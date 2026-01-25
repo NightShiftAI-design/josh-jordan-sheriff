@@ -1,110 +1,166 @@
-/* Josh Jordan for Sheriff — script.js
-   Matches new index + new CSS:
-   - Mobile nav toggle: .nav-toggle controls #nav by toggling .is-open
-   - Close nav on link click, outside click, and Escape
-   - Contact form: opens mail client (mailto:) with filled fields
-   Notes:
-   - Personal Statement uses native <details> (no JS needed)
-*/
+/* =========================================================
+   Campaign Site — script.js
+   - Mobile menu toggle (works with #menuBtn + #mobilePanel)
+   - Auto year in footer (#year)
+   - Active nav link highlight on scroll
+   - Smooth scroll w/ sticky-header offset
+   - Close mobile menu on link click / outside click / ESC
+   ========================================================= */
 
-(function () {
+(() => {
   "use strict";
 
+  // ---------- Helpers ----------
   const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // -------------------------
-  // Mobile Nav Toggle
-  // -------------------------
-  const nav = document.getElementById("nav");
-  const navToggle = $(".nav-toggle");
+  const headerEl = $(".site-header");
+  const menuBtn = $("#menuBtn");
+  const mobilePanel = $("#mobilePanel");
+  const yearEl = $("#year");
 
-  function setNav(open) {
-    if (!nav || !navToggle) return;
-    nav.classList.toggle("is-open", open);
-    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-  }
+  // ---------- Footer Year ----------
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  if (nav && navToggle) {
-    navToggle.addEventListener("click", () => {
-      setNav(!nav.classList.contains("is-open"));
+  // ---------- Mobile Menu ----------
+  const isMobilePanelOpen = () => mobilePanel && mobilePanel.style.display === "block";
+
+  const setMobilePanel = (open) => {
+    if (!mobilePanel || !menuBtn) return;
+    mobilePanel.style.display = open ? "block" : "none";
+    menuBtn.setAttribute("aria-expanded", String(open));
+  };
+
+  if (menuBtn && mobilePanel) {
+    // Initialize (closed)
+    setMobilePanel(false);
+
+    menuBtn.addEventListener("click", () => {
+      setMobilePanel(!isMobilePanelOpen());
     });
 
-    // Close nav when a nav link is clicked
-    nav.addEventListener("click", (e) => {
+    // Close menu when clicking a link inside
+    mobilePanel.addEventListener("click", (e) => {
       const a = e.target.closest("a");
-      if (!a) return;
-      setNav(false);
+      if (a) setMobilePanel(false);
     });
 
-    // Close nav on Escape
+    // Close on Escape
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setNav(false);
+      if (e.key === "Escape") setMobilePanel(false);
     });
 
-    // Close nav when clicking outside
+    // Close when clicking outside header
     document.addEventListener("click", (e) => {
-      if (!nav.classList.contains("is-open")) return;
-      const insideNav = e.target.closest("#nav");
-      const insideToggle = e.target.closest(".nav-toggle");
-      if (!insideNav && !insideToggle) setNav(false);
-    });
-
-    // If resizing up to desktop, ensure nav is visible by default (no overlay)
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 980) setNav(false);
+      if (!isMobilePanelOpen()) return;
+      const clickedInsideHeader = e.target.closest(".site-header");
+      if (!clickedInsideHeader) setMobilePanel(false);
     });
   }
 
-  // -------------------------
-  // Contact Form (mailto)
-  // -------------------------
-  const form = document.getElementById("contactForm");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+  // ---------- Smooth Scroll (with sticky header offset) ----------
+  const getHeaderOffset = () => {
+    // Include topbar + header height if both are visible
+    const topbar = $(".topbar");
+    const h = (topbar?.offsetHeight || 0) + (headerEl?.offsetHeight || 0);
+    // A little breathing room
+    return h + 8;
+  };
 
-      const name = (document.getElementById("name")?.value || "").trim();
-      const phone = (document.getElementById("phone")?.value || "").trim();
-      const email = (document.getElementById("email")?.value || "").trim();
-      const topic = (document.getElementById("topic")?.value || "other").trim();
-      const message = (document.getElementById("message")?.value || "").trim();
+  const smoothScrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-      if (!name || !email || !message) {
-        // Let browser show "required" messages when possible
-        form.reportValidity?.();
-        return;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - getHeaderOffset();
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
+  // Intercept in-page anchor clicks for offset scrolling
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+
+    const href = a.getAttribute("href") || "";
+    // Ignore empty hash
+    if (href === "#" || href === "#top") return;
+
+    const id = href.slice(1);
+    if (!id) return;
+
+    const target = document.getElementById(id);
+    if (!target) return; // let browser handle unknown anchors
+
+    e.preventDefault();
+    smoothScrollToId(id);
+    // Update URL without jumping
+    history.pushState(null, "", `#${id}`);
+  });
+
+  // ---------- Active Nav Link Highlight ----------
+  // Adds "is-active" class to .nav__link matching the section in view.
+  // You can optionally style it in CSS:
+  // .nav__link.is-active { background:#f3f6fa; }
+  const navLinks = $$('.nav a[href^="#"], .mobile-panel a[href^="#"]')
+    .filter(a => a.getAttribute("href") && a.getAttribute("href").length > 1);
+
+  const sections = navLinks
+    .map(a => a.getAttribute("href").slice(1))
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if (sections.length) {
+    const setActive = (activeId) => {
+      navLinks.forEach((a) => {
+        const id = a.getAttribute("href").slice(1);
+        a.classList.toggle("is-active", id === activeId);
+      });
+    };
+
+    // Use IntersectionObserver for clean + efficient tracking
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // pick the most visible entry
+        const visible = entries
+          .filter(en => en.isIntersecting)
+          .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0))[0];
+
+        if (visible && visible.target && visible.target.id) {
+          setActive(visible.target.id);
+        }
+      },
+      {
+        root: null,
+        // Offset for sticky header + topbar
+        rootMargin: `-${getHeaderOffset()}px 0px -60% 0px`,
+        threshold: [0.15, 0.25, 0.35, 0.5, 0.65]
       }
+    );
 
-      const to = "jjordan206@yahoo.com";
+    sections.forEach(sec => observer.observe(sec));
 
-      const subjectMap = {
-        volunteer: "Volunteer — Josh Jordan for Sheriff",
-        sign: "Yard Sign / Window Decal Request",
-        endorsement: "Endorsement / Support",
-        question: "Question for the Campaign",
-        other: "Message for the Campaign",
-      };
-
-      const subject = subjectMap[topic] || subjectMap.other;
-
-      const lines = [
-        `Name: ${name}`,
-        phone ? `Phone: ${phone}` : null,
-        `Email: ${email}`,
-        `Topic: ${topic}`,
-        "",
-        message,
-      ].filter(Boolean);
-
-      const body = lines.join("\n");
-
-      const mailto =
-        `mailto:${encodeURIComponent(to)}` +
-        `?subject=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(body)}`;
-
-      window.location.href = mailto;
-      form.reset();
+    // If page loads with a hash, adjust scroll to account for sticky header
+    window.addEventListener("load", () => {
+      const hash = (location.hash || "").replace("#", "");
+      if (hash) {
+        // delay to allow layout paint
+        setTimeout(() => smoothScrollToId(hash), 50);
+      } else {
+        // default to first section highlight if near top
+        const first = sections[0];
+        if (first?.id) setActive(first.id);
+      }
     });
   }
+
+  // ---------- Optional: shrink header on scroll (subtle, official) ----------
+  // If you want this effect, add CSS:
+  // .site-header.is-compact .header__inner { padding:10px 0; }
+  // .site-header.is-compact .brand__logo { width:48px; height:48px; }
+  const onScroll = () => {
+    if (!headerEl) return;
+    headerEl.classList.toggle("is-compact", window.scrollY > 18);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
 })();
