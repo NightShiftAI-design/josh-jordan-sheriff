@@ -1,10 +1,9 @@
-```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Josh Jordan for Rhea County Sheriff — Dayton, Tennessee. Leadership, integrity, and community-first policing." />
+  <meta name="description" content="Josh Jordan for Rhea County Sheriff — Dayton, Tennessee. Experience. Integrity. Community-first leadership." />
   <title>Josh Jordan for Rhea County Sheriff</title>
 
   <link rel="stylesheet" href="styles.css" />
@@ -37,11 +36,12 @@
   <header class="header" role="banner">
     <div class="container header__inner">
       <a class="brand" href="#top" aria-label="Josh Jordan for Sheriff home">
-        <!-- TEMP "logo" using your second image -->
+        <!-- ✅ LOGO (correct file) -->
         <img
-          class="brand__mark"
-          src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
-          alt="Josh Jordan for Rhea County Sheriff"
+          class="brand__mark brand__mark--logo"
+          src="assets/images/505079140_122095294814908392_6417227761878724309_n.jpg"
+          alt="Josh Jordan for Rhea County Sheriff logo"
+          loading="eager"
         />
         <div class="brand__text">
           <span class="brand__name">Josh Jordan</span>
@@ -58,8 +58,8 @@
 
       <nav id="nav" class="nav" role="navigation" aria-label="Primary">
         <a href="#priorities">Priorities</a>
+        <a href="#experience">Experience</a>
         <a href="#statement">Statement</a>
-        <a href="#about">Meet Josh</a>
         <a href="#get-involved">Get Involved</a>
         <a href="#contact">Contact</a>
         <a class="btn btn--primary" href="#contact">Volunteer</a>
@@ -69,24 +69,24 @@
 
   <main id="main">
     <!-- Hero -->
-    <section id="top" class="hero" aria-label="Hero">
+    <section id="top" class="hero hero--sheriff" aria-label="Hero">
       <div class="container hero__grid">
         <div class="hero__content">
           <p class="kicker">Rhea County, Tennessee</p>
 
           <h1 class="hero__title">
-            Leadership you can trust.<br />
-            <span class="accent">Community-first</span> policing.
+            Proven law enforcement leadership.<br />
+            <span class="accent">Sheriff</span> you can trust.
           </h1>
 
           <p class="hero__lead">
-            Josh Jordan is running for Rhea County Sheriff to strengthen public safety, support deputies,
-            and keep our community informed, respected, and protected.
+            Josh Jordan is a current Patrol Sergeant and lifelong resident of Rhea County,
+            running to lead with integrity, strengthen public safety, support deputies, and serve every citizen with respect.
           </p>
 
           <div class="hero__cta">
             <a class="btn btn--primary" href="#get-involved">Join the Campaign</a>
-            <a class="btn btn--ghost" href="#statement">Read Josh’s Statement</a>
+            <a class="btn btn--ghost" href="#statement">Read the Statement</a>
 
             <a class="btn btn--fb"
                href="https://www.facebook.com/profile.php?id=61577251765386"
@@ -101,7 +101,7 @@
 
           <div class="hero__meta">
             <div class="meta-card">
-              <span class="meta-card__label">Location</span>
+              <span class="meta-card__label">Base</span>
               <span class="meta-card__value">Dayton, TN</span>
             </div>
             <div class="meta-card">
@@ -117,9 +117,10 @@
 
         <div class="hero__media">
           <div class="portrait">
+            <!-- ✅ HEADSHOT (correct file) -->
             <img
-              src="assets/images/505079140_122095294814908392_6417227761878724309_n.jpg"
-              alt="Portrait of Josh Jordan"
+              src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
+              alt="Josh Jordan headshot"
               loading="eager"
             />
           </div>
@@ -140,154 +141,169 @@
       <div class="container trust__grid">
         <div class="trust__item">
           <h3>Integrity</h3>
-          <p>Serve with honesty, accountability, and transparency.</p>
+          <p>Accountability, transparency, and leadership by example.</p>
         </div>
         <div class="trust__item">
-          <h3>Safety</h3>
-          <p>Proactive strategies that keep families and businesses secure.</p>
+          <h3>Professionalism</h3>
+          <p>High standards, strong training, and consistent supervision.</p>
         </div>
         <div class="trust__item">
-          <h3>Respect</h3>
-          <p>Professional policing that protects rights and earns trust.</p>
+          <h3>Public Safety</h3>
+          <p>Proactive crime prevention and fast, coordinated response.</p>
         </div>
         <div class="trust__item">
           <h3>Community</h3>
-          <p>Partnerships with schools, churches, and local organizations.</p>
+          <p>Service to everyone—unity over division, always.</p>
         </div>
       </div>
     </section>
 
-    <!-- Priorities -->
+    <!-- Priorities (expanded + more official) -->
     <section id="priorities" class="section">
       <div class="container">
         <header class="section__head">
-          <h2>Top Priorities</h2>
-          <p>Clear goals. Real action. Focused leadership for Rhea County.</p>
+          <h2>Priorities for the Sheriff’s Office</h2>
+          <p>Focused leadership with practical action steps—built for real operations, not slogans.</p>
         </header>
 
-        <div class="cards">
+        <div class="cards cards--priorities">
           <article class="card">
             <h3>Deputy Support & Training</h3>
-            <p>Prioritize ongoing training, safety equipment, and strong leadership so deputies can do their job professionally and safely.</p>
+            <p>Invest in ongoing training, safety equipment, and clear supervision so deputies can serve confidently and safely.</p>
+            <ul class="bullets">
+              <li>Consistent training & standards</li>
+              <li>Officer safety & readiness</li>
+              <li>Leadership that shows up</li>
+            </ul>
           </article>
 
           <article class="card">
             <h3>Transparency & Accountability</h3>
-            <p>Keep the community informed with clear communication, updates, and a culture of accountability at every level.</p>
+            <p>Better communication with citizens and consistent expectations within the agency.</p>
+            <ul class="bullets">
+              <li>Clear public updates</li>
+              <li>Professional conduct standards</li>
+              <li>Accountability at every level</li>
+            </ul>
           </article>
 
           <article class="card">
-            <h3>Community Trust</h3>
-            <p>Lead by example, listen to citizens, and strengthen partnerships across the county.</p>
+            <h3>Community Trust & Partnership</h3>
+            <p>Work with schools, churches, neighborhoods, and local organizations to prevent crime and build trust.</p>
+            <ul class="bullets">
+              <li>Community outreach</li>
+              <li>Victim support & responsiveness</li>
+              <li>Respect on every call</li>
+            </ul>
           </article>
 
           <article class="card">
-            <h3>Professional Standards</h3>
-            <p>Do the job correctly, raise expectations, and deliver consistent leadership across the Sheriff’s Office.</p>
+            <h3>Smart Crime Prevention</h3>
+            <p>Practical strategies focused on repeat issues, coordination, and doing the basics exceptionally well.</p>
+            <ul class="bullets">
+              <li>Target repeat problems</li>
+              <li>Better coordination</li>
+              <li>Fast, effective response</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Mental Health & Crisis Response</h3>
+            <p>Support safe outcomes and strengthen partnerships with local and regional providers.</p>
+            <ul class="bullets">
+              <li>Crisis-informed response</li>
+              <li>Partnerships with providers</li>
+              <li>De-escalation where appropriate</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Professional Operations & Command Staff</h3>
+            <p>Build a strong command staff with division-level experience to keep operations efficient and responsive.</p>
+            <ul class="bullets">
+              <li>Experienced supervision</li>
+              <li>Policy & operations focus</li>
+              <li>Efficient day-to-day management</li>
+            </ul>
           </article>
         </div>
 
         <div class="note">
-          <p><strong>Want a yard sign or window decal?</strong> Call or text (423) 593-1964.</p>
+          <p><strong>Yard signs & window decals:</strong> Call or text Josh at <a class="link" href="tel:+14235931964">(423) 593-1964</a>.</p>
         </div>
       </div>
     </section>
 
-    <!-- Statement -->
-    <section id="statement" class="section section--alt">
+    <!-- Experience snapshot -->
+    <section id="experience" class="section section--alt">
       <div class="container">
         <header class="section__head">
-          <h2>Josh’s Statement on Leadership & Experience</h2>
-          <p>“Not from anything AI generated. Just from me.”</p>
+          <h2>Experience & Service</h2>
+          <p>A career built inside the work—patrol, investigations, supervision, and community service.</p>
         </header>
 
-        <div class="accordion" data-accordion>
-          <button class="accordion__btn" type="button" aria-expanded="false">
-            Read the full statement
-            <span class="accordion__icon" aria-hidden="true"></span>
-          </button>
+        <div class="grid-3">
+          <div class="action">
+            <h3>Law Enforcement</h3>
+            <p>Corrections Deputy → Patrol Deputy → Patrol Sergeant. Experience across a wide range of cases and crisis response.</p>
+          </div>
 
-          <div class="accordion__panel" hidden>
-            <div class="card statement">
-              <p><strong>I had some thoughts tonight and wanted to share this from me.</strong> Not from anything AI generated. Just from me, grammatical errors and all.</p>
+          <div class="action">
+            <h3>Leadership</h3>
+            <p>Training new officers, coordinating schedules, planning goals, and maintaining professional standards.</p>
+          </div>
 
-              <p>One of the very few concerns I have heard during my campaign for sheriff is my ability to run an organization as complicated as the Rhea County Sheriff’s Office. I want to take a moment to address those concerns.</p>
-
-              <p>From the time I began college, I was working as an auxiliary/reserve officer for the Rhea County Sheriff’s Office and Spring City Police Department. I first began as an auxiliary deputy under Leon Sneed during his last term as sheriff. During the transition from his administration to Mike Neal’s administration, I moved to the Spring City Police Department to work as a reserve officer. After roughly six months, I spoke to Sheriff Mike Neal and returned to the sheriff’s office as a reserve deputy.</p>
-
-              <p>During the time of working at both departments, I was attending the University of Tennessee and Chattanooga State Community College. I ended up majoring in General Management, which is a business focus, at Chattanooga State. While attending college, I spent most of my free time volunteering as a reserve at both previously mentioned departments. I was able to experience day to day operations on road patrol and within the jail at the sheriff’s office. I spent many valuable hours there learning about multiple facets of law enforcement.</p>
-
-              <p>I graduated with honors from Chattanooga State with an associate degree in General Management. It included classes in language arts, public speaking, business law, business math, accounting, financial management, statistics, psychology, and multiple other college level courses. I had originally planned on that degree being a fallback plan in case my law enforcement career didn’t pan out. Little did I know, it would help advance my career in law enforcement as a supervisor.</p>
-
-              <p>I worked full time for the Rhea County Sheriff’s Office for two and a half years after I graduated college. During that time, I worked in corrections and as a patrol deputy. I worked multiple districts in the county and became very familiar with all of the communities of Rhea County. During my time as a reserve officer, corrections officer, and patrol deputy, I was able to gain a wealth of knowledge on the everyday workings of a police officer.</p>
-
-              <p>I married my wife, Megan Madewell Jordan in March of 2006. With plans of a future family, I had to look at what would be best for raising our children. In August of 2006, I accepted a job with the Dayton Police Department. I worked as a patrol officer on night shift, before accepting a position as a patrol sergeant on night shift. While my wife and I raised our children, I accepted a position as a school resource officer at Bryan College so I could be on a shift more aligned with my family’s schedule. That gave me five years of invaluable experience, learning the ins and outs of both college campus life and schools in general.</p>
-
-              <p>After those five years working as a school resource officer at Bryan College, I had the opportunity to move back to road patrol on day shift. I could not pass that chance, as working on the road dealing with day to day issues was where my passion really was. I was able to interact with the community, help people in times of need, apprehend those who had committed crimes, and truly feel like I was making a positive impact within my community. That included time showing mercy to first time offenders, potentially giving a learning lesson, and also trying to encourage repeat offenders that they could get out of their situation, and better themselves and their families. It also included confronting situations and people that were truly evil. I had to learn to meet those situations with the same ferocity as the times of mercy and teaching.</p>
-
-              <p>I later moved into a supervisor role as a patrol sergeant on day shift for the Dayton Police Department. In that time, I have tried to share both the successes and mistakes I have made with other officers working with me. I have always tried to stress to them to treat people with respect until they force the situation otherwise. We want to be able to approach every situation with that respect, but it doesn’t realistically always happen that way. All of these experiences have taught me to approach everything with balance and an open mind.</p>
-
-              <p>I don’t bring up any of this to get a pat on the back or an “atta boy”. I point it out to show that I have a wide variety of experiences and certifications in law enforcement. Combine that with my college education in business and extensive life experiences, it has given me a wealth of knowledge in potentially being your next sheriff of Rhea County.</p>
-
-              <p>I am a very fast learner, and very particular about details in anything I do. I want to make sure things are done correctly and that I do right by people, having the ability to step back and look at each situation on an individual basis. I have very high expectations for myself and those who work for and with me in law enforcement. If elected Sheriff of Rhea County, I will instill all of these experiences and knowledge into The Rhea County Sheriff’s Office. We will get better at our job every day, and instill a relationship of trust within our community.</p>
-
-              <p>I do not settle for half ass work, and I will work to raise expectations for myself, and those who work for me if you give me the opportunity to serve our community as sheriff. Ego will never stand in the way of what I want for my department and Rhea County as a whole.</p>
-
-              <p>I will have a command staff that has worked within and managed nearly every division of the current Sheriff’s Office, bringing a wealth of experience in law enforcement operations, personnel management, budgeting, and public safety response. This team has collectively overseen patrol, criminal investigations, corrections, court security, and community programs, ensuring continuity, accountability, and professional leadership across all areas. Their proven history of effective supervision, policy development, and interagency coordination will assist me in the day-to-day management of the Sheriff’s Office and ensure that our operations remain efficient, transparent, and responsive to the citizens of Rhea County.</p>
-
-              <p><strong>Please feel free to reach out to me with any questions or concerns folks 😊</strong></p>
-            </div>
+          <div class="action">
+            <h3>Community Commitment</h3>
+            <p>Lifelong Rhea County resident. Service rooted in respect, unity, and doing right by people.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="section">
-      <div class="container about">
-        <div class="about__content">
-          <header class="section__head">
-            <h2>Meet Josh Jordan</h2>
-            <p>Steady leadership, real experience, and a deep commitment to Rhea County.</p>
-          </header>
+    <!-- Statement (more visible + NOT “hidden accordion”) -->
+    <section id="statement" class="section statement-section">
+      <div class="container">
+        <header class="section__head">
+          <h2>Personal Statement</h2>
+          <p class="muted">“Not from anything AI generated. Just from me.”</p>
+        </header>
 
-          <div class="about__points">
-            <div class="about__point">
-              <h3>Experience</h3>
-              <p>Decades of service across corrections, patrol, investigations, and supervision.</p>
-            </div>
+        <!-- Native details/summary = works without JS -->
+        <details class="statement" open>
+          <summary class="statement__summary">
+            Read Josh’s full statement on leadership & experience
+            <span class="statement__chev" aria-hidden="true"></span>
+          </summary>
 
-            <div class="about__point">
-              <h3>Leadership</h3>
-              <p>Respect first, accountability always, and a Sheriff’s Office that improves every day.</p>
-            </div>
+          <div class="statement__body">
+            <p><strong>I had some thoughts tonight and wanted to share this from me.</strong> Not from anything AI generated. Just from me, grammatical errors and all.</p>
 
-            <div class="about__point">
-              <h3>Commitment</h3>
-              <p>Support deputies, keep communities safe, and strengthen trust throughout the county.</p>
-            </div>
+            <p>One of the very few concerns I have heard during my campaign for sheriff is my ability to run an organization as complicated as the Rhea County Sheriff’s Office. I want to take a moment to address those concerns.</p>
+
+            <p>From the time I began college, I was working as an auxiliary/reserve officer for the Rhea County Sheriff’s Office and Spring City Police Department. I first began as an auxiliary deputy under Leon Sneed during his last term as sheriff. During the transition from his administration to Mike Neal’s administration, I moved to the Spring City Police Department to work as a reserve officer. After roughly six months, I spoke to Sheriff Mike Neal and returned to the sheriff’s office as a reserve deputy.</p>
+
+            <p>During the time of working at both departments, I was attending the University of Tennessee and Chattanooga State Community College. I ended up majoring in General Management, which is a business focus, at Chattanooga State. While attending college, I spent most of my free time volunteering as a reserve at both previously mentioned departments. I was able to experience day to day operations on road patrol and within the jail at the sheriff’s office. I spent many valuable hours there learning about multiple facets of law enforcement.</p>
+
+            <p>I graduated with honors from Chattanooga State with an associate degree in General Management. It included classes in language arts, public speaking, business law, business math, accounting, financial management, statistics, psychology, and multiple other college level courses. I had originally planned on that degree being a fallback plan in case my law enforcement career didn’t pan out. Little did I know, it would help advance my career in law enforcement as a supervisor.</p>
+
+            <p>I worked full time for the Rhea County Sheriff’s Office for two and a half years after I graduated college. During that time, I worked in corrections and as a patrol deputy. I worked multiple districts in the county and became very familiar with all of the communities of Rhea County. During my time as a reserve officer, corrections officer, and patrol deputy, I was able to gain a wealth of knowledge on the everyday workings of a police officer.</p>
+
+            <p>I married my wife, Megan Madewell Jordan in March of 2006. With plans of a future family, I had to look at what would be best for raising our children. In August of 2006, I accepted a job with the Dayton Police Department. I worked as a patrol officer on night shift, before accepting a position as a patrol sergeant on night shift. While my wife and I raised our children, I accepted a position as a school resource officer at Bryan College so I could be on a shift more aligned with my family’s schedule. That gave me five years of invaluable experience, learning the ins and outs of both college campus life and schools in general.</p>
+
+            <p>After those five years working as a school resource officer at Bryan College, I had the opportunity to move back to road patrol on day shift. I could not pass that chance, as working on the road dealing with day to day issues was where my passion really was. I was able to interact with the community, help people in times of need, apprehend those who had committed crimes, and truly feel like I was making a positive impact within my community.</p>
+
+            <p>I later moved into a supervisor role as a patrol sergeant on day shift for the Dayton Police Department. In that time, I have tried to share both the successes and mistakes I have made with other officers working with me. I have always tried to stress to them to treat people with respect until they force the situation otherwise. We want to be able to approach every situation with that respect, but it doesn’t realistically always happen that way. All of these experiences have taught me to approach everything with balance and an open mind.</p>
+
+            <p>I don’t bring up any of this to get a pat on the back or an “atta boy”. I point it out to show that I have a wide variety of experiences and certifications in law enforcement. Combine that with my college education in business and extensive life experiences, it has given me a wealth of knowledge in potentially being your next sheriff of Rhea County.</p>
+
+            <p>I am a very fast learner, and very particular about details in anything I do. I want to make sure things are done correctly and that I do right by people. If elected Sheriff of Rhea County, we will get better at our job every day, and instill a relationship of trust within our community.</p>
+
+            <p>Ego will never stand in the way of what I want for my department and Rhea County as a whole.</p>
+
+            <p><strong>Please feel free to reach out to me with any questions or concerns folks 😊</strong></p>
           </div>
-
-          <div class="about__cta">
-            <a class="btn btn--primary" href="#contact">Contact the Campaign</a>
-            <a class="btn btn--ghost" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
-              Follow on Facebook
-            </a>
-          </div>
-        </div>
-
-        <aside class="about__side" aria-label="Campaign highlight">
-          <div class="side-card">
-            <h3>Campaign Info</h3>
-            <ul class="side-list">
-              <li><span>Area:</span> Rhea County, Tennessee</li>
-              <li><span>Base:</span> Dayton, TN 37321</li>
-              <li><span>Phone:</span> <a class="link" href="tel:+14235931964">(423) 593-1964</a></li>
-              <li><span>Email:</span> <a class="link" href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a></li>
-            </ul>
-            <p class="fineprint">For updates, photos, and announcements, visit the campaign Facebook page.</p>
-          </div>
-        </aside>
+        </details>
       </div>
     </section>
 
@@ -296,7 +312,7 @@
       <div class="container">
         <header class="section__head">
           <h2>Get Involved</h2>
-          <p>Help spread the message and grow support across Rhea County.</p>
+          <p>Volunteer, request a yard sign, and help spread the message across Rhea County.</p>
         </header>
 
         <div class="grid-3">
@@ -307,15 +323,22 @@
           </div>
 
           <div class="action">
-            <h3>Request a Yard Sign</h3>
-            <p>Call or text Josh directly for a yard sign or vehicle window decal.</p>
+            <h3>Yard Signs / Decals</h3>
+            <p>Call, text, message on Facebook—or use the request form below.</p>
             <a class="btn btn--ghost" href="tel:+14235931964">Call/Text (423) 593-1964</a>
+            <div class="spacer"></div>
+            <a class="btn btn--ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform" target="_blank" rel="noopener">
+              Request a Sign (Form)
+            </a>
           </div>
 
           <div class="action">
             <h3>Follow & Share</h3>
-            <p>Stay updated and share posts with friends and family.</p>
-            <a class="btn btn--ghost" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
+            <p>For updates, photos, and announcements, follow the campaign page.</p>
+            <a class="btn btn--fb" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M22 12.06C22 6.49 17.52 2 12 2S2 6.49 2 12.06c0 5.03 3.66 9.2 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.74 8.44-4.91 8.44-9.94z"/>
+              </svg>
               Visit Facebook
             </a>
           </div>
@@ -328,7 +351,7 @@
       <div class="container contact">
         <header class="section__head">
           <h2>Contact</h2>
-          <p>Reach out directly — questions, support, volunteering, or yard signs.</p>
+          <p>Questions, support, volunteering, endorsements, or yard signs—reach out anytime.</p>
         </header>
 
         <div class="contact__grid">
@@ -386,13 +409,11 @@
 
             <div class="form__row">
               <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+              <textarea id="message" name="message" rows="6" placeholder="Write your message..." required></textarea>
             </div>
 
             <button class="btn btn--primary" type="submit">Send Message</button>
-            <p class="fineprint">
-              This form opens your email app (no server needed).
-            </p>
+            <p class="fineprint">This form opens your email app (no server needed).</p>
           </form>
         </div>
       </div>
@@ -415,4 +436,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-```
