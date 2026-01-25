@@ -1,438 +1,611 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" id="top">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Josh Jordan for Rhea County Sheriff — Dayton, Tennessee. Experience. Integrity. Community-first leadership." />
-  <title>Josh Jordan for Rhea County Sheriff</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="[CANDIDATE NAME] for Sheriff — Official Campaign Website" />
+  <title>[CANDIDATE NAME] for Sheriff</title>
 
+  <!-- Fonts (safe + official) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Your main stylesheet -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Minimal header/topbar styling embedded so it looks official immediately,
+       even if your styles.css is still basic. You can move this into styles.css later. -->
+  <style>
+    :root{
+      --sheriff-green:#0b3d2e;
+      --sheriff-green-2:#0f4b38;
+      --ink:#0b1220;
+      --muted:#556070;
+      --line:#e7ebf0;
+      --bg:#ffffff;
+      --container: 1120px;
+      --shadow: 0 10px 30px rgba(11,18,32,.08);
+      --radius: 14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{max-width:var(--container);margin:0 auto;padding:0 18px}
+
+    /* Topbar */
+    .topbar{
+      background:linear-gradient(90deg,var(--sheriff-green),var(--sheriff-green-2));
+      color:#fff;
+      font-size:13px;
+    }
+    .topbar__inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0;
+    }
+    .topbar__left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .topbar__badge{
+      font-weight:800;
+      letter-spacing:.12em;
+      font-size:11px;
+      padding:6px 10px;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .topbar__text{
+      opacity:.95;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .topbar__cta{
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.22);
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:600;
+      white-space:nowrap;
+    }
+    .topbar__cta:hover{background:rgba(255,255,255,.18)}
+
+    /* Header (sticky) */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+      box-shadow: 0 6px 18px rgba(11,18,32,.04);
+    }
+    .header__inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .brand__logo{
+      width:54px;
+      height:54px;
+      border-radius:12px;
+      object-fit:cover;
+      border:1px solid var(--line);
+      box-shadow: 0 8px 20px rgba(11,18,32,.08);
+      flex:0 0 auto;
+    }
+    .brand__text{min-width:0}
+    .brand__name{
+      font-weight:800;
+      letter-spacing:.02em;
+      line-height:1.05;
+      font-size:16px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:52vw;
+    }
+    .brand__title{
+      color:var(--muted);
+      font-weight:600;
+      font-size:12px;
+      margin-top:2px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .nav__link{
+      font-size:14px;
+      font-weight:600;
+      color:#1a2233;
+      padding:10px 10px;
+      border-radius:10px;
+    }
+    .nav__link:hover{background:#f3f6fa}
+    .nav__link--button{
+      background:var(--sheriff-green);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .nav__link--button:hover{background:var(--sheriff-green-2)}
+
+    .icon-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow: 0 10px 20px rgba(11,18,32,.06);
+    }
+    .icon-btn:hover{background:#f7f9fc}
+    .icon-btn svg{fill:#1877F2}
+
+    /* Mobile nav button + panel (simple, no JS framework needed) */
+    .menu-btn{
+      display:none;
+      border:1px solid var(--line);
+      background:#fff;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:700;
+    }
+    .mobile-panel{
+      display:none;
+      padding:12px 0 18px;
+      border-top:1px solid var(--line);
+    }
+    .mobile-panel a{
+      display:block;
+      padding:12px 10px;
+      border-radius:12px;
+      font-weight:650;
+      color:#1a2233;
+    }
+    .mobile-panel a:hover{background:#f3f6fa}
+
+    /* Hero */
+    .hero{
+      padding:36px 0 26px;
+      background:
+        radial-gradient(1200px 380px at 20% 0%, rgba(11,61,46,.10), transparent 60%),
+        radial-gradient(900px 320px at 90% 10%, rgba(11,61,46,.08), transparent 55%);
+    }
+    .hero__grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:center;
+    }
+    .hero__kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      background:#f3f6fa;
+      border:1px solid var(--line);
+      color:#1a2233;
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+    .hero h1{
+      margin:14px 0 10px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    .hero p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width:58ch;
+    }
+    .hero__actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-weight:750;
+      font-size:14px;
+      background:#fff;
+    }
+    .btn--primary{
+      background:var(--sheriff-green);
+      color:#fff;
+      border-color:rgba(0,0,0,.06);
+    }
+    .btn--primary:hover{background:var(--sheriff-green-2)}
+    .btn:hover{background:#f7f9fc}
+
+    .hero__card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero__photo{
+      aspect-ratio: 4 / 5;
+      width:100%;
+      object-fit:cover;
+    }
+    .hero__card-footer{
+      padding:14px 14px 16px;
+      border-top:1px solid var(--line);
+    }
+    .hero__meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:600;
+    }
+
+    /* Sections */
+    section{padding:34px 0}
+    .section-title{
+      font-size:22px;
+      margin:0 0 12px;
+      letter-spacing:-.01em;
+    }
+    .section-sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:70ch;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      background:#fff;
+      box-shadow: 0 10px 24px rgba(11,18,32,.05);
+    }
+    .card h3{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+
+    /* Footer */
+    footer{
+      border-top:1px solid var(--line);
+      padding:22px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footer__inner{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero__grid{grid-template-columns:1fr;gap:16px}
+      .hero h1{font-size:36px}
+      .grid-3{grid-template-columns:1fr}
+      .nav{display:none}
+      .menu-btn{display:inline-flex}
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Skip link for accessibility -->
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- Top bar -->
-  <div class="topbar" role="region" aria-label="Campaign contact bar">
+  <!-- Topbar -->
+  <div class="topbar">
     <div class="container topbar__inner">
       <div class="topbar__left">
-        <span class="pill">Rhea County • Dayton, TN 37321</span>
+        <span class="topbar__badge">SHERIFF</span>
+        <span class="topbar__text">Rhea County • Experience • Integrity • Service</span>
       </div>
-
-      <div class="topbar__right">
-        <a class="topbar__link" href="tel:+14235931964" aria-label="Call 423 593 1964">(423) 593-1964</a>
-        <span class="dot" aria-hidden="true">•</span>
-        <a class="topbar__link" href="mailto:jjordan206@yahoo.com" aria-label="Email jjordan206@yahoo.com">jjordan206@yahoo.com</a>
-        <span class="dot" aria-hidden="true">•</span>
-        <a class="topbar__link" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
-          Facebook
-        </a>
-      </div>
+      <a class="topbar__cta" href="#volunteer">Get Involved</a>
     </div>
   </div>
 
-  <!-- Header / Nav -->
-  <header class="header" role="banner">
+  <!-- Header (sticky) -->
+  <header class="site-header">
     <div class="container header__inner">
-      <a class="brand" href="#top" aria-label="Josh Jordan for Sheriff home">
-        <!-- ✅ LOGO (correct file) -->
+      <a class="brand" href="#top" aria-label="Home">
         <img
-          class="brand__mark brand__mark--logo"
+          class="brand__logo"
           src="assets/images/505079140_122095294814908392_6417227761878724309_n.jpg"
-          alt="Josh Jordan for Rhea County Sheriff logo"
-          loading="eager"
+          alt="Campaign logo"
         />
         <div class="brand__text">
-          <span class="brand__name">Josh Jordan</span>
-          <span class="brand__sub">For Rhea County Sheriff</span>
+          <div class="brand__name">[CANDIDATE NAME]</div>
+          <div class="brand__title">For Sheriff</div>
         </div>
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-        <span class="sr-only">Menu</span>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobilePanel" id="menuBtn">
+        Menu
       </button>
 
-      <nav id="nav" class="nav" role="navigation" aria-label="Primary">
-        <a href="#priorities">Priorities</a>
-        <a href="#experience">Experience</a>
-        <a href="#statement">Statement</a>
-        <a href="#get-involved">Get Involved</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btn--primary" href="#contact">Volunteer</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="#about">About</a>
+        <a class="nav__link" href="#priorities">Priorities</a>
+        <a class="nav__link" href="#endorsements">Endorsements</a>
+        <a class="nav__link" href="#events">Events</a>
+        <a class="nav__link nav__link--button" href="#donate">Donate</a>
+
+        <a
+          class="icon-btn"
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Visit our Facebook page"
+          title="Facebook"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+            <path d="M22 12.06C22 6.504 17.523 2 12 2S2 6.504 2 12.06C2 17.083 5.657 21.245 10.438 22v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.46h-1.26c-1.242 0-1.63.772-1.63 1.562v1.88h2.773l-.443 2.91h-2.33V22C18.343 21.245 22 17.083 22 12.06z"/>
+          </svg>
+        </a>
       </nav>
+    </div>
+
+    <!-- Mobile nav panel -->
+    <div class="container mobile-panel" id="mobilePanel">
+      <a href="#about">About</a>
+      <a href="#priorities">Priorities</a>
+      <a href="#endorsements">Endorsements</a>
+      <a href="#events">Events</a>
+      <a href="#donate">Donate</a>
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
     </div>
   </header>
 
-  <main id="main">
-    <!-- Hero -->
-    <section id="top" class="hero hero--sheriff" aria-label="Hero">
+  <!-- Hero -->
+  <main>
+    <section class="hero">
       <div class="container hero__grid">
-        <div class="hero__content">
-          <p class="kicker">Rhea County, Tennessee</p>
-
-          <h1 class="hero__title">
-            Proven law enforcement leadership.<br />
-            <span class="accent">Sheriff</span> you can trust.
-          </h1>
-
-          <p class="hero__lead">
-            Josh Jordan is a current Patrol Sergeant and lifelong resident of Rhea County,
-            running to lead with integrity, strengthen public safety, support deputies, and serve every citizen with respect.
+        <div>
+          <div class="hero__kicker">Official Campaign Site</div>
+          <h1>[CANDIDATE NAME] for Sheriff</h1>
+          <p>
+            Committed to protecting our community with professionalism, transparency, and service.
+            I’m running to keep Rhea County safe and ensure law enforcement remains accountable to the people.
           </p>
 
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#get-involved">Join the Campaign</a>
-            <a class="btn btn--ghost" href="#statement">Read the Statement</a>
-
-            <a class="btn btn--fb"
-               href="https://www.facebook.com/profile.php?id=61577251765386"
-               target="_blank" rel="noopener"
-               aria-label="Visit Josh Jordan campaign Facebook page">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M22 12.06C22 6.49 17.52 2 12 2S2 6.49 2 12.06c0 5.03 3.66 9.2 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.74 8.44-4.91 8.44-9.94z"/>
-              </svg>
-              Facebook
-            </a>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#donate">Donate</a>
+            <a class="btn" href="#volunteer">Volunteer</a>
+            <a class="btn" href="#events">See Events</a>
           </div>
+        </div>
 
-          <div class="hero__meta">
-            <div class="meta-card">
-              <span class="meta-card__label">Base</span>
-              <span class="meta-card__value">Dayton, TN</span>
-            </div>
-            <div class="meta-card">
-              <span class="meta-card__label">Phone</span>
-              <span class="meta-card__value">(423) 593-1964</span>
-            </div>
-            <div class="meta-card">
-              <span class="meta-card__label">Email</span>
-              <a class="meta-card__value link" href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a>
+        <div class="hero__card" aria-label="Candidate photo">
+          <img
+            class="hero__photo"
+            src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
+            alt="[CANDIDATE NAME] headshot"
+          />
+          <div class="hero__card-footer">
+            <div class="hero__meta">
+              <span>Rhea County</span>
+              <span>•</span>
+              <span>Integrity</span>
+              <span>•</span>
+              <span>Service</span>
             </div>
           </div>
-        </div>
-
-        <div class="hero__media">
-          <div class="portrait">
-            <!-- ✅ HEADSHOT (correct file) -->
-            <img
-              src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
-              alt="Josh Jordan headshot"
-              loading="eager"
-            />
-          </div>
-
-          <div class="hero__badge" aria-hidden="true">
-            <span class="badge__top">Josh Jordan</span>
-            <span class="badge__big">SHERIFF</span>
-            <span class="badge__bot">Rhea County</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero__fade" aria-hidden="true"></div>
-    </section>
-
-    <!-- Trust strip -->
-    <section class="trust" aria-label="Values">
-      <div class="container trust__grid">
-        <div class="trust__item">
-          <h3>Integrity</h3>
-          <p>Accountability, transparency, and leadership by example.</p>
-        </div>
-        <div class="trust__item">
-          <h3>Professionalism</h3>
-          <p>High standards, strong training, and consistent supervision.</p>
-        </div>
-        <div class="trust__item">
-          <h3>Public Safety</h3>
-          <p>Proactive crime prevention and fast, coordinated response.</p>
-        </div>
-        <div class="trust__item">
-          <h3>Community</h3>
-          <p>Service to everyone—unity over division, always.</p>
         </div>
       </div>
     </section>
 
-    <!-- Priorities (expanded + more official) -->
-    <section id="priorities" class="section">
+    <!-- About -->
+    <section id="about">
       <div class="container">
-        <header class="section__head">
-          <h2>Priorities for the Sheriff’s Office</h2>
-          <p>Focused leadership with practical action steps—built for real operations, not slogans.</p>
-        </header>
-
-        <div class="cards cards--priorities">
-          <article class="card">
-            <h3>Deputy Support & Training</h3>
-            <p>Invest in ongoing training, safety equipment, and clear supervision so deputies can serve confidently and safely.</p>
-            <ul class="bullets">
-              <li>Consistent training & standards</li>
-              <li>Officer safety & readiness</li>
-              <li>Leadership that shows up</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Transparency & Accountability</h3>
-            <p>Better communication with citizens and consistent expectations within the agency.</p>
-            <ul class="bullets">
-              <li>Clear public updates</li>
-              <li>Professional conduct standards</li>
-              <li>Accountability at every level</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Community Trust & Partnership</h3>
-            <p>Work with schools, churches, neighborhoods, and local organizations to prevent crime and build trust.</p>
-            <ul class="bullets">
-              <li>Community outreach</li>
-              <li>Victim support & responsiveness</li>
-              <li>Respect on every call</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Smart Crime Prevention</h3>
-            <p>Practical strategies focused on repeat issues, coordination, and doing the basics exceptionally well.</p>
-            <ul class="bullets">
-              <li>Target repeat problems</li>
-              <li>Better coordination</li>
-              <li>Fast, effective response</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Mental Health & Crisis Response</h3>
-            <p>Support safe outcomes and strengthen partnerships with local and regional providers.</p>
-            <ul class="bullets">
-              <li>Crisis-informed response</li>
-              <li>Partnerships with providers</li>
-              <li>De-escalation where appropriate</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Professional Operations & Command Staff</h3>
-            <p>Build a strong command staff with division-level experience to keep operations efficient and responsive.</p>
-            <ul class="bullets">
-              <li>Experienced supervision</li>
-              <li>Policy & operations focus</li>
-              <li>Efficient day-to-day management</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="note">
-          <p><strong>Yard signs & window decals:</strong> Call or text Josh at <a class="link" href="tel:+14235931964">(423) 593-1964</a>.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience snapshot -->
-    <section id="experience" class="section section--alt">
-      <div class="container">
-        <header class="section__head">
-          <h2>Experience & Service</h2>
-          <p>A career built inside the work—patrol, investigations, supervision, and community service.</p>
-        </header>
+        <h2 class="section-title">About [CANDIDATE NAME]</h2>
+        <p class="section-sub">
+          Write a short, credible bio here: background, local roots, years of service, and why you’re running.
+          Keep it simple and official.
+        </p>
 
         <div class="grid-3">
-          <div class="action">
-            <h3>Law Enforcement</h3>
-            <p>Corrections Deputy → Patrol Deputy → Patrol Sergeant. Experience across a wide range of cases and crisis response.</p>
+          <div class="card">
+            <h3>Experience</h3>
+            <p>Briefly highlight law enforcement or leadership experience and core qualifications.</p>
           </div>
-
-          <div class="action">
-            <h3>Leadership</h3>
-            <p>Training new officers, coordinating schedules, planning goals, and maintaining professional standards.</p>
+          <div class="card">
+            <h3>Community</h3>
+            <p>Talk about relationships with local organizations, outreach, and service.</p>
           </div>
-
-          <div class="action">
-            <h3>Community Commitment</h3>
-            <p>Lifelong Rhea County resident. Service rooted in respect, unity, and doing right by people.</p>
+          <div class="card">
+            <h3>Values</h3>
+            <p>Integrity, transparency, professionalism, and accountability to the public.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Statement (more visible + NOT “hidden accordion”) -->
-    <section id="statement" class="section statement-section">
+    <!-- Priorities -->
+    <section id="priorities">
       <div class="container">
-        <header class="section__head">
-          <h2>Personal Statement</h2>
-          <p class="muted">“Not from anything AI generated. Just from me.”</p>
-        </header>
-
-        <!-- Native details/summary = works without JS -->
-        <details class="statement" open>
-          <summary class="statement__summary">
-            Read Josh’s full statement on leadership & experience
-            <span class="statement__chev" aria-hidden="true"></span>
-          </summary>
-
-          <div class="statement__body">
-            <p><strong>I had some thoughts tonight and wanted to share this from me.</strong> Not from anything AI generated. Just from me, grammatical errors and all.</p>
-
-            <p>One of the very few concerns I have heard during my campaign for sheriff is my ability to run an organization as complicated as the Rhea County Sheriff’s Office. I want to take a moment to address those concerns.</p>
-
-            <p>From the time I began college, I was working as an auxiliary/reserve officer for the Rhea County Sheriff’s Office and Spring City Police Department. I first began as an auxiliary deputy under Leon Sneed during his last term as sheriff. During the transition from his administration to Mike Neal’s administration, I moved to the Spring City Police Department to work as a reserve officer. After roughly six months, I spoke to Sheriff Mike Neal and returned to the sheriff’s office as a reserve deputy.</p>
-
-            <p>During the time of working at both departments, I was attending the University of Tennessee and Chattanooga State Community College. I ended up majoring in General Management, which is a business focus, at Chattanooga State. While attending college, I spent most of my free time volunteering as a reserve at both previously mentioned departments. I was able to experience day to day operations on road patrol and within the jail at the sheriff’s office. I spent many valuable hours there learning about multiple facets of law enforcement.</p>
-
-            <p>I graduated with honors from Chattanooga State with an associate degree in General Management. It included classes in language arts, public speaking, business law, business math, accounting, financial management, statistics, psychology, and multiple other college level courses. I had originally planned on that degree being a fallback plan in case my law enforcement career didn’t pan out. Little did I know, it would help advance my career in law enforcement as a supervisor.</p>
-
-            <p>I worked full time for the Rhea County Sheriff’s Office for two and a half years after I graduated college. During that time, I worked in corrections and as a patrol deputy. I worked multiple districts in the county and became very familiar with all of the communities of Rhea County. During my time as a reserve officer, corrections officer, and patrol deputy, I was able to gain a wealth of knowledge on the everyday workings of a police officer.</p>
-
-            <p>I married my wife, Megan Madewell Jordan in March of 2006. With plans of a future family, I had to look at what would be best for raising our children. In August of 2006, I accepted a job with the Dayton Police Department. I worked as a patrol officer on night shift, before accepting a position as a patrol sergeant on night shift. While my wife and I raised our children, I accepted a position as a school resource officer at Bryan College so I could be on a shift more aligned with my family’s schedule. That gave me five years of invaluable experience, learning the ins and outs of both college campus life and schools in general.</p>
-
-            <p>After those five years working as a school resource officer at Bryan College, I had the opportunity to move back to road patrol on day shift. I could not pass that chance, as working on the road dealing with day to day issues was where my passion really was. I was able to interact with the community, help people in times of need, apprehend those who had committed crimes, and truly feel like I was making a positive impact within my community.</p>
-
-            <p>I later moved into a supervisor role as a patrol sergeant on day shift for the Dayton Police Department. In that time, I have tried to share both the successes and mistakes I have made with other officers working with me. I have always tried to stress to them to treat people with respect until they force the situation otherwise. We want to be able to approach every situation with that respect, but it doesn’t realistically always happen that way. All of these experiences have taught me to approach everything with balance and an open mind.</p>
-
-            <p>I don’t bring up any of this to get a pat on the back or an “atta boy”. I point it out to show that I have a wide variety of experiences and certifications in law enforcement. Combine that with my college education in business and extensive life experiences, it has given me a wealth of knowledge in potentially being your next sheriff of Rhea County.</p>
-
-            <p>I am a very fast learner, and very particular about details in anything I do. I want to make sure things are done correctly and that I do right by people. If elected Sheriff of Rhea County, we will get better at our job every day, and instill a relationship of trust within our community.</p>
-
-            <p>Ego will never stand in the way of what I want for my department and Rhea County as a whole.</p>
-
-            <p><strong>Please feel free to reach out to me with any questions or concerns folks 😊</strong></p>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- Get involved -->
-    <section id="get-involved" class="section section--alt">
-      <div class="container">
-        <header class="section__head">
-          <h2>Get Involved</h2>
-          <p>Volunteer, request a yard sign, and help spread the message across Rhea County.</p>
-        </header>
+        <h2 class="section-title">Priorities</h2>
+        <p class="section-sub">
+          These should sound realistic and local. Three to six bullets works best.
+        </p>
 
         <div class="grid-3">
-          <div class="action">
-            <h3>Volunteer</h3>
-            <p>Help at events, share online, assist with signs, or support campaign outreach.</p>
-            <a class="btn btn--primary" href="#contact">I want to volunteer</a>
+          <div class="card">
+            <h3>Public Safety</h3>
+            <p>Focus on prevention, quick response, and data-driven patrol allocation.</p>
           </div>
-
-          <div class="action">
-            <h3>Yard Signs / Decals</h3>
-            <p>Call, text, message on Facebook—or use the request form below.</p>
-            <a class="btn btn--ghost" href="tel:+14235931964">Call/Text (423) 593-1964</a>
-            <div class="spacer"></div>
-            <a class="btn btn--ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform" target="_blank" rel="noopener">
-              Request a Sign (Form)
-            </a>
+          <div class="card">
+            <h3>Accountability</h3>
+            <p>Clear standards, transparent reporting, and community trust.</p>
           </div>
-
-          <div class="action">
-            <h3>Follow & Share</h3>
-            <p>For updates, photos, and announcements, follow the campaign page.</p>
-            <a class="btn btn--fb" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M22 12.06C22 6.49 17.52 2 12 2S2 6.49 2 12.06c0 5.03 3.66 9.2 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.74 8.44-4.91 8.44-9.94z"/>
-              </svg>
-              Visit Facebook
-            </a>
+          <div class="card">
+            <h3>Support for Deputies</h3>
+            <p>Training, wellness, recruiting, and retaining high-quality staff.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section">
-      <div class="container contact">
-        <header class="section__head">
-          <h2>Contact</h2>
-          <p>Questions, support, volunteering, endorsements, or yard signs—reach out anytime.</p>
-        </header>
+    <!-- Endorsements -->
+    <section id="endorsements">
+      <div class="container">
+        <h2 class="section-title">Endorsements</h2>
+        <p class="section-sub">
+          Add real endorsements as you get them (names + titles). If none yet, you can remove this section.
+        </p>
 
-        <div class="contact__grid">
-          <div class="contact__cards">
-            <div class="contact-card">
-              <h3>Phone</h3>
-              <p><a class="link" href="tel:+14235931964">(423) 593-1964</a></p>
-              <p class="muted">Call or text.</p>
-            </div>
-
-            <div class="contact-card">
-              <h3>Email</h3>
-              <p><a class="link" href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a></p>
-              <p class="muted">Fastest for detailed messages.</p>
-            </div>
-
-            <div class="contact-card">
-              <h3>Facebook</h3>
-              <p>
-                <a class="link" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
-                  View campaign page
-                </a>
-              </p>
-              <p class="muted">Updates, photos, and announcements.</p>
-            </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>[Name]</h3>
+            <p>[Title/Role] — “Short endorsement quote.”</p>
           </div>
+          <div class="card">
+            <h3>[Name]</h3>
+            <p>[Title/Role] — “Short endorsement quote.”</p>
+          </div>
+          <div class="card">
+            <h3>[Name]</h3>
+            <p>[Title/Role] — “Short endorsement quote.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Simple form (mailto — no backend needed) -->
-          <form class="form" id="contactForm" autocomplete="on">
-            <div class="form__row">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required />
-            </div>
+    <!-- Events -->
+    <section id="events">
+      <div class="container">
+        <h2 class="section-title">Events</h2>
+        <p class="section-sub">
+          List upcoming meet-and-greets, speaking events, community stops, etc.
+        </p>
 
-            <div class="form__row">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="(###) ###-####" />
-            </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>[Date] • [Location]</h3>
+            <p>[Event details]</p>
+          </div>
+          <div class="card">
+            <h3>[Date] • [Location]</h3>
+            <p>[Event details]</p>
+          </div>
+          <div class="card">
+            <h3>[Date] • [Location]</h3>
+            <p>[Event details]</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="form__row">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="you@email.com" required />
-            </div>
+    <!-- Volunteer -->
+    <section id="volunteer">
+      <div class="container">
+        <h2 class="section-title">Volunteer</h2>
+        <p class="section-sub">
+          Add a simple call-to-action (phone, email, or a form link). Keep it official.
+        </p>
 
-            <div class="form__row">
-              <label for="topic">I’m reaching out about</label>
-              <select id="topic" name="topic">
-                <option value="volunteer">Volunteering</option>
-                <option value="sign">Yard sign / Decal</option>
-                <option value="endorsement">Endorsement</option>
-                <option value="question">Question</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Call</h3>
+            <p><strong>[Phone]</strong></p>
+          </div>
+          <div class="card">
+            <h3>Email</h3>
+            <p><strong>[Email]</strong></p>
+          </div>
+          <div class="card">
+            <h3>Sign Up</h3>
+            <p><a class="btn btn--primary" href="[Form Link]">Volunteer Form</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="form__row">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="6" placeholder="Write your message..." required></textarea>
-            </div>
+    <!-- Donate -->
+    <section id="donate">
+      <div class="container">
+        <h2 class="section-title">Donate</h2>
+        <p class="section-sub">
+          Link to your official donation platform or provide instructions. (If you don’t have it set yet, leave this as “Coming soon”.)
+        </p>
 
-            <button class="btn btn--primary" type="submit">Send Message</button>
-            <p class="fineprint">This form opens your email app (no server needed).</p>
-          </form>
+        <div class="card">
+          <h3>Support the Campaign</h3>
+          <p style="margin-top:8px">
+            <a class="btn btn--primary" href="[Donation Link]">Donate Now</a>
+            <span style="display:inline-block;margin-left:10px;color:var(--muted);font-weight:600;">Or: [Mailing info / alternate]</span>
+          </p>
         </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="footer" role="contentinfo">
+  <footer>
     <div class="container footer__inner">
-      <div class="footer__left">
-        <strong>Josh Jordan for Rhea County Sheriff</strong>
-        <p class="muted">Dayton, TN 37321 • (423) 593-1964 • jjordan206@yahoo.com</p>
+      <div>
+        <strong>[CANDIDATE NAME] for Sheriff</strong><br />
+        <span>Paid for by [Committee Name].</span>
       </div>
-      <div class="footer__right">
-        <a class="link" href="#top">Back to top</a>
+      <div>
+        <span>© <span id="year"></span> All rights reserved.</span>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // simple mobile menu toggle
+    const btn = document.getElementById("menuBtn");
+    const panel = document.getElementById("mobilePanel");
+    if (btn && panel) {
+      btn.addEventListener("click", () => {
+        const open = panel.style.display === "block";
+        panel.style.display = open ? "none" : "block";
+        btn.setAttribute("aria-expanded", String(!open));
+      });
+    }
+  </script>
 </body>
 </html>
