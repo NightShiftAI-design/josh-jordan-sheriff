@@ -1,63 +1,73 @@
-```js
 /* Josh Jordan for Rhea County Sheriff — script.js
-   - Mobile nav toggle
+   - Mobile nav toggle (if present)
    - Smooth scroll w/ header offset
-   - Simple scroll reveal animations
-   - Contact form: opens mail client (mailto) with filled fields
+   - Scroll reveal
+   - Click-to-scroll for buttons/cards (data-scroll="#sectionId")
+   - Accordions for long text (data-accordion)
+   - Contact form -> mailto compose (if present)
 */
 
 (() => {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // -------------------------------------------
-  // Mobile nav toggle (matches your original HTML structure)
-  // -------------------------------------------
+  // -----------------------------
+  // Mobile nav toggle (works if your HTML has .nav-toggle + #nav)
+  // -----------------------------
   const navToggle = $(".nav-toggle");
   const nav = $("#nav");
 
+  const closeNav = () => {
+    if (!navToggle || !nav) return;
+    navToggle.setAttribute("aria-expanded", "false");
+    nav.classList.remove("is-open");
+    document.body.classList.remove("nav-open");
+  };
+
+  const openNav = () => {
+    if (!navToggle || !nav) return;
+    navToggle.setAttribute("aria-expanded", "true");
+    nav.classList.add("is-open");
+    document.body.classList.add("nav-open");
+  };
+
   if (navToggle && nav) {
-    const closeNav = () => {
-      navToggle.setAttribute("aria-expanded", "false");
-      nav.classList.remove("is-open");
-      document.body.classList.remove("nav-open");
-    };
-
-    const openNav = () => {
-      navToggle.setAttribute("aria-expanded", "true");
-      nav.classList.add("is-open");
-      document.body.classList.add("nav-open");
-    };
-
     navToggle.addEventListener("click", () => {
       const expanded = navToggle.getAttribute("aria-expanded") === "true";
       expanded ? closeNav() : openNav();
     });
 
-    // Close nav when a link is clicked
     nav.addEventListener("click", (e) => {
       const a = e.target.closest("a");
       if (!a) return;
       closeNav();
     });
 
-    // Close with ESC
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeNav();
     });
 
-    // Close if window is resized up (desktop)
     window.addEventListener("resize", () => {
       if (window.matchMedia("(min-width: 981px)").matches) closeNav();
     });
   }
 
-  // -------------------------------------------
+  // -----------------------------
   // Smooth scroll with header offset
-  // -------------------------------------------
+  // -----------------------------
   const header = $(".header");
   const headerOffset = () => (header ? header.getBoundingClientRect().height + 10 : 80);
 
+  const scrollToId = (id) => {
+    if (!id) return;
+    const target = document.getElementById(id.replace("#", ""));
+    if (!target) return;
+
+    const top = target.getBoundingClientRect().top + window.scrollY - headerOffset();
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  // Standard anchor links
   $$('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const href = a.getAttribute("href");
@@ -67,19 +77,27 @@
       if (!target) return;
 
       e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - headerOffset();
-      window.scrollTo({ top, behavior: "smooth" });
-
-      // Keep hash updated for shareability
+      scrollToId(href);
       history.pushState(null, "", href);
     });
   });
 
-  // -------------------------------------------
-  // Scroll reveal (adds a classy "official" feel)
-  // Add data-reveal to any element you want animated.
-  // Also auto-applies to common sections/cards.
-  // -------------------------------------------
+  // Buttons/cards with data-scroll
+  // Example: <button data-scroll="#unity">Read the full statement</button>
+  $$("[data-scroll]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      const dest = el.getAttribute("data-scroll");
+      if (!dest) return;
+      scrollToId(dest);
+      if (dest.startsWith("#")) history.pushState(null, "", dest);
+      closeNav();
+    });
+  });
+
+  // -----------------------------
+  // Scroll reveal
+  // -----------------------------
   const autoRevealSelectors = [
     ".hero__content",
     ".hero__media",
@@ -92,21 +110,21 @@
     ".form",
     ".section__head",
     ".note",
+    ".statement",
+    ".timeline",
+    ".accordion",
+    ".faq",
   ];
 
   const revealTargets = new Set();
   autoRevealSelectors.forEach((sel) => $$(sel).forEach((el) => revealTargets.add(el)));
-
-  // If you manually add data-reveal, include it too.
   $$("[data-reveal]").forEach((el) => revealTargets.add(el));
 
-  // Apply base styles via inline CSS vars so no extra CSS needed
   revealTargets.forEach((el, i) => {
     el.style.opacity = "0";
     el.style.transform = "translateY(14px)";
     el.style.transition = "opacity 700ms ease, transform 700ms ease";
     el.style.transitionDelay = `${Math.min(i * 40, 240)}ms`;
-    el.classList.add("reveal-pending");
   });
 
   const io = new IntersectionObserver(
@@ -116,8 +134,6 @@
         const el = entry.target;
         el.style.opacity = "1";
         el.style.transform = "translateY(0)";
-        el.classList.remove("reveal-pending");
-        el.classList.add("reveal-in");
         io.unobserve(el);
       });
     },
@@ -126,10 +142,55 @@
 
   revealTargets.forEach((el) => io.observe(el));
 
-  // -------------------------------------------
-  // Contact form -> mailto compose
-  // (No backend needed. Uses the form fields to create an email draft.)
-  // -------------------------------------------
+  // -----------------------------
+  // Accordions for long content
+  // Markup:
+  // <div class="accordion" data-accordion>
+  //   <button class="accordion__btn" type="button" aria-expanded="false">...</button>
+  //   <div class="accordion__panel" hidden>...</div>
+  // </div>
+  // -----------------------------
+  $$("[data-accordion]").forEach((wrap) => {
+    const btn = $(".accordion__btn", wrap);
+    const panel = $(".accordion__panel", wrap);
+    if (!btn || !panel) return;
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      if (expanded) {
+        panel.hidden = true;
+        wrap.classList.remove("is-open");
+      } else {
+        panel.hidden = false;
+        wrap.classList.add("is-open");
+      }
+    });
+  });
+
+  // Auto-open accordion if URL hash matches its panel id
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (target) {
+      const acc = target.closest?.("[data-accordion]");
+      if (acc) {
+        const btn = $(".accordion__btn", acc);
+        const panel = $(".accordion__panel", acc);
+        if (btn && panel) {
+          btn.setAttribute("aria-expanded", "true");
+          panel.hidden = false;
+          acc.classList.add("is-open");
+        }
+      }
+      // Scroll after layout
+      setTimeout(() => scrollToId(hash), 50);
+    }
+  }
+
+  // -----------------------------
+  // Contact form -> mailto (if present)
+  // -----------------------------
   const form = $("#contactForm");
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -170,5 +231,4 @@
       form.reset();
     });
   }
-})(); 
-```
+})();
