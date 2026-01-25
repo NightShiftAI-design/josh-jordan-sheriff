@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Josh Jordan for Sheriff of Rhea County, Tennessee — Official Campaign Website" />
   <title>Josh Jordan for Sheriff • Rhea County, TN</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -19,371 +16,67 @@
   <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
-      <div class="topbar__left">
-        <span class="topbar__badge">SHERIFF</span>
-        <span class="topbar__text">Rhea County, Tennessee • Dayton, TN 37321</span>
-      </div>
-      <a class="topbar__cta" href="#signs">Request a Yard Sign</a>
+      <span class="topbar__badge">SHERIFF</span>
+      <span class="topbar__text">Rhea County, Tennessee • Republican Candidate • May 2026</span>
     </div>
   </div>
 
-  <!-- Header (sticky) -->
+  <!-- Header -->
   <header class="site-header">
     <div class="container header__inner">
-      <a class="brand" href="#top" aria-label="Home">
-        <img
-          class="brand__logo"
+      <a class="brand" href="index.html">
+        <img class="brand__logo"
           src="assets/images/505079140_122095294814908392_6417227761878724309_n.jpg"
-          alt="Josh Jordan for Sheriff campaign logo"
+          alt="Josh Jordan campaign logo"
         />
-        <div class="brand__text">
+        <div>
           <div class="brand__name">Josh Jordan</div>
-          <div class="brand__title">For Sheriff • Rhea County, TN</div>
+          <div class="brand__title">For Sheriff</div>
         </div>
       </a>
 
-      <!-- Mobile menu button (works with script.js) -->
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobilePanel" id="menuBtn">
-        Menu
-      </button>
-
-      <!-- Desktop nav -->
-      <nav class="nav" aria-label="Primary">
-        <a class="nav__link" href="#about">About</a>
-        <a class="nav__link" href="#experience">Experience</a>
-        <a class="nav__link" href="#priorities">Priorities</a>
-        <a class="nav__link" href="#signs">Yard Signs</a>
-        <a class="nav__link nav__link--button" href="#contact">Contact</a>
-
-        <!-- Facebook icon button -->
-        <a
-          class="icon-btn"
-          href="https://www.facebook.com/profile.php?id=61577251765386"
-          target="_blank"
-          rel="noopener"
-          aria-label="Visit the official Facebook page"
-          title="Facebook"
-        >
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
-            <path d="M22 12.06C22 6.504 17.523 2 12 2S2 6.504 2 12.06C2 17.083 5.657 21.245 10.438 22v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.46h-1.26c-1.242 0-1.63.772-1.63 1.562v1.88h2.773l-.443 2.91h-2.33V22C18.343 21.245 22 17.083 22 12.06z"/>
-          </svg>
-        </a>
+      <nav class="nav">
+        <a class="nav__link" href="about.html">About</a>
+        <a class="nav__link" href="experience.html">Experience</a>
+        <a class="nav__link" href="priorities.html">Priorities</a>
+        <a class="nav__link nav__link--button" href="get-involved.html">Get Involved</a>
       </nav>
-    </div>
-
-    <!-- Mobile nav panel -->
-    <div class="container mobile-panel" id="mobilePanel">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#priorities">Priorities</a>
-      <a href="#signs">Yard Signs</a>
-      <a href="#contact">Contact</a>
-      <a href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">Facebook</a>
     </div>
   </header>
 
-  <!-- Main -->
+  <!-- HERO -->
   <main>
-    <!-- Hero -->
     <section class="hero">
       <div class="container hero__grid">
         <div>
-          <div class="hero__kicker">Official Campaign Website</div>
-          <h1>Josh Jordan for Sheriff</h1>
+          <h1>Josh Jordan<br>for Sheriff</h1>
           <p>
-            Republican candidate for Sheriff of Rhea County, Tennessee — May 2026.
-            Dedicated to professional leadership, community trust, and public safety done right.
+            Lifelong Rhea County resident.  
+            24 years in law enforcement.  
+            Committed to professional leadership, accountability, and community trust.
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#signs">Request a Yard Sign</a>
-            <a class="btn" href="#priorities">View Priorities</a>
-            <a class="btn" href="#contact">Contact Josh</a>
-          </div>
-
-          <div style="margin-top:12px; color: var(--muted); font-weight: 600; font-size: 13px; line-height: 1.6;">
-            Follow updates on Facebook:
-            <a href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener" style="text-decoration: underline;">
-              Josh Jordan for Sheriff of Rhea County, TN
-            </a>
+            <a class="btn btn--primary" href="priorities.html">View Priorities</a>
+            <a class="btn" href="experience.html">Experience</a>
+            <a class="btn" href="get-involved.html">Get Involved</a>
           </div>
         </div>
 
-        <div class="hero__card" aria-label="Candidate photo">
+        <div class="hero__card">
           <img
             class="hero__photo"
             src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
             alt="Josh Jordan headshot"
           />
-          <div class="hero__card-footer">
-            <div class="hero__meta">
-              <span>Rhea County</span>
-              <span>•</span>
-              <span>Integrity</span>
-              <span>•</span>
-              <span>Service</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Contact -->
-    <section id="contact">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-sub">
-          Reach out with questions, concerns, or to get involved.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Call / Text</h3>
-            <p>
-              <a class="btn btn--primary" href="tel:4235931964">Call (423) 593-1964</a>
-              <span style="display:inline-block;margin-left:10px;"></span>
-              <a class="btn" href="sms:4235931964">Text</a>
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Email</h3>
-            <p>
-              <a class="btn" href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a>
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Facebook</h3>
-            <p>
-              <a class="btn" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
-                Visit Official Page
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Yard Signs -->
-    <section id="signs">
-      <div class="container">
-        <h2 class="section-title">Yard Signs & Window Decals</h2>
-        <p class="section-sub">
-          Want a yard sign or vehicle window decal? Please fill out the official request form below.
-        </p>
-
-        <div class="card">
-          <h3>Request Form</h3>
-          <p style="margin-top:8px;">
-            <a
-              class="btn btn--primary"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
-              target="_blank"
-              rel="noopener"
-            >
-              Fill Out the Yard Sign Form
-            </a>
-            <span style="display:inline-block; margin-left:10px; color: var(--muted); font-weight: 650;">
-              (Takes ~1 minute)
-            </span>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-      <div class="container">
-        <h2 class="section-title">About Josh Jordan</h2>
-        <p class="section-sub">
-          Josh Jordan is a lifelong resident of Rhea County and currently serves as a Patrol Sergeant with the Dayton Police Department.
-          He’s running to bring experienced, professional leadership to the Rhea County Sheriff’s Office.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Local Roots</h3>
-            <p>
-              Lifelong Rhea County resident. Graduate of Rhea County High School (Class of 2000).
-              Married and raising a family here at home.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Education</h3>
-            <p>
-              Associate degree in Business / General Management from Chattanooga State (graduated with honors),
-              with coursework including public speaking, business law, accounting, finance, and statistics.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Public Service</h3>
-            <p>
-              Began serving early as a Reserve Officer and Reserve Deputy while in college, then built a full-time career in law enforcement
-              serving Rhea County communities.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
-      <div class="container">
-        <h2 class="section-title">Experience & Leadership</h2>
-        <p class="section-sub">
-          Over 20 years in law enforcement with experience across patrol, corrections, supervision, investigations,
-          training, and interagency coordination.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Career Path</h3>
-            <p>
-              Started full-time in 2004 as a Corrections Deputy with the Rhea County Sheriff’s Office, later served as Patrol Deputy,
-              and since 2006 has served with the Dayton Police Department — now as a Patrol Sergeant.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Supervision</h3>
-            <p>
-              As a Patrol Sergeant: trains new officers, coordinates schedules, helps plan departmental goals,
-              and emphasizes respectful policing with balanced decision-making.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Special Focus: Crisis Response</h3>
-            <p>
-              Certified Crisis Intervention Team (CIT) officer (December 2023) and works closely with local and regional mental health providers
-              to improve outcomes in crisis situations.
-            </p>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px;">
-          <h3>Message on Leadership</h3>
-          <p>
-            Josh believes the Sheriff’s Office must be run with strong standards, clear accountability, and a culture of continuous improvement.
-            That includes building a capable command team with operational experience across divisions (patrol, investigations, corrections, court security),
-            so the office stays efficient, transparent, and responsive to the people of Rhea County.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Priorities -->
-    <section id="priorities">
-      <div class="container">
-        <h2 class="section-title">Priorities</h2>
-        <p class="section-sub">
-          A safer Rhea County starts with professional leadership, community trust, and doing the work the right way — every day.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Public Safety & Response</h3>
-            <p>
-              Strengthen day-to-day patrol operations, improve response readiness, and keep focus on the crimes that most impact families and neighborhoods.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Accountability & Trust</h3>
-            <p>
-              Raise standards, enforce professionalism, and build stronger relationships with the public through transparency and respectful policing.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Training & Support</h3>
-            <p>
-              Invest in training, supervision, and leadership development to support deputies and ensure consistent, high-quality service countywide.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-3" style="margin-top:14px;">
-          <div class="card">
-            <h3>Crisis & Mental Health</h3>
-            <p>
-              Continue improving crisis response using CIT training and coordinated partnerships with mental health providers to reduce harm and improve outcomes.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Balanced, Fair Enforcement</h3>
-            <p>
-              Treat people with respect, use good judgment, and apply the right approach for each situation — firm when needed, fair always.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Strong Command Staff</h3>
-            <p>
-              Build an experienced leadership team with proven operational and administrative ability to manage a complex organization effectively.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Get Involved -->
-    <section id="get-involved">
-      <div class="container">
-        <h2 class="section-title">Get Involved</h2>
-        <p class="section-sub">
-          Support the campaign and stay connected.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Request a Sign</h3>
-            <p style="margin-top:10px;">
-              <a
-                class="btn btn--primary"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
-                target="_blank"
-                rel="noopener"
-              >
-                Yard Sign / Decal Form
-              </a>
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Follow Updates</h3>
-            <p style="margin-top:10px;">
-              <a class="btn" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
-                Follow on Facebook
-              </a>
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Reach Out</h3>
-            <p style="margin-top:10px;">
-              <a class="btn" href="tel:4235931964">Call</a>
-              <span style="display:inline-block;margin-left:10px;"></span>
-              <a class="btn" href="mailto:jjordan206@yahoo.com">Email</a>
-            </p>
-          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
     <div class="container footer__inner">
-      <div>
-        <strong>Josh Jordan for Sheriff</strong><br />
-        <span>Paid for by [Committee Name].</span>
-      </div>
-      <div>
-        <span>© <span id="year"></span> All rights reserved.</span>
-      </div>
+      <span>© <span id="year"></span> Josh Jordan for Sheriff</span>
     </div>
   </footer>
 
