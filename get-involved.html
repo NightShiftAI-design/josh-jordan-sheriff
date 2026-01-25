@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Get involved with Josh Jordan for Sheriff — yard signs, contact info, and official links." />
+  <meta name="description" content="Get involved with Josh Jordan for Sheriff — request yard signs, contact info, and official links." />
   <title>Get Involved • Josh Jordan for Sheriff</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body class="page-involved">
   <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
@@ -72,94 +72,61 @@
     </div>
   </header>
 
-  <main>
-    <!-- Page Hero -->
-    <section class="hero" style="padding:28px 0 18px;">
-      <div class="container hero__grid" style="grid-template-columns: 1.1fr .9fr;">
-        <div>
-          <div class="hero__kicker">Get Involved</div>
-          <h1 style="margin-top:12px;">Support the Campaign</h1>
-          <p style="margin-bottom:14px;">
-            Request a yard sign or vehicle decal, follow the official campaign page, or reach out directly.
-            Every conversation and every sign helps.
-          </p>
-
-          <div class="hero__actions">
-            <a
-              class="btn btn--primary"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
-              target="_blank"
-              rel="noopener"
-            >
-              Request a Yard Sign
-            </a>
-            <a class="btn" href="tel:4235931964">Call</a>
-            <a class="btn" href="mailto:jjordan206@yahoo.com">Email</a>
-          </div>
-
-          <div style="margin-top:12px; color: var(--muted); font-weight: 650; font-size: 13px; line-height: 1.6;">
-            Official Facebook page:
-            <a href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener" style="text-decoration: underline;">
-              Josh Jordan for Sheriff of Rhea County, TN
-            </a>
-          </div>
-        </div>
-
-        <div class="hero__card" aria-label="Candidate photo">
-          <img
-            class="hero__photo"
-            src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
-            alt="Josh Jordan headshot"
-          />
-          <div class="hero__card-footer">
-            <div class="hero__meta">
-              <span>Rhea County</span><span>•</span><span>Service</span><span>•</span><span>Trust</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Yard Signs -->
-    <section id="signs">
-      <div class="container">
-        <h2 class="section-title">Yard Signs & Window Decals</h2>
-        <p class="section-sub">
-          If you would like a yard sign or vehicle window decal, please fill out the official request form.
+  <!-- PAGE BANNER -->
+  <section class="page-hero" style="--banner:url('assets/images/595620669_122153482004908392_1610278707937448114_n.jpg');">
+    <div class="container page-hero__inner">
+      <div>
+        <div class="page-hero__chip">Get Involved</div>
+        <h1 class="page-hero__title">Support the Campaign</h1>
+        <p class="page-hero__sub">
+          Request a yard sign or decal • Follow official updates • Reach out directly
         </p>
-
-        <div class="card">
-          <h3>Official Request Form</h3>
-          <p style="margin-top:10px;">
-            <a
-              class="btn btn--primary"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
-              target="_blank"
-              rel="noopener"
-            >
-              Yard Sign / Decal Form
-            </a>
-            <span style="display:inline-block;margin-left:10px;color:var(--muted);font-weight:650;">
-              Takes about 1 minute
-            </span>
-          </p>
-        </div>
       </div>
-    </section>
 
-    <!-- Contact Blocks -->
-    <section id="contact">
+      <div class="page-hero__actions">
+        <a
+          class="btn btn--primary"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
+          target="_blank"
+          rel="noopener"
+        >
+          Yard Sign Form
+        </a>
+        <a class="btn" href="tel:4235931964">Call</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- Action grid (single strong block instead of many sections) -->
+    <section>
       <div class="container">
-        <h2 class="section-title">Contact Josh</h2>
+        <h2 class="section-title">Official Links & Contact</h2>
         <p class="section-sub">
-          Questions or concerns? Want to help? Reach out anytime.
+          Everything you need in one place: sign requests, contact info, and official campaign updates.
         </p>
 
         <div class="grid-3">
           <div class="card">
+            <h3>Request a Yard Sign</h3>
+            <p>Want a yard sign or vehicle window decal? Use the official request form.</p>
+            <p style="margin-top:12px;">
+              <a
+                class="btn btn--primary"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
+                target="_blank"
+                rel="noopener"
+              >
+                Open Request Form
+              </a>
+            </p>
+          </div>
+
+          <div class="card">
             <h3>Call / Text</h3>
-            <p>
-              <a class="btn btn--primary" href="tel:4235931964">Call (423) 593-1964</a>
+            <p>Questions, concerns, or want to help? Reach out directly.</p>
+            <p style="margin-top:12px;">
+              <a class="btn btn--primary" href="tel:4235931964">(423) 593-1964</a>
               <span style="display:inline-block;margin-left:10px;"></span>
               <a class="btn" href="sms:4235931964">Text</a>
             </p>
@@ -167,64 +134,47 @@
 
           <div class="card">
             <h3>Email</h3>
-            <p>
+            <p>Send a message any time. We’ll respond as soon as possible.</p>
+            <p style="margin-top:12px;">
               <a class="btn" href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a>
             </p>
           </div>
+        </div>
 
+        <div class="grid-3" style="margin-top:14px;">
           <div class="card">
-            <h3>Facebook</h3>
-            <p>
+            <h3>Official Facebook</h3>
+            <p>Campaign updates are posted on the official page.</p>
+            <p style="margin-top:12px;">
               <a class="btn" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
-                Visit Official Page
+                Visit Facebook Page
               </a>
             </p>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Share / Support -->
-    <section>
-      <div class="container">
-        <h2 class="section-title">Other Ways to Help</h2>
-        <p class="section-sub">
-          Even small actions make a big difference in a local campaign.
-        </p>
-
-        <div class="grid-3">
           <div class="card">
-            <h3>Share Updates</h3>
-            <p>
-              Follow the official page and share posts with friends and neighbors to help spread accurate information.
+            <h3>Share With Friends</h3>
+            <p>Local elections are won neighbor-to-neighbor. Share updates and help spread accurate information.</p>
+            <p style="margin-top:12px;">
+              <a class="btn" href="priorities.html">View Priorities</a>
             </p>
           </div>
 
           <div class="card">
-            <h3>Host a Meet & Greet</h3>
-            <p>
-              Want Josh to visit your neighborhood or speak to a local group? Reach out and we’ll coordinate a time.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Stay Connected</h3>
-            <p>
-              Campaign updates will be posted on Facebook. If you’d like to help, call or email directly.
+            <h3>Location</h3>
+            <p>Rhea County, Tennessee • Dayton, TN 37321</p>
+            <p style="margin-top:12px;">
+              <a class="btn" href="about.html">Read About Josh</a>
             </p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- CTA -->
-    <section>
-      <div class="container">
-        <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <!-- Big CTA band -->
+        <div class="card" style="margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
           <div>
-            <h3 style="margin:0 0 6px;">Ready to request a sign?</h3>
+            <h3 style="margin:0 0 6px;">Most common request: yard signs</h3>
             <p style="margin:0; color:var(--muted);">
-              Fill out the form and the campaign will follow up.
+              Fill out the form and the campaign will coordinate delivery/pickup.
             </p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -240,6 +190,7 @@
             <a class="btn" href="mailto:jjordan206@yahoo.com">Email</a>
           </div>
         </div>
+
       </div>
     </section>
   </main>
