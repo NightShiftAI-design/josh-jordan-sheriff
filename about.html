@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body class="page-about">
   <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
@@ -72,50 +72,33 @@
     </div>
   </header>
 
-  <main>
-    <!-- Page Hero -->
-    <section class="hero" style="padding:28px 0 18px;">
-      <div class="container hero__grid" style="grid-template-columns: 1.1fr .9fr;">
-        <div>
-          <div class="hero__kicker">About the Candidate</div>
-          <h1 style="margin-top:12px;">Meet Josh Jordan</h1>
-          <p style="margin-bottom:14px;">
-            Josh Jordan is a lifelong Rhea County resident and a Republican candidate for Sheriff in May 2026.
-            He has dedicated his career to public service and is committed to professional leadership, accountability, and community trust.
-          </p>
-
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="get-involved.html">Get Involved</a>
-            <a class="btn" href="priorities.html">View Priorities</a>
-            <a class="btn" href="experience.html">See Experience</a>
-          </div>
-        </div>
-
-        <div class="hero__card" aria-label="Candidate photo">
-          <img
-            class="hero__photo"
-            src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
-            alt="Josh Jordan headshot"
-          />
-          <div class="hero__card-footer">
-            <div class="hero__meta">
-              <span>Rhea County</span><span>•</span><span>Service</span><span>•</span><span>Integrity</span>
-            </div>
-          </div>
-        </div>
+  <!-- PAGE BANNER (this is what makes pages instantly different) -->
+  <section class="page-hero" style="--banner:url('assets/images/612041674_122158951652908392_6347288783412594930_n.jpg');">
+    <div class="container page-hero__inner">
+      <div>
+        <div class="page-hero__chip">About</div>
+        <h1 class="page-hero__title">Meet Josh Jordan</h1>
+        <p class="page-hero__sub">
+          Lifelong Rhea County resident • Patrol Sergeant • Republican candidate for Sheriff (May 2026)
+        </p>
       </div>
-    </section>
 
-    <!-- About Content -->
+      <div class="page-hero__actions">
+        <a class="btn btn--primary" href="get-involved.html">Get Involved</a>
+        <a class="btn" href="experience.html">Experience</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
     <section>
       <div class="container">
-        <h2 class="section-title">Official Announcement</h2>
-        <p class="section-sub">
-          “My name is Josh Jordan, and I am formally announcing my intent to run for Sheriff of Rhea County, Tennessee.”
-        </p>
+        <h2 class="section-title">Official Statement</h2>
 
         <div class="card">
           <p style="margin:0; color: var(--muted); line-height:1.75;">
+            My name is Josh Jordan, and I am formally announcing my intent to run for Sheriff of Rhea County, Tennessee.
+            <br><br>
             I am 43 years old and have proudly called Rhea County my home for my entire life. I have been married for 19 years and raise my children here.
             I am a graduate of Rhea County High School, Class of 2000, and went on to earn an Associate of Applied Science degree in Business from Chattanooga State,
             graduating with honors.
@@ -137,23 +120,23 @@
 
     <section>
       <div class="container">
-        <h2 class="section-title">Local Roots & Family</h2>
-        <p class="section-sub">
-          Rhea County is home — and that’s where Josh’s commitment to service begins.
-        </p>
+        <h2 class="section-title">Quick Facts</h2>
 
         <div class="grid-3">
           <div class="card">
-            <h3>Lifelong Rhea County Resident</h3>
-            <p>Born and raised in Rhea County and proud to call it home.</p>
+            <h3>Home</h3>
+            <p>Rhea County, Tennessee • Dayton, TN 37321</p>
           </div>
           <div class="card">
-            <h3>Family</h3>
-            <p>Married for 19 years and raising children here in the community.</p>
+            <h3>Election</h3>
+            <p>Republican candidate for Sheriff • May 2026</p>
           </div>
           <div class="card">
-            <h3>Education</h3>
-            <p>Rhea County High School (Class of 2000). Associate degree in Business from Chattanooga State (honors).</p>
+            <h3>Contact</h3>
+            <p>
+              <a href="tel:4235931964" style="text-decoration:underline;">(423) 593-1964</a><br/>
+              <a href="mailto:jjordan206@yahoo.com" style="text-decoration:underline;">jjordan206@yahoo.com</a>
+            </p>
           </div>
         </div>
       </div>
@@ -161,44 +144,23 @@
 
     <section>
       <div class="container">
-        <h2 class="section-title">Why He’s Running</h2>
-        <p class="section-sub">
-          Professional leadership, higher standards, and stronger community trust.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Lead by Example</h3>
-            <p>Josh believes leadership starts with personal accountability and consistent standards.</p>
-          </div>
-          <div class="card">
-            <h3>Serve the Public</h3>
-            <p>Respectful policing, balanced judgment, and doing what’s right for the people of Rhea County.</p>
-          </div>
-          <div class="card">
-            <h3>Improve Every Day</h3>
-            <p>A Sheriff’s Office that is always improving operations, training, and community relationships.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section id="about-cta">
-      <div class="container">
         <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
           <div>
-            <h3 style="margin:0 0 6px;">Want to support the campaign?</h3>
+            <h3 style="margin:0 0 6px;">Request a yard sign or decal</h3>
             <p style="margin:0; color:var(--muted);">
-              Request a yard sign, follow on Facebook, or reach out directly.
+              Fill out the official form and the campaign will follow up.
             </p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn--primary" href="get-involved.html">Get Involved</a>
-            <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform" target="_blank" rel="noopener">
+            <a
+              class="btn btn--primary"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
+              target="_blank"
+              rel="noopener"
+            >
               Yard Sign Form
             </a>
-            <a class="btn" href="tel:4235931964">Call</a>
+            <a class="btn" href="get-involved.html">Get Involved</a>
           </div>
         </div>
       </div>
