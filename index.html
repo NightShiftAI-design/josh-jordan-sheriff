@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Josh Jordan for Sheriff of Rhea County, Tennessee — Official Campaign Website" />
   <title>Josh Jordan for Sheriff • Rhea County, TN</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,71 +13,171 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body class="page-home">
   <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
       <span class="topbar__badge">SHERIFF</span>
       <span class="topbar__text">Rhea County, Tennessee • Republican Candidate • May 2026</span>
+      <a class="topbar__cta" href="get-involved.html">Request a Yard Sign</a>
     </div>
   </div>
 
   <!-- Header -->
   <header class="site-header">
     <div class="container header__inner">
-      <a class="brand" href="index.html">
-        <img class="brand__logo"
+      <a class="brand" href="index.html" aria-label="Home">
+        <img
+          class="brand__logo"
           src="assets/images/505079140_122095294814908392_6417227761878724309_n.jpg"
-          alt="Josh Jordan campaign logo"
+          alt="Josh Jordan for Sheriff campaign logo"
         />
-        <div>
+        <div class="brand__text">
           <div class="brand__name">Josh Jordan</div>
-          <div class="brand__title">For Sheriff</div>
+          <div class="brand__title">For Sheriff • Rhea County, TN</div>
         </div>
       </a>
 
-      <nav class="nav">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobilePanel" id="menuBtn">
+        Menu
+      </button>
+
+      <nav class="nav" aria-label="Primary">
         <a class="nav__link" href="about.html">About</a>
         <a class="nav__link" href="experience.html">Experience</a>
         <a class="nav__link" href="priorities.html">Priorities</a>
         <a class="nav__link nav__link--button" href="get-involved.html">Get Involved</a>
+
+        <a
+          class="icon-btn"
+          href="https://www.facebook.com/profile.php?id=61577251765386"
+          target="_blank"
+          rel="noopener"
+          aria-label="Visit the official Facebook page"
+          title="Facebook"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+            <path d="M22 12.06C22 6.504 17.523 2 12 2S2 6.504 2 12.06C2 17.083 5.657 21.245 10.438 22v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.46h-1.26c-1.242 0-1.63.772-1.63 1.562v1.88h2.773l-.443 2.91h-2.33V22C18.343 21.245 22 17.083 22 12.06z"/>
+          </svg>
+        </a>
       </nav>
+    </div>
+
+    <!-- Mobile nav panel -->
+    <div class="container mobile-panel" id="mobilePanel">
+      <a href="about.html">About</a>
+      <a href="experience.html">Experience</a>
+      <a href="priorities.html">Priorities</a>
+      <a href="get-involved.html">Get Involved</a>
+      <a href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">Facebook</a>
     </div>
   </header>
 
-  <!-- HERO -->
   <main>
-    <section class="hero">
-      <div class="container hero__grid">
-        <div>
-          <h1>Josh Jordan<br>for Sheriff</h1>
-          <p>
-            Lifelong Rhea County resident.  
-            24 years in law enforcement.  
+    <!-- HOME HERO (different from inner pages) -->
+    <section class="home-hero" style="--banner:url('assets/images/515547077_122113985780908392_2390202805218607323_n.jpg');">
+      <div class="container home-hero__inner">
+        <div class="home-hero__content">
+          <div class="home-hero__kicker">Official Campaign Website</div>
+          <h1 class="home-hero__title">Josh Jordan<br><span>for Sheriff</span></h1>
+          <p class="home-hero__sub">
+            Lifelong Rhea County resident. Patrol Sergeant. 24 years in law enforcement.
             Committed to professional leadership, accountability, and community trust.
           </p>
 
-          <div class="hero__actions">
+          <div class="home-hero__actions">
             <a class="btn btn--primary" href="priorities.html">View Priorities</a>
             <a class="btn" href="experience.html">Experience</a>
             <a class="btn" href="get-involved.html">Get Involved</a>
           </div>
+
+          <div class="home-hero__quick">
+            <a class="quick-pill" href="tel:4235931964">Call: (423) 593-1964</a>
+            <a class="quick-pill" href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a>
+            <a class="quick-pill" href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform" target="_blank" rel="noopener">
+              Request a Yard Sign
+            </a>
+          </div>
         </div>
 
-        <div class="hero__card">
-          <img
-            class="hero__photo"
-            src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
-            alt="Josh Jordan headshot"
-          />
+        <div class="home-hero__card" aria-label="Candidate photo">
+          <div class="home-hero__photo-wrap">
+            <img
+              class="home-hero__photo"
+              src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg"
+              alt="Josh Jordan headshot"
+            />
+          </div>
+
+          <div class="home-hero__card-footer">
+            <div class="home-hero__meta">
+              <span>Rhea County</span><span>•</span><span>Integrity</span><span>•</span><span>Service</span>
+            </div>
+
+            <div class="home-hero__mini">
+              <a class="btn btn--primary" href="get-involved.html">Request a Sign</a>
+              <a class="btn" href="about.html">Meet Josh</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Minimal “credibility strip” (not a bunch of sections) -->
+    <section class="cred-strip">
+      <div class="container cred-strip__inner">
+        <div class="cred">
+          <div class="cred__num">24</div>
+          <div class="cred__label">Years in law enforcement</div>
+        </div>
+        <div class="cred">
+          <div class="cred__num">CIT</div>
+          <div class="cred__label">Certified crisis response</div>
+        </div>
+        <div class="cred">
+          <div class="cred__num">Local</div>
+          <div class="cred__label">Lifelong Rhea County resident</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- One clean CTA block -->
+    <section class="home-cta">
+      <div class="container">
+        <div class="card home-cta__card">
+          <div>
+            <h2 class="section-title" style="margin-bottom:8px;">What do you say we make this official?</h2>
+            <p class="section-sub" style="margin:0;">
+              Request a yard sign, follow official updates, or reach out directly.
+            </p>
+          </div>
+          <div class="home-cta__actions">
+            <a
+              class="btn btn--primary"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
+              target="_blank"
+              rel="noopener"
+            >
+              Yard Sign Form
+            </a>
+            <a class="btn" href="get-involved.html">Get Involved</a>
+            <a class="btn" href="tel:4235931964">Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
     <div class="container footer__inner">
-      <span>© <span id="year"></span> Josh Jordan for Sheriff</span>
+      <div>
+        <strong>Josh Jordan for Sheriff</strong><br />
+        <span>Paid for by [Committee Name].</span>
+      </div>
+      <div>
+        <span>© <span id="year"></span> All rights reserved.</span>
+      </div>
     </div>
   </footer>
 
