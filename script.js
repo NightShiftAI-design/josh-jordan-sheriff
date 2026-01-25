@@ -1,196 +1,163 @@
-/* Josh Jordan for Rhea County Sheriff — script.js
-   - Mobile nav toggle (if present)
-   - Smooth scroll w/ header offset
-   - Scroll reveal
-   - Click-to-scroll for buttons/cards (data-scroll="#sectionId")
-   - Accordions for long text (data-accordion)
-   - Contact form -> mailto compose (if present)
+```js
+/* Josh Jordan for Sheriff — script.js
+   Works with the current index.html + styles.css you’re using:
+   - Mobile nav toggle (#nav + .nav-toggle) + body.nav-open
+   - Smooth scroll for internal anchors
+   - Accordion system for statements (data-accordion)
+   - Contact form: opens mail client (mailto) with filled fields
 */
 
-(() => {
+(function () {
+  "use strict";
+
+  // ---------- Helpers ----------
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // -----------------------------
-  // Mobile nav toggle (works if your HTML has .nav-toggle + #nav)
-  // -----------------------------
-  const navToggle = $(".nav-toggle");
-  const nav = $("#nav");
+  const isSamePageHashLink = (href) => typeof href === "string" && href.startsWith("#") && href.length > 1;
 
   const closeNav = () => {
-    if (!navToggle || !nav) return;
-    navToggle.setAttribute("aria-expanded", "false");
+    const nav = $("#nav");
+    const toggle = $(".nav-toggle");
+    if (!nav || !toggle) return;
+
     nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
     document.body.classList.remove("nav-open");
   };
 
   const openNav = () => {
-    if (!navToggle || !nav) return;
-    navToggle.setAttribute("aria-expanded", "true");
+    const nav = $("#nav");
+    const toggle = $(".nav-toggle");
+    if (!nav || !toggle) return;
+
     nav.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
     document.body.classList.add("nav-open");
   };
 
-  if (navToggle && nav) {
-    navToggle.addEventListener("click", () => {
-      const expanded = navToggle.getAttribute("aria-expanded") === "true";
-      expanded ? closeNav() : openNav();
-    });
+  const toggleNav = () => {
+    const nav = $("#nav");
+    if (!nav) return;
+    nav.classList.contains("is-open") ? closeNav() : openNav();
+  };
 
+  // ---------- Mobile nav ----------
+  const nav = $("#nav");
+  const navToggle = $(".nav-toggle");
+
+  if (nav && navToggle) {
+    navToggle.addEventListener("click", toggleNav);
+
+    // Close nav when clicking any nav link
     nav.addEventListener("click", (e) => {
       const a = e.target.closest("a");
       if (!a) return;
+      // close for any click on a link (including external)
       closeNav();
     });
 
-    window.addEventListener("keydown", (e) => {
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeNav();
     });
 
-    window.addEventListener("resize", () => {
-      if (window.matchMedia("(min-width: 981px)").matches) closeNav();
+    // Close when clicking outside the nav (mobile drawer)
+    document.addEventListener("click", (e) => {
+      const isOpen = nav.classList.contains("is-open");
+      if (!isOpen) return;
+
+      const clickedToggle = e.target.closest(".nav-toggle");
+      const clickedNav = e.target.closest("#nav");
+      if (!clickedNav && !clickedToggle) closeNav();
     });
   }
 
-  // -----------------------------
-  // Smooth scroll with header offset
-  // -----------------------------
-  const header = $(".header");
-  const headerOffset = () => (header ? header.getBoundingClientRect().height + 10 : 80);
-
-  const scrollToId = (id) => {
-    if (!id) return;
-    const target = document.getElementById(id.replace("#", ""));
-    if (!target) return;
-
-    const top = target.getBoundingClientRect().top + window.scrollY - headerOffset();
-    window.scrollTo({ top, behavior: "smooth" });
-  };
-
-  // Standard anchor links
+  // ---------- Smooth scroll for internal anchors ----------
   $$('a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const href = a.getAttribute("href");
-      if (!href || href.length < 2) return;
+    const href = a.getAttribute("href");
+    if (!isSamePageHashLink(href)) return;
 
-      const target = document.getElementById(href.slice(1));
+    a.addEventListener("click", (e) => {
+      const id = href.slice(1);
+      const target = document.getElementById(id);
       if (!target) return;
 
       e.preventDefault();
-      scrollToId(href);
+      closeNav();
+
+      // Use scroll-margin-top via CSS? We'll account for sticky header.
+      const header = $(".header");
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const y = target.getBoundingClientRect().top + window.scrollY - headerH - 10;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+
+      // Update URL hash (without jumping)
       history.pushState(null, "", href);
     });
   });
 
-  // Buttons/cards with data-scroll
-  // Example: <button data-scroll="#unity">Read the full statement</button>
-  $$("[data-scroll]").forEach((el) => {
-    el.addEventListener("click", (e) => {
-      e.preventDefault();
-      const dest = el.getAttribute("data-scroll");
-      if (!dest) return;
-      scrollToId(dest);
-      if (dest.startsWith("#")) history.pushState(null, "", dest);
-      closeNav();
+  // ---------- Make .card[role="button"] / .card[data-scroll] scroll (optional) ----------
+  $$(".card[role='button'][tabindex], .card[data-scroll]").forEach((card) => {
+    const link = card.querySelector("a[href^='#']");
+    const href = link ? link.getAttribute("href") : null;
+    if (!href || !isSamePageHashLink(href)) return;
+
+    const go = () => {
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      const header = $(".header");
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const y = target.getBoundingClientRect().top + window.scrollY - headerH - 10;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+      history.pushState(null, "", href);
+    };
+
+    card.addEventListener("click", (e) => {
+      // If user clicked a real link/button inside, let it behave normally.
+      if (e.target.closest("a, button, input, select, textarea")) return;
+      go();
+    });
+
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        go();
+      }
     });
   });
 
-  // -----------------------------
-  // Scroll reveal
-  // -----------------------------
-  const autoRevealSelectors = [
-    ".hero__content",
-    ".hero__media",
-    ".trust__item",
-    ".card",
-    ".about__content",
-    ".about__side",
-    ".action",
-    ".contact-card",
-    ".form",
-    ".section__head",
-    ".note",
-    ".statement",
-    ".timeline",
-    ".accordion",
-    ".faq",
-  ];
-
-  const revealTargets = new Set();
-  autoRevealSelectors.forEach((sel) => $$(sel).forEach((el) => revealTargets.add(el)));
-  $$("[data-reveal]").forEach((el) => revealTargets.add(el));
-
-  revealTargets.forEach((el, i) => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(14px)";
-    el.style.transition = "opacity 700ms ease, transform 700ms ease";
-    el.style.transitionDelay = `${Math.min(i * 40, 240)}ms`;
-  });
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        el.style.opacity = "1";
-        el.style.transform = "translateY(0)";
-        io.unobserve(el);
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  revealTargets.forEach((el) => io.observe(el));
-
-  // -----------------------------
-  // Accordions for long content
-  // Markup:
+  // ---------- Accordions ----------
+  // Expected structure:
   // <div class="accordion" data-accordion>
-  //   <button class="accordion__btn" type="button" aria-expanded="false">...</button>
+  //   <button class="accordion__btn" aria-expanded="false">...</button>
   //   <div class="accordion__panel" hidden>...</div>
   // </div>
-  // -----------------------------
-  $$("[data-accordion]").forEach((wrap) => {
-    const btn = $(".accordion__btn", wrap);
-    const panel = $(".accordion__panel", wrap);
+  $$(".accordion[data-accordion]").forEach((acc) => {
+    const btn = $(".accordion__btn", acc);
+    const panel = $(".accordion__panel", acc);
     if (!btn || !panel) return;
 
+    const setState = (open) => {
+      acc.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      panel.hidden = !open;
+    };
+
+    // Start closed (if markup accidentally left it open)
+    setState(btn.getAttribute("aria-expanded") === "true" && !panel.hidden);
+
     btn.addEventListener("click", () => {
-      const expanded = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", String(!expanded));
-      if (expanded) {
-        panel.hidden = true;
-        wrap.classList.remove("is-open");
-      } else {
-        panel.hidden = false;
-        wrap.classList.add("is-open");
-      }
+      const isOpen = acc.classList.contains("is-open");
+      setState(!isOpen);
     });
   });
 
-  // Auto-open accordion if URL hash matches its panel id
-  const hash = window.location.hash;
-  if (hash) {
-    const target = document.getElementById(hash.slice(1));
-    if (target) {
-      const acc = target.closest?.("[data-accordion]");
-      if (acc) {
-        const btn = $(".accordion__btn", acc);
-        const panel = $(".accordion__panel", acc);
-        if (btn && panel) {
-          btn.setAttribute("aria-expanded", "true");
-          panel.hidden = false;
-          acc.classList.add("is-open");
-        }
-      }
-      // Scroll after layout
-      setTimeout(() => scrollToId(hash), 50);
-    }
-  }
-
-  // -----------------------------
-  // Contact form -> mailto (if present)
-  // -----------------------------
+  // ---------- Contact form: mailto ----------
   const form = $("#contactForm");
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -199,36 +166,42 @@
       const name = ($("#name")?.value || "").trim();
       const phone = ($("#phone")?.value || "").trim();
       const email = ($("#email")?.value || "").trim();
-      const topic = ($("#topic")?.value || "question").trim();
+      const topic = ($("#topic")?.value || "other").trim();
       const message = ($("#message")?.value || "").trim();
+
+      // Basic required fields check (HTML already enforces)
+      if (!name || !email || !message) return;
+
+      const to = "jjordan206@yahoo.com";
 
       const subjectMap = {
         volunteer: "Volunteer — Josh Jordan for Sheriff",
-        sign: "Yard Sign Request — Josh Jordan for Sheriff",
-        endorsement: "Endorsement — Josh Jordan for Sheriff",
-        question: "Question — Josh Jordan for Sheriff",
-        other: "Message — Josh Jordan for Sheriff",
+        sign: "Yard Sign / Window Decal Request",
+        endorsement: "Endorsement / Support",
+        question: "Question for the Campaign",
+        other: "Message for Josh Jordan Campaign",
       };
 
       const subject = subjectMap[topic] || subjectMap.other;
 
-      const lines = [
+      const bodyLines = [
+        `Name: ${name}`,
+        phone ? `Phone: ${phone}` : null,
+        `Email: ${email}`,
         `Topic: ${topic}`,
-        `Name: ${name || "N/A"}`,
-        `Phone: ${phone || "N/A"}`,
-        `Email: ${email || "N/A"}`,
         "",
-        "Message:",
-        message || "(No message provided)",
-        "",
-        "— Sent from the campaign website",
-      ];
+        message,
+      ].filter(Boolean);
 
-      const body = encodeURIComponent(lines.join("\n"));
-      const mailto = `mailto:jjordan206@yahoo.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
       window.location.href = mailto;
+
+      // Nice UX: clear form after launching mail client
       form.reset();
     });
   }
 })();
+```
