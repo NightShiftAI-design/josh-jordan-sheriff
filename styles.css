@@ -123,14 +123,20 @@ a:hover{ opacity:.95; }
   gap: 12px;
   min-width: 240px;
 }
+
+/* ✅ Logo: no cropping + centered */
 .brand__logo{
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  object-fit: cover;
+  object-fit: contain;            /* don’t crop logo */
+  object-position: center;
+  background: rgba(255,255,255,.06);
+  padding: 6px;                   /* breathing room */
   border: 1px solid rgba(255,255,255,.14);
   box-shadow: 0 10px 26px rgba(0,0,0,.22);
 }
+
 .brand__name{
   font-weight: 950;
   letter-spacing: -.02em;
@@ -170,13 +176,28 @@ a:hover{ opacity:.95; }
   border-color: rgba(255,255,255,.12);
 }
 
+/* ✅ Make Yard Sign CTA more prominent */
 .nav__link--button{
   background: linear-gradient(180deg, rgba(200,164,81,.24), rgba(200,164,81,.16));
   border: 1px solid rgba(200,164,81,.34);
   color: rgba(255,255,255,.98);
+
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 950;
+  letter-spacing: .02em;
+  box-shadow: 0 14px 34px rgba(0,0,0,.26);
 }
 .nav__link--button:hover{
   background: linear-gradient(180deg, rgba(200,164,81,.30), rgba(200,164,81,.20));
+}
+@media (prefers-reduced-motion: no-preference){
+  .nav__link--button{
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .nav__link--button:hover{
+    transform: translateY(-1px);
+  }
 }
 
 .icon-btn{
@@ -290,12 +311,12 @@ section{ padding: 34px 0; }
   position:absolute;
   inset:0;
   background-image: var(--banner);
-  background-position:center;
+  background-position: var(--banner-pos, center);
   background-size:cover;
   opacity:.14;
   filter: grayscale(1) contrast(1.05);
   pointer-events:none;
-  transform: scale(1.02);
+  transform: scale(var(--banner-zoom, 1.02));
 }
 .page-hero::before{
   content:"";
@@ -359,11 +380,11 @@ section{ padding: 34px 0; }
   position:absolute;
   inset:0;
   background-image: var(--banner);
-  background-position:center;
+  background-position: var(--banner-pos, center);
   background-size:cover;
   opacity:.12;
   filter: grayscale(1) contrast(1.1);
-  transform: scale(1.03);
+  transform: scale(var(--banner-zoom, 1.03));
   pointer-events:none;
 }
 .home-hero::before{
@@ -444,15 +465,18 @@ section{ padding: 34px 0; }
   display:flex;
   flex-direction: column;
 }
+
 .home-hero__photo-wrap{
   padding: 14px;
 }
+
 .home-hero__photo{
   width: 100%;
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,.12);
   object-fit: cover;
 }
+
 .home-hero__card-footer{
   padding: 0 14px 14px;
   display:flex;
@@ -585,18 +609,37 @@ footer{
   position: relative;
   overflow: hidden;
   border-radius: 18px;
+
+  /* subtle “frame” so mixed aspect ratios still look clean */
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
 }
 
 .carousel__track{
   display: flex;
   transition: transform .45s ease;
+  height: 100%;
 }
+
+/* ✅ Consistent frame height, NO cropping */
+.home-hero__photo-wrap .carousel{ height: 320px; }
 
 .carousel__track img{
   min-width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;          /* key: no cropping */
+  object-position: center;
   border-radius: 18px;
+  padding: 10px;
+  background: rgba(0,0,0,.15);
+}
+
+/* Responsive heights */
+@media (max-width: 980px){
+  .home-hero__photo-wrap .carousel{ height: 300px; }
+}
+@media (max-width: 520px){
+  .home-hero__photo-wrap .carousel{ height: 240px; }
 }
 
 /* Arrows */
@@ -620,91 +663,14 @@ footer{
   transition: opacity .25s ease, background .25s ease;
   z-index: 5;
 }
-
-.carousel__btn:hover{
-  background: rgba(0,0,0,.65);
-}
-
+.carousel__btn:hover{ background: rgba(0,0,0,.65); }
 .carousel__btn.prev{ left: 10px; }
 .carousel__btn.next{ right: 10px; }
 
 /* Show arrows on hover (desktop) */
-.carousel:hover .carousel__btn{
-  opacity: 1;
-}
+.carousel:hover .carousel__btn{ opacity: 1; }
 
 /* Always show on mobile */
 @media (max-width: 900px){
   .carousel__btn{ opacity: 1; }
-}
-
-/* =========================================================
-   OVERRIDES / FIXES (added)
-   - Fix logo cropping
-   - Make Yard Sign CTA more prominent
-   - Carousel frame + contain images (no cropping)
-   - Banner per-page control via CSS vars
-   ========================================================= */
-
-/* ===== Fix logo cropping / centering ===== */
-.brand__logo{
-  object-fit: contain;            /* don't crop the logo */
-  object-position: center;
-  background: rgba(255,255,255,.06);
-  padding: 6px;                   /* gives logo breathing room */
-}
-
-/* ===== Make Yard Sign CTA more prominent ===== */
-.nav__link--button{
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 950;
-  letter-spacing: .02em;
-  box-shadow: 0 14px 34px rgba(0,0,0,.26);
-}
-.nav__link--button:hover{
-  transform: translateY(-1px);
-}
-@media (prefers-reduced-motion: no-preference){
-  .nav__link--button{
-    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-  }
-}
-
-/* ===== Carousel: consistent frame, NO cropping ===== */
-.carousel{
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-}
-
-/* Choose a consistent “frame” height so every slide looks uniform */
-.home-hero__photo-wrap .carousel{
-  height: 320px;
-}
-
-.carousel__track{
-  height: 100%;
-}
-
-.carousel__track img{
-  height: 100%;
-  object-fit: contain;           /* key: no cropping */
-  object-position: center;
-  padding: 10px;                 /* prevents edge-to-edge awkwardness */
-  background: rgba(0,0,0,.15);   /* subtle frame behind non-matching aspect ratios */
-}
-
-/* Responsive heights */
-@media (max-width: 980px){
-  .home-hero__photo-wrap .carousel{ height: 300px; }
-}
-@media (max-width: 520px){
-  .home-hero__photo-wrap .carousel{ height: 240px; }
-}
-
-/* ===== Banner control: let each page adjust position/zoom cleanly ===== */
-.page-hero::after,
-.home-hero::after{
-  background-position: var(--banner-pos, center);
-  transform: scale(var(--banner-zoom, 1.02));
 }
