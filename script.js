@@ -3,7 +3,7 @@
    - Close menu on navigation
    - Set current year
    - Auto mark active nav links
-   - Homepage hero carousel (safe + reusable)
+   - Homepage hero carousel (safe + reusable + swipe + optional autoplay)
 */
 
 (() => {
@@ -74,7 +74,7 @@
   markActive(document.querySelector(".nav"));
   markActive(document.getElementById("mobilePanel"));
 
-  /* ---------- Homepage Hero Carousel (safe) ---------- */
+  /* ---------- Homepage Hero Carousel (safe + swipe + optional autoplay) ---------- */
   document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     const track = carousel.querySelector(".carousel__track");
     const slides = track ? Array.from(track.children) : [];
@@ -83,20 +83,91 @@
 
     if (!track || slides.length === 0 || !prevBtn || !nextBtn) return;
 
+    // Make carousel focusable for keyboard interaction
+    if (!carousel.hasAttribute("tabindex")) carousel.setAttribute("tabindex", "0");
+
     let index = 0;
+    let autoTimer = null;
 
     const update = () => {
       track.style.transform = `translateX(-${index * 100}%)`;
     };
 
-    prevBtn.addEventListener("click", () => {
+    const prev = () => {
       index = (index - 1 + slides.length) % slides.length;
       update();
-    });
+    };
 
-    nextBtn.addEventListener("click", () => {
+    const next = () => {
       index = (index + 1) % slides.length;
       update();
+    };
+
+    prevBtn.addEventListener("click", prev);
+    nextBtn.addEventListener("click", next);
+
+    // Keyboard: only when carousel is focused
+    carousel.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     });
+
+    // Swipe support (touch + pointer)
+    let startX = 0;
+    let isDown = false;
+
+    const onDown = (clientX) => {
+      isDown = true;
+      startX = clientX;
+    };
+
+    const onUp = (clientX) => {
+      if (!isDown) return;
+      isDown = false;
+
+      const delta = clientX - startX;
+      const threshold = 40; // swipe sensitivity
+
+      if (delta > threshold) prev();
+      else if (delta < -threshold) next();
+    };
+
+    // Touch
+    carousel.addEventListener("touchstart", (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      onDown(e.touches[0].clientX);
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", (e) => {
+      if (!e.changedTouches || !e.changedTouches[0]) return;
+      onUp(e.changedTouches[0].clientX);
+    }, { passive: true });
+
+    // Mouse / pointer (optional “drag” feel on desktop)
+    carousel.addEventListener("pointerdown", (e) => onDown(e.clientX));
+    window.addEventListener("pointerup", (e) => onUp(e.clientX));
+
+    // Optional autoplay: comment this block out if you don't want auto-slide
+    const startAuto = () => {
+      stopAuto();
+      autoTimer = window.setInterval(() => next(), 4500);
+    };
+    const stopAuto = () => {
+      if (!autoTimer) return;
+      window.clearInterval(autoTimer);
+      autoTimer = null;
+    };
+
+    // Pause autoplay when user interacts
+    carousel.addEventListener("mouseenter", stopAuto);
+    carousel.addEventListener("mouseleave", startAuto);
+    carousel.addEventListener("focusin", stopAuto);
+    carousel.addEventListener("focusout", startAuto);
+
+    // Start autoplay only if there are multiple slides
+    if (slides.length > 1) startAuto();
+
+    // Initial position
+    update();
   });
 })();
