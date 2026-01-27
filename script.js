@@ -3,7 +3,7 @@
    - Close menu on navigation
    - Set current year
    - Auto mark active nav links
-   - Homepage hero carousel (safe + reusable + swipe + optional autoplay)
+   - Homepage hero carousel (safe + swipe + optional autoplay)
 */
 
 (() => {
@@ -75,6 +75,10 @@
   markActive(document.getElementById("mobilePanel"));
 
   /* ---------- Homepage Hero Carousel (safe + swipe + optional autoplay) ---------- */
+  const prefersReducedMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     const track = carousel.querySelector(".carousel__track");
     const slides = track ? Array.from(track.children) : [];
@@ -115,10 +119,14 @@
     // Swipe support (touch + pointer)
     let startX = 0;
     let isDown = false;
+    let pointerId = null;
 
-    const onDown = (clientX) => {
+    const threshold = 40; // swipe sensitivity
+
+    const onDown = (clientX, pid = null) => {
       isDown = true;
       startX = clientX;
+      pointerId = pid;
     };
 
     const onUp = (clientX) => {
@@ -126,32 +134,58 @@
       isDown = false;
 
       const delta = clientX - startX;
-      const threshold = 40; // swipe sensitivity
 
       if (delta > threshold) prev();
       else if (delta < -threshold) next();
+
+      pointerId = null;
     };
 
     // Touch
-    carousel.addEventListener("touchstart", (e) => {
-      if (!e.touches || !e.touches[0]) return;
-      onDown(e.touches[0].clientX);
-    }, { passive: true });
+    carousel.addEventListener(
+      "touchstart",
+      (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        onDown(e.touches[0].clientX);
+      },
+      { passive: true }
+    );
 
-    carousel.addEventListener("touchend", (e) => {
-      if (!e.changedTouches || !e.changedTouches[0]) return;
-      onUp(e.changedTouches[0].clientX);
-    }, { passive: true });
+    carousel.addEventListener(
+      "touchend",
+      (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        onUp(e.changedTouches[0].clientX);
+      },
+      { passive: true }
+    );
 
-    // Mouse / pointer (optional “drag” feel on desktop)
-    carousel.addEventListener("pointerdown", (e) => onDown(e.clientX));
-    window.addEventListener("pointerup", (e) => onUp(e.clientX));
+    // Pointer (desktop + some mobile browsers)
+    carousel.addEventListener("pointerdown", (e) => {
+      // capture so we reliably get pointerup even if pointer leaves the element
+      try {
+        carousel.setPointerCapture(e.pointerId);
+      } catch (_) {}
+      onDown(e.clientX, e.pointerId);
+    });
 
-    // Optional autoplay: comment this block out if you don't want auto-slide
+    carousel.addEventListener("pointerup", (e) => {
+      if (pointerId !== null && e.pointerId !== pointerId) return;
+      onUp(e.clientX);
+    });
+
+    carousel.addEventListener("pointercancel", () => {
+      isDown = false;
+      pointerId = null;
+    });
+
+    // Optional autoplay (skips if reduced motion is requested)
     const startAuto = () => {
+      if (prefersReducedMotion) return;
       stopAuto();
       autoTimer = window.setInterval(() => next(), 4500);
     };
+
     const stopAuto = () => {
       if (!autoTimer) return;
       window.clearInterval(autoTimer);
@@ -163,6 +197,12 @@
     carousel.addEventListener("mouseleave", startAuto);
     carousel.addEventListener("focusin", stopAuto);
     carousel.addEventListener("focusout", startAuto);
+
+    // Pause when tab not visible
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopAuto();
+      else startAuto();
+    });
 
     // Start autoplay only if there are multiple slides
     if (slides.length > 1) startAuto();
