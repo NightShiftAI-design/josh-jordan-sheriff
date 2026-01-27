@@ -81,7 +81,14 @@
   <main>
 
     <!-- HOME HERO -->
-    <section class="home-hero" style="--banner:url('assets/images/515547077_122113985780908392_2390202805218607323_n.jpg');">
+    <section
+      class="home-hero"
+      style="
+        --banner:url('assets/images/515547077_122113985780908392_2390202805218607323_n.jpg');
+        --banner-pos:center;
+        --banner-zoom:1.03;
+      "
+    >
       <div class="container home-hero__inner">
 
         <div class="home-hero__content">
@@ -109,9 +116,8 @@
 
         <div class="home-hero__card" aria-label="Candidate photos">
           <div class="home-hero__photo-wrap">
-
             <div class="carousel" data-carousel>
-              <button class="carousel__btn prev" aria-label="Previous photo">‹</button>
+              <button class="carousel__btn prev" type="button" aria-label="Previous photo">‹</button>
 
               <div class="carousel__track">
                 <img src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg" alt="Josh Jordan" />
@@ -122,9 +128,8 @@
                 <img src="assets/images/595667527_122153401874908392_7447416013118529248_n.jpg" alt="Josh Jordan" />
               </div>
 
-              <button class="carousel__btn next" aria-label="Next photo">›</button>
+              <button class="carousel__btn next" type="button" aria-label="Next photo">›</button>
             </div>
-
           </div>
 
           <div class="home-hero__card-footer">
