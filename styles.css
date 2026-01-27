@@ -1,710 +1,95 @@
 /* =========================================================
-   Josh Jordan for Sheriff — styles.css (UPDATED FULL)
-   Goal: official, law-enforcement tone, strong hierarchy,
-   unique page tops (banners), clean + modern.
+   DONATE EMPHASIS (add at bottom of styles.css)
+   - tasteful glow + pulse
+   - shine on hover
+   - respects prefers-reduced-motion
    ========================================================= */
 
-/* ---------- Root / Theme ---------- */
-:root{
-  --bg: #0b1220;             /* deep navy */
-  --surface: #0f1a2f;
-  --card: #0f172a;
-  --text: #eaf0ff;
-  --muted: rgba(234,240,255,.78);
-  --muted2: rgba(234,240,255,.62);
-  --line: rgba(234,240,255,.12);
-
-  --green: #0b3d2e;          /* sheriff green */
-  --green2:#0f4a36;
-  --gold: #c8a451;           /* subtle “badge” gold */
-  --white: #ffffff;
-
-  --shadow: 0 18px 45px rgba(0,0,0,.35);
-  --shadow2: 0 10px 26px rgba(0,0,0,.28);
-
-  --radius: 18px;
-  --radius2: 26px;
-
-  --container: 1120px;
-
-  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+/* Stronger visual weight for Donate in topbar + header */
+.topbar__cta--donate,
+.nav__link--donate,
+.btn--donate{
+  position: relative;
+  isolation: isolate;
+  border-color: rgba(200,164,81,.55);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.30),
+    0 0 0 2px rgba(200,164,81,.10) inset,
+    0 0 22px rgba(200,164,81,.18);
 }
 
-/* ---------- Base ---------- */
-*{ box-sizing:border-box; }
-html, body{ height:100%; }
-body{
-  margin:0;
-  font-family: var(--font);
-  background: radial-gradient(1100px 650px at 15% -10%, rgba(11,61,46,.35), transparent 55%),
-              radial-gradient(900px 520px at 105% 10%, rgba(200,164,81,.18), transparent 55%),
-              var(--bg);
-  color: var(--text);
-  line-height:1.55;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-img{ max-width:100%; display:block; }
-a{ color: inherit; text-decoration:none; }
-a:hover{ opacity:.95; }
-
-.container{
-  width: min(100% - 32px, var(--container));
-  margin-inline:auto;
-}
-
-/* ---------- Topbar ---------- */
-.topbar{
-  background: linear-gradient(180deg, rgba(11,61,46,.95), rgba(11,61,46,.92));
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.topbar__inner{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 10px 0;
-}
-.topbar__badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(200,164,81,.14);
-  border: 1px solid rgba(200,164,81,.32);
-  color: rgba(255,255,255,.95);
-  font-weight: 900;
-  letter-spacing: .16em;
-  font-size: 12px;
-}
-.topbar__text{
-  color: rgba(255,255,255,.88);
-  font-weight: 650;
-  font-size: 13px;
-  flex: 1;
-}
-.topbar__cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding: 9px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.10);
-  border: 1px solid rgba(255,255,255,.18);
-  font-weight: 850;
-  font-size: 13px;
-  white-space: nowrap;
-}
-.topbar__cta:hover{ background: rgba(255,255,255,.14); }
-
-/* ✅ NEW: allow multiple CTAs (Yard Sign + Donate) */
-.topbar__actions{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-}
-
-/* ✅ NEW: Donate styling (gold-ish) */
-.topbar__cta--donate{
-  background: linear-gradient(180deg, rgba(200,164,81,.26), rgba(200,164,81,.16));
-  border: 1px solid rgba(200,164,81,.34);
-}
-.topbar__cta--donate:hover{
-  background: linear-gradient(180deg, rgba(200,164,81,.32), rgba(200,164,81,.20));
-}
-
-/* ---------- Header (sticky) ---------- */
-.site-header{
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(11,18,32,.78);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(234,240,255,.10);
-}
-
-.header__inner{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 14px 0;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap: 12px;
-  min-width: 240px;
-}
-
-/* ✅ Logo: no cropping + centered */
-.brand__logo{
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  object-fit: contain;            /* don’t crop logo */
-  object-position: center;
-  background: rgba(255,255,255,.06);
-  padding: 6px;                   /* breathing room */
-  border: 1px solid rgba(255,255,255,.14);
-  box-shadow: 0 10px 26px rgba(0,0,0,.22);
-}
-
-.brand__name{
-  font-weight: 950;
-  letter-spacing: -.02em;
-  font-size: 16px;
-}
-.brand__title{
-  color: var(--muted2);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-/* Nav */
-.nav{
-  display:flex;
-  align-items:center;
-  gap: 8px;
-}
-.nav__link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding: 10px 12px;
-  border-radius: 999px;
-  font-weight: 800;
-  font-size: 13px;
-  color: rgba(234,240,255,.88);
-  border: 1px solid transparent;
-}
-.nav__link:hover{
-  background: rgba(255,255,255,.06);
-  border-color: rgba(255,255,255,.08);
-}
-.nav__link.is-active{
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.12);
-}
-
-/* ✅ Make Yard Sign CTA more prominent */
-.nav__link--button{
-  background: linear-gradient(180deg, rgba(200,164,81,.24), rgba(200,164,81,.16));
-  border: 1px solid rgba(200,164,81,.34);
+/* Make Donate feel “special” compared to Yard Sign */
+.nav__link--donate{
+  background: linear-gradient(180deg, rgba(200,164,81,.34), rgba(200,164,81,.20));
   color: rgba(255,255,255,.98);
+  letter-spacing: .03em;
+}
 
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 950;
-  letter-spacing: .02em;
-  box-shadow: 0 14px 34px rgba(0,0,0,.26);
+/* Optional: a dedicated donate button class for hero/CTAs */
+.btn--donate{
+  background: linear-gradient(180deg, rgba(200,164,81,.40), rgba(200,164,81,.22));
+  border: 1px solid rgba(200,164,81,.60);
+  color: rgba(255,255,255,.98);
 }
-.nav__link--button:hover{
-  background: linear-gradient(180deg, rgba(200,164,81,.30), rgba(200,164,81,.20));
+
+/* Shine sweep */
+.topbar__cta--donate::after,
+.nav__link--donate::after,
+.btn--donate::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,.18) 35%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  opacity: .0;
+  border-radius: 999px;
+  z-index: -1;
+  pointer-events: none;
 }
+
+/* Hover: lift + shine */
+.topbar__cta--donate:hover,
+.nav__link--donate:hover,
+.btn--donate:hover{
+  transform: translateY(-1px);
+  box-shadow:
+    0 22px 55px rgba(0,0,0,.34),
+    0 0 0 2px rgba(200,164,81,.12) inset,
+    0 0 28px rgba(200,164,81,.24);
+}
+
+.topbar__cta--donate:hover::after,
+.nav__link--donate:hover::after,
+.btn--donate:hover::after{
+  opacity: 1;
+  transform: translateX(120%);
+  transition: transform .75s ease, opacity .2s ease;
+}
+
+/* Gentle pulse (only when user allows motion) */
 @media (prefers-reduced-motion: no-preference){
-  .nav__link--button{
+  .topbar__cta--donate,
+  .nav__link--donate,
+  .btn--donate{
+    animation: donatePulse 2.6s ease-in-out infinite;
     transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
   }
-  .nav__link--button:hover{
-    transform: translateY(-1px);
+
+  @keyframes donatePulse{
+    0%, 100% { box-shadow: 0 18px 45px rgba(0,0,0,.30), 0 0 22px rgba(200,164,81,.18); }
+    50%      { box-shadow: 0 22px 55px rgba(0,0,0,.34), 0 0 30px rgba(200,164,81,.28); }
   }
 }
 
-/* ✅ NEW: Donate CTA variant (green) */
-.nav__link--donate{
-  background: linear-gradient(180deg, rgba(11,61,46,.92), rgba(11,61,46,.78));
-  border-color: rgba(11,61,46,.65);
-}
-.nav__link--donate:hover{
-  background: linear-gradient(180deg, rgba(11,61,46,.98), rgba(11,61,46,.82));
-}
-
-.icon-btn{
-  width: 40px;
-  height: 40px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-}
-.icon-btn:hover{ background: rgba(255,255,255,.10); }
-
-/* Mobile menu */
-.menu-btn{
-  display:none;
-  padding: 10px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.92);
-  font-weight: 850;
-}
-.mobile-panel{
-  display:none;
-  padding: 0 0 14px;
-}
-.mobile-panel a{
-  display:block;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-  margin-top: 10px;
-  font-weight: 850;
-}
-.mobile-panel a.is-active{
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.14);
-}
-
-/* ---------- Buttons ---------- */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.92);
-  font-weight: 900;
-  font-size: 13px;
-  white-space: nowrap;
-  box-shadow: 0 10px 22px rgba(0,0,0,.18);
-}
-.btn:hover{ background: rgba(255,255,255,.10); }
-
-.btn--primary{
-  background: linear-gradient(180deg, rgba(11,61,46,.92), rgba(11,61,46,.78));
-  border-color: rgba(11,61,46,.65);
-  box-shadow: 0 18px 45px rgba(0,0,0,.28);
-}
-.btn--primary:hover{
-  background: linear-gradient(180deg, rgba(11,61,46,.98), rgba(11,61,46,.82));
-}
-
-/* ---------- Cards / Sections ---------- */
-section{ padding: 34px 0; }
-
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: var(--radius);
-  padding: 18px 18px;
-  box-shadow: var(--shadow2);
-}
-
-.grid-3{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.section-title{
-  margin: 0 0 10px;
-  font-size: 26px;
-  letter-spacing: -.02em;
-  font-weight: 950;
-}
-.section-sub{
-  margin: 0 0 16px;
-  color: var(--muted);
-  font-weight: 650;
-  line-height: 1.65;
-}
-
-/* ---------- PAGE HERO (Inner pages) ---------- */
-.page-hero{
-  position: relative;
-  padding: 30px 0 20px;
-  border-bottom: 1px solid rgba(255,255,255,.10);
-  overflow: hidden;
-  background: radial-gradient(900px 340px at 18% 0%, rgba(11,61,46,.28), transparent 58%),
-              radial-gradient(700px 320px at 95% 10%, rgba(200,164,81,.16), transparent 55%);
-}
-.page-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image: var(--banner);
-  background-position: var(--banner-pos, center);
-  background-size:cover;
-  opacity:.14;
-  filter: grayscale(1) contrast(1.05);
-  pointer-events:none;
-  transform: scale(var(--banner-zoom, 1.02));
-}
-.page-hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg, rgba(11,18,32,.62), rgba(11,18,32,.90));
-  pointer-events:none;
-}
-.page-hero__inner{
-  position: relative;
-  display:flex;
-  align-items:flex-end;
-  justify-content: space-between;
-  gap: 16px;
-}
-.page-hero__title{
-  margin: 10px 0 0;
-  font-size: 34px;
-  line-height: 1.08;
-  letter-spacing: -.03em;
-  font-weight: 1000;
-}
-.page-hero__sub{
-  margin: 10px 0 0;
-  max-width: 78ch;
-  color: rgba(234,240,255,.84);
-  font-weight: 650;
-  line-height: 1.65;
-}
-.page-hero__chip{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(200,164,81,.40);
-  background: rgba(200,164,81,.14);
-  color: rgba(255,255,255,.95);
-  font-weight: 950;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-.page-hero__actions{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* ---------- HOME HERO (Homepage) ---------- */
-.home-hero{
-  position: relative;
-  padding: 44px 0 24px;
-  border-bottom: 1px solid rgba(255,255,255,.10);
-  overflow:hidden;
-  background: radial-gradient(1000px 520px at 18% 0%, rgba(11,61,46,.30), transparent 58%),
-              radial-gradient(780px 420px at 100% 10%, rgba(200,164,81,.16), transparent 55%);
-}
-.home-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image: var(--banner);
-  background-position: var(--banner-pos, center);
-  background-size:cover;
-  opacity:.12;
-  filter: grayscale(1) contrast(1.1);
-  transform: scale(var(--banner-zoom, 1.03));
-  pointer-events:none;
-}
-.home-hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg, rgba(11,18,32,.56), rgba(11,18,32,.92));
-  pointer-events:none;
-}
-.home-hero__inner{
-  position: relative;
-  display:grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: 18px;
-  align-items: stretch;
-}
-.home-hero__kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.05);
-  font-weight: 900;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: rgba(234,240,255,.92);
-}
-.home-hero__title{
-  margin: 14px 0 10px;
-  font-size: 54px;
-  line-height: 1.02;
-  letter-spacing: -.04em;
-  font-weight: 1000;
-}
-.home-hero__title span{
-  color: rgba(234,240,255,.92);
-}
-.home-hero__sub{
-  margin: 0 0 16px;
-  max-width: 70ch;
-  color: rgba(234,240,255,.84);
-  font-weight: 650;
-  line-height: 1.7;
-}
-.home-hero__actions{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
-}
-.home-hero__quick{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.quick-pill{
-  display:inline-flex;
-  align-items:center;
-  padding: 10px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.04);
-  font-weight: 850;
-  font-size: 13px;
-  color: rgba(234,240,255,.90);
-}
-.quick-pill:hover{ background: rgba(255,255,255,.08); }
-
-.home-hero__card{
-  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: var(--radius2);
-  box-shadow: var(--shadow);
-  overflow:hidden;
-  display:flex;
-  flex-direction: column;
-}
-
-.home-hero__photo-wrap{
-  padding: 14px;
-}
-
-.home-hero__photo{
-  width: 100%;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.12);
-  object-fit: cover;
-}
-
-.home-hero__card-footer{
-  padding: 0 14px 14px;
-  display:flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.home-hero__meta{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  color: rgba(234,240,255,.78);
-  font-weight: 800;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-.home-hero__mini{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* ---------- Credibility strip ---------- */
-.cred-strip{ padding: 18px 0; }
-.cred-strip__inner{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-.cred{
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 18px;
-  padding: 14px 14px;
-}
-.cred__num{
-  font-weight: 1000;
-  font-size: 22px;
-  letter-spacing: -.02em;
-}
-.cred__label{
-  color: rgba(234,240,255,.80);
-  font-weight: 700;
-  margin-top: 6px;
-}
-
-/* ---------- Timeline (Experience page) ---------- */
-.timeline{ display:flex; flex-direction: column; gap: 14px; }
-.timeline__item{
-  display:grid;
-  grid-template-columns: 18px 1fr;
-  gap: 12px;
-  align-items: flex-start;
-}
-.timeline__dot{
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  background: rgba(200,164,81,.55);
-  border: 1px solid rgba(200,164,81,.75);
-  margin-top: 6px;
-  box-shadow: 0 10px 20px rgba(0,0,0,.25);
-}
-.timeline__content h3{
-  margin: 0 0 6px;
-  font-size: 16px;
-  letter-spacing: -.01em;
-}
-.timeline__content p{
-  margin: 0;
-  color: rgba(234,240,255,.80);
-  line-height: 1.7;
-  font-weight: 600;
-}
-
-/* ---------- Home CTA ---------- */
-.home-cta{ padding: 20px 0 44px; }
-.home-cta__card{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.home-cta__actions{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* ---------- Footer ---------- */
-footer{
-  border-top: 1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.20);
-}
-.footer__inner{
-  display:flex;
-  align-items:flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 22px 0;
-  color: rgba(234,240,255,.82);
-  font-weight: 650;
-  font-size: 13px;
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 980px){
-  .nav{ display:none; }
-  .menu-btn{ display:inline-flex; }
-  .home-hero__inner{ grid-template-columns: 1fr; }
-  .page-hero__inner{ flex-direction: column; align-items:flex-start; }
-  .grid-3{ grid-template-columns: 1fr; }
-  .cred-strip__inner{ grid-template-columns: 1fr; }
-}
-
-/* ✅ UPDATED: keep CTAs visible on mobile */
+/* Mobile: keep donate strong even with smaller buttons */
 @media (max-width: 520px){
-  .brand{ min-width: unset; }
-  .brand__logo{ width: 40px; height: 40px; }
-  .home-hero__title{ font-size: 42px; }
-  .page-hero__title{ font-size: 30px; }
-
-  /* Hide long topbar text so buttons fit */
-  .topbar__text{ display:none; }
-
-  /* Make CTAs slightly smaller */
-  .topbar__cta{
-    padding: 8px 10px;
-    font-size: 12px;
+  .topbar__cta--donate{
+    border-color: rgba(200,164,81,.62);
+    box-shadow: 0 14px 34px rgba(0,0,0,.28), 0 0 18px rgba(200,164,81,.22);
   }
-}
-
-/* Utility: show mobile panel when open (script toggles .is-open on header) */
-.site-header.is-open .mobile-panel{ display:block; }
-
-/* ---------- Carousel (Homepage Hero) ---------- */
-.carousel{
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-
-  /* subtle “frame” so mixed aspect ratios still look clean */
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-}
-
-.carousel__track{
-  display: flex;
-  transition: transform .45s ease;
-  height: 100%;
-}
-
-/* ✅ Consistent frame height, NO cropping */
-.home-hero__photo-wrap .carousel{ height: 320px; }
-
-.carousel__track img{
-  min-width: 100%;
-  height: 100%;
-  object-fit: contain;          /* key: no cropping */
-  object-position: center;
-  border-radius: 18px;
-  padding: 10px;
-  background: rgba(0,0,0,.15);
-}
-
-/* Responsive heights */
-@media (max-width: 980px){
-  .home-hero__photo-wrap .carousel{ height: 300px; }
-}
-@media (max-width: 520px){
-  .home-hero__photo-wrap .carousel{ height: 240px; }
-}
-
-/* Arrows */
-.carousel__btn{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.22);
-  background: rgba(0,0,0,.45);
-  color: white;
-  font-size: 28px;
-  font-weight: 900;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity .25s ease, background .25s ease;
-  z-index: 5;
-}
-.carousel__btn:hover{ background: rgba(0,0,0,.65); }
-.carousel__btn.prev{ left: 10px; }
-.carousel__btn.next{ right: 10px; }
-
-/* Show arrows on hover (desktop) */
-.carousel:hover .carousel__btn{ opacity: 1; }
-
-/* Always show on mobile */
-@media (max-width: 900px){
-  .carousel__btn{ opacity: 1; }
 }
