@@ -6,6 +6,9 @@
   <meta name="description" content="Get involved with Josh Jordan for Sheriff — request yard signs, contact info, and official links." />
   <title>Get Involved • Josh Jordan for Sheriff</title>
 
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -73,7 +76,14 @@
   </header>
 
   <!-- PAGE BANNER -->
-  <section class="page-hero" style="--banner:url('assets/images/595620669_122153482004908392_1610278707937448114_n.jpg');">
+  <section
+    class="page-hero"
+    style="
+      --banner:url('assets/images/595620669_122153482004908392_1610278707937448114_n.jpg');
+      --banner-pos:center 32%;
+      --banner-zoom:1.00;
+    "
+  >
     <div class="container page-hero__inner">
       <div>
         <div class="page-hero__chip">Get Involved</div>
@@ -98,7 +108,6 @@
   </section>
 
   <main>
-    <!-- Action grid (single strong block instead of many sections) -->
     <section>
       <div class="container">
         <h2 class="section-title">Official Links & Contact</h2>
@@ -117,6 +126,7 @@
                 target="_blank"
                 rel="noopener"
               >
+                <span aria-hidden="true" style="font-size:16px;">🪧</span>
                 Open Request Form
               </a>
             </p>
@@ -125,10 +135,15 @@
           <div class="card">
             <h3>Call / Text</h3>
             <p>Questions, concerns, or want to help? Reach out directly.</p>
-            <p style="margin-top:12px;">
-              <a class="btn btn--primary" href="tel:4235931964">(423) 593-1964</a>
-              <span style="display:inline-block;margin-left:10px;"></span>
-              <a class="btn" href="sms:4235931964">Text</a>
+            <p style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn--primary" href="tel:4235931964">
+                <span aria-hidden="true" style="font-size:16px;">📞</span>
+                (423) 593-1964
+              </a>
+              <a class="btn" href="sms:4235931964">
+                <span aria-hidden="true" style="font-size:16px;">💬</span>
+                Text
+              </a>
             </p>
           </div>
 
@@ -136,7 +151,10 @@
             <h3>Email</h3>
             <p>Send a message any time. We’ll respond as soon as possible.</p>
             <p style="margin-top:12px;">
-              <a class="btn" href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a>
+              <a class="btn" href="mailto:jjordan206@yahoo.com">
+                <span aria-hidden="true" style="font-size:16px;">✉️</span>
+                jjordan206@yahoo.com
+              </a>
             </p>
           </div>
         </div>
@@ -147,6 +165,7 @@
             <p>Campaign updates are posted on the official page.</p>
             <p style="margin-top:12px;">
               <a class="btn" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">
+                <span aria-hidden="true" style="font-size:16px;">f</span>
                 Visit Facebook Page
               </a>
             </p>
@@ -154,17 +173,32 @@
 
           <div class="card">
             <h3>Share With Friends</h3>
-            <p>Local elections are won neighbor-to-neighbor. Share updates and help spread accurate information.</p>
-            <p style="margin-top:12px;">
-              <a class="btn" href="priorities.html">View Priorities</a>
+            <p>Local elections are won neighbor-to-neighbor. Share this official website.</p>
+            <p style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn btn--primary" type="button" id="shareBtn">
+                <span aria-hidden="true" style="font-size:16px;">🔗</span>
+                Share Website
+              </button>
+              <a class="btn" href="priorities.html">
+                <span aria-hidden="true" style="font-size:16px;">📄</span>
+                View Priorities
+              </a>
             </p>
+            <p id="shareMsg" style="margin:10px 0 0; color:var(--muted2); font-weight:650; display:none;"></p>
           </div>
 
           <div class="card">
             <h3>Location</h3>
             <p>Rhea County, Tennessee • Dayton, TN 37321</p>
-            <p style="margin-top:12px;">
-              <a class="btn" href="about.html">Read About Josh</a>
+            <p style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="https://www.google.com/maps?q=Dayton,+TN+37321" target="_blank" rel="noopener">
+                <span aria-hidden="true" style="font-size:16px;">📍</span>
+                Open Map
+              </a>
+              <a class="btn" href="about.html">
+                <span aria-hidden="true" style="font-size:16px;">👤</span>
+                Read About Josh
+              </a>
             </p>
           </div>
         </div>
@@ -197,16 +231,52 @@
 
   <footer>
     <div class="container footer__inner">
-      <div>
-        <strong>Josh Jordan for Sheriff</strong><br />
-        <span>Paid for by [Committee Name].</span>
-      </div>
-      <div>
-        <span>© <span id="year"></span> All rights reserved.</span>
-      </div>
+      <div><strong>Josh Jordan for Sheriff</strong></div>
+      <div>© <span id="year"></span> All rights reserved.</div>
     </div>
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- Share logic (safe + no libraries) -->
+  <script>
+    (function () {
+      const btn = document.getElementById("shareBtn");
+      const msg = document.getElementById("shareMsg");
+      if (!btn) return;
+
+      const shareData = {
+        title: "Josh Jordan for Sheriff — Rhea County, TN",
+        text: "Official campaign website for Josh Jordan for Sheriff.",
+        url: window.location.href
+      };
+
+      const showMsg = (text) => {
+        if (!msg) return;
+        msg.textContent = text;
+        msg.style.display = "block";
+        setTimeout(() => { msg.style.display = "none"; }, 2500);
+      };
+
+      btn.addEventListener("click", async () => {
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            showMsg("Shared.");
+            return;
+          }
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(shareData.url);
+            showMsg("Link copied to clipboard.");
+            return;
+          }
+          // fallback
+          prompt("Copy this link:", shareData.url);
+        } catch (e) {
+          // user cancelled share -> no need to spam errors
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
