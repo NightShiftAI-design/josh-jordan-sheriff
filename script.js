@@ -2,7 +2,8 @@
    - Sticky header mobile menu toggle
    - Close menu on navigation
    - Set current year
-   - (Optional) mark active nav links automatically if not manually set
+   - Auto mark active nav links
+   - Homepage hero carousel (safe + reusable)
 */
 
 (() => {
@@ -46,18 +47,23 @@
     // Close when clicking outside header (mobile)
     document.addEventListener("click", (e) => {
       if (!header.classList.contains("is-open")) return;
-      const within = header.contains(e.target);
-      if (!within) closeMenu();
+      if (!header.contains(e.target)) closeMenu();
     });
   }
 
-  // Optional: auto-set active nav link based on filename (helps if you forget is-active)
+  // Auto-set active nav link based on filename
   const path = window.location.pathname.split("/").pop() || "index.html";
   const markActive = (root) => {
     if (!root) return;
     root.querySelectorAll("a").forEach((a) => {
       const href = a.getAttribute("href") || "";
-      if (!href || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("#")) return;
+      if (
+        !href ||
+        href.startsWith("http") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("tel:") ||
+        href.startsWith("#")
+      ) return;
 
       const target = href.split("/").pop();
       if (target === path) a.classList.add("is-active");
@@ -67,27 +73,30 @@
 
   markActive(document.querySelector(".nav"));
   markActive(document.getElementById("mobilePanel"));
+
+  /* ---------- Homepage Hero Carousel (safe) ---------- */
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector(".carousel__track");
+    const slides = track ? Array.from(track.children) : [];
+    const prevBtn = carousel.querySelector(".carousel__btn.prev");
+    const nextBtn = carousel.querySelector(".carousel__btn.next");
+
+    if (!track || slides.length === 0 || !prevBtn || !nextBtn) return;
+
+    let index = 0;
+
+    const update = () => {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    };
+
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + slides.length) % slides.length;
+      update();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % slides.length;
+      update();
+    });
+  });
 })();
-/* ---------- Homepage Hero Carousel ---------- */
-document.querySelectorAll("[data-carousel]").forEach(carousel => {
-  const track = carousel.querySelector(".carousel__track");
-  const slides = Array.from(track.children);
-  const prevBtn = carousel.querySelector(".prev");
-  const nextBtn = carousel.querySelector(".next");
-
-  let index = 0;
-
-  const update = () => {
-    track.style.transform = `translateX(-${index * 100}%)`;
-  };
-
-  prevBtn.addEventListener("click", () => {
-    index = (index - 1 + slides.length) % slides.length;
-    update();
-  });
-
-  nextBtn.addEventListener("click", () => {
-    index = (index + 1) % slides.length;
-    update();
-  });
-});
