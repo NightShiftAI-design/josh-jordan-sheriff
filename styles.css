@@ -1,5 +1,5 @@
 /* =========================================================
-   Josh Jordan for Sheriff — styles.css (UPDATED)
+   Josh Jordan for Sheriff — styles.css (UPDATED FULL)
    Goal: official, law-enforcement tone, strong hierarchy,
    unique page tops (banners), clean + modern.
    ========================================================= */
@@ -98,6 +98,22 @@ a:hover{ opacity:.95; }
   white-space: nowrap;
 }
 .topbar__cta:hover{ background: rgba(255,255,255,.14); }
+
+/* ✅ NEW: allow multiple CTAs (Yard Sign + Donate) */
+.topbar__actions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+/* ✅ NEW: Donate styling (gold-ish) */
+.topbar__cta--donate{
+  background: linear-gradient(180deg, rgba(200,164,81,.26), rgba(200,164,81,.16));
+  border: 1px solid rgba(200,164,81,.34);
+}
+.topbar__cta--donate:hover{
+  background: linear-gradient(180deg, rgba(200,164,81,.32), rgba(200,164,81,.20));
+}
 
 /* ---------- Header (sticky) ---------- */
 .site-header{
@@ -198,6 +214,15 @@ a:hover{ opacity:.95; }
   .nav__link--button:hover{
     transform: translateY(-1px);
   }
+}
+
+/* ✅ NEW: Donate CTA variant (green) */
+.nav__link--donate{
+  background: linear-gradient(180deg, rgba(11,61,46,.92), rgba(11,61,46,.78));
+  border-color: rgba(11,61,46,.65);
+}
+.nav__link--donate:hover{
+  background: linear-gradient(180deg, rgba(11,61,46,.98), rgba(11,61,46,.82));
 }
 
 .icon-btn{
@@ -593,12 +618,21 @@ footer{
   .cred-strip__inner{ grid-template-columns: 1fr; }
 }
 
+/* ✅ UPDATED: keep CTAs visible on mobile */
 @media (max-width: 520px){
   .brand{ min-width: unset; }
   .brand__logo{ width: 40px; height: 40px; }
   .home-hero__title{ font-size: 42px; }
   .page-hero__title{ font-size: 30px; }
-  .topbar__cta{ display:none; }
+
+  /* Hide long topbar text so buttons fit */
+  .topbar__text{ display:none; }
+
+  /* Make CTAs slightly smaller */
+  .topbar__cta{
+    padding: 8px 10px;
+    font-size: 12px;
+  }
 }
 
 /* Utility: show mobile panel when open (script toggles .is-open on header) */
