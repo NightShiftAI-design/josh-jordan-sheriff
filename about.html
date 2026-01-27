@@ -6,6 +6,9 @@
   <meta name="description" content="About Josh Jordan — Candidate for Sheriff of Rhea County, Tennessee (May 2026)" />
   <title>About • Josh Jordan for Sheriff</title>
 
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -72,8 +75,18 @@
     </div>
   </header>
 
-  <!-- PAGE BANNER (this is what makes pages instantly different) -->
-  <section class="page-hero" style="--banner:url('assets/images/612041674_122158951652908392_6347288783412594930_n.jpg');">
+  <!-- PAGE BANNER -->
+  <!-- Banner tuning:
+       - --banner-pos: moves the "crop" so face is visible
+       - --banner-zoom: reduces zoom so image reads clearly -->
+  <section
+    class="page-hero"
+    style="
+      --banner:url('assets/images/612041674_122158951652908392_6347288783412594930_n.jpg');
+      --banner-pos:center 18%;
+      --banner-zoom:1.00;
+    "
+  >
     <div class="container page-hero__inner">
       <div>
         <div class="page-hero__chip">About</div>
@@ -127,10 +140,27 @@
             <h3>Home</h3>
             <p>Rhea County, Tennessee • Dayton, TN 37321</p>
           </div>
+
           <div class="card">
             <h3>Election</h3>
             <p>Republican candidate for Sheriff • May 2026</p>
           </div>
+
+          <div class="card">
+            <h3>Roots</h3>
+            <p>Rhea County High School • Class of 2000</p>
+          </div>
+
+          <div class="card">
+            <h3>Service</h3>
+            <p>24 years in law enforcement • Patrol Sergeant</p>
+          </div>
+
+          <div class="card">
+            <h3>Community</h3>
+            <p>Married • Raising a family in Rhea County</p>
+          </div>
+
           <div class="card">
             <h3>Contact</h3>
             <p>
@@ -169,13 +199,8 @@
 
   <footer>
     <div class="container footer__inner">
-      <div>
-        <strong>Josh Jordan for Sheriff</strong><br />
-        <span>Paid for by [Committee Name].</span>
-      </div>
-      <div>
-        <span>© <span id="year"></span> All rights reserved.</span>
-      </div>
+      <div><strong>Josh Jordan for Sheriff</strong></div>
+      <div>© <span id="year"></span> All rights reserved.</div>
     </div>
   </footer>
 
