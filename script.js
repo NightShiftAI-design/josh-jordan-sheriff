@@ -225,4 +225,21 @@
 
     update();
   });
+     /* ---------- Reveal on scroll (sections/cards) ---------- */
+  const revealEls = [
+    ...document.querySelectorAll(".card"),
+    ...document.querySelectorAll(".section-title"),
+    ...document.querySelectorAll(".section-sub")
+  ];
+
+  revealEls.forEach(el => el.classList.add("reveal"));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("is-visible");
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+  revealEls.forEach(el => io.observe(el));
+
 })();
