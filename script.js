@@ -1,9 +1,9 @@
 /* Josh Jordan for Sheriff — script.js
-   - Sticky header mobile menu toggle
-   - Close menu on navigation
+   - Sticky header mobile menu toggle (robust)
+   - Close menu on navigation / escape / outside click / resize
    - Set current year
-   - Auto mark active nav links
-   - Homepage hero carousel (safe + reusable + swipe + optional autoplay)
+   - Auto mark active nav links (safe)
+   - Homepage hero carousel (safe + swipe + optional autoplay + reduced motion)
 */
 
 (() => {
@@ -12,24 +12,35 @@
   const mobilePanel = document.getElementById("mobilePanel");
   const yearEl = document.getElementById("year");
 
+  // ---------------------------
   // Year
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  // ---------------------------
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  // Mobile menu toggle
-  if (header && menuBtn && mobilePanel) {
-    const closeMenu = () => {
-      header.classList.remove("is-open");
-      menuBtn.setAttribute("aria-expanded", "false");
-    };
+  // ---------------------------
+  // Mobile menu
+  // ---------------------------
+  const hasMenu = header && menuBtn && mobilePanel;
+  const isOpen = () => header?.classList.contains("is-open");
 
-    const openMenu = () => {
-      header.classList.add("is-open");
-      menuBtn.setAttribute("aria-expanded", "true");
-    };
+  const closeMenu = () => {
+    if (!hasMenu) return;
+    header.classList.remove("is-open");
+    menuBtn.setAttribute("aria-expanded", "false");
+  };
 
-    menuBtn.addEventListener("click", () => {
-      const expanded = menuBtn.getAttribute("aria-expanded") === "true";
-      expanded ? closeMenu() : openMenu();
+  const openMenu = () => {
+    if (!hasMenu) return;
+    header.classList.add("is-open");
+    menuBtn.setAttribute("aria-expanded", "true");
+  };
+
+  if (hasMenu) {
+    // Toggle on button click
+    menuBtn.addEventListener("click", (e) => {
+      // Prevent “outside click” handler from immediately closing it
+      e.stopPropagation();
+      isOpen() ? closeMenu() : openMenu();
     });
 
     // Close when clicking a link in the mobile panel
@@ -44,29 +55,52 @@
       if (e.key === "Escape") closeMenu();
     });
 
-    // Close when clicking outside header (mobile)
+    // Close when clicking outside header (only if open)
     document.addEventListener("click", (e) => {
-      if (!header.classList.contains("is-open")) return;
+      if (!isOpen()) return;
       if (!header.contains(e.target)) closeMenu();
     });
+
+    // Close when switching to desktop layout / orientation changes
+    const closeOnWide = () => {
+      // Match your CSS breakpoint where .nav hides / menu shows
+      if (window.innerWidth > 980) closeMenu();
+    };
+    window.addEventListener("resize", closeOnWide);
+    window.addEventListener("orientationchange", closeOnWide);
   }
 
-  // Auto-set active nav link based on filename
-  const path = window.location.pathname.split("/").pop() || "index.html";
+  // ---------------------------
+  // Active nav link (safe)
+  // ---------------------------
+  const normalizePath = (hrefOrPath) => {
+    if (!hrefOrPath) return "";
+    // strip query/hash
+    const clean = hrefOrPath.split("#")[0].split("?")[0];
+    // last segment
+    const last = clean.split("/").filter(Boolean).pop() || "";
+    // treat root as index.html
+    return last || "index.html";
+  };
+
+  const current = normalizePath(window.location.pathname);
+
+  const shouldIgnoreHref = (href) => {
+    if (!href) return true;
+    if (href === "#" || href.startsWith("#")) return true;
+    if (href.startsWith("http")) return true;
+    if (href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("sms:")) return true;
+    return false;
+  };
+
   const markActive = (root) => {
     if (!root) return;
     root.querySelectorAll("a").forEach((a) => {
       const href = a.getAttribute("href") || "";
-      if (
-        !href ||
-        href.startsWith("http") ||
-        href.startsWith("mailto:") ||
-        href.startsWith("tel:") ||
-        href.startsWith("#")
-      ) return;
+      if (shouldIgnoreHref(href)) return;
 
-      const target = href.split("/").pop();
-      if (target === path) a.classList.add("is-active");
+      const target = normalizePath(href);
+      if (target === current) a.classList.add("is-active");
       else a.classList.remove("is-active");
     });
   };
@@ -74,7 +108,34 @@
   markActive(document.querySelector(".nav"));
   markActive(document.getElementById("mobilePanel"));
 
-  /* ---------- Homepage Hero Carousel (safe + swipe + optional autoplay) ---------- */
+  // ---------------------------
+  // Homepage Hero Carousel
+  // ---------------------------
+  const prefersReducedMotion =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Shared pointer tracking so we don't attach a window pointerup per carousel
+  let activePointer = null; // { carousel, startX }
+  const SWIPE_THRESHOLD = 40;
+
+  const onPointerUp = (clientX) => {
+    if (!activePointer) return;
+    const { carousel, startX } = activePointer;
+    activePointer = null;
+
+    const delta = clientX - startX;
+    if (Math.abs(delta) < SWIPE_THRESHOLD) return;
+
+    const prevBtn = carousel.querySelector(".carousel__btn.prev");
+    const nextBtn = carousel.querySelector(".carousel__btn.next");
+    if (!prevBtn || !nextBtn) return;
+
+    if (delta > 0) prevBtn.click();
+    else nextBtn.click();
+  };
+
+  window.addEventListener("pointerup", (e) => onPointerUp(e.clientX));
+
   document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     const track = carousel.querySelector(".carousel__track");
     const slides = track ? Array.from(track.children) : [];
@@ -83,7 +144,6 @@
 
     if (!track || slides.length === 0 || !prevBtn || !nextBtn) return;
 
-    // Make carousel focusable for keyboard interaction
     if (!carousel.hasAttribute("tabindex")) carousel.setAttribute("tabindex", "0");
 
     let index = 0;
@@ -106,52 +166,48 @@
     prevBtn.addEventListener("click", prev);
     nextBtn.addEventListener("click", next);
 
-    // Keyboard: only when carousel is focused
+    // Keyboard (only when carousel is focused)
     carousel.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     });
 
-    // Swipe support (touch + pointer)
-    let startX = 0;
-    let isDown = false;
+    // Touch swipe
+    let touchStartX = 0;
 
-    const onDown = (clientX) => {
-      isDown = true;
-      startX = clientX;
-    };
+    carousel.addEventListener(
+      "touchstart",
+      (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        touchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
 
-    const onUp = (clientX) => {
-      if (!isDown) return;
-      isDown = false;
+    carousel.addEventListener(
+      "touchend",
+      (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const endX = e.changedTouches[0].clientX;
+        const delta = endX - touchStartX;
+        if (Math.abs(delta) < SWIPE_THRESHOLD) return;
+        delta > 0 ? prev() : next();
+      },
+      { passive: true }
+    );
 
-      const delta = clientX - startX;
-      const threshold = 40; // swipe sensitivity
+    // Pointer swipe (desktop drag)
+    carousel.addEventListener("pointerdown", (e) => {
+      activePointer = { carousel, startX: e.clientX };
+    });
 
-      if (delta > threshold) prev();
-      else if (delta < -threshold) next();
-    };
-
-    // Touch
-    carousel.addEventListener("touchstart", (e) => {
-      if (!e.touches || !e.touches[0]) return;
-      onDown(e.touches[0].clientX);
-    }, { passive: true });
-
-    carousel.addEventListener("touchend", (e) => {
-      if (!e.changedTouches || !e.changedTouches[0]) return;
-      onUp(e.changedTouches[0].clientX);
-    }, { passive: true });
-
-    // Mouse / pointer (optional “drag” feel on desktop)
-    carousel.addEventListener("pointerdown", (e) => onDown(e.clientX));
-    window.addEventListener("pointerup", (e) => onUp(e.clientX));
-
-    // Optional autoplay: comment this block out if you don't want auto-slide
+    // Optional autoplay (respects reduced motion)
     const startAuto = () => {
+      if (prefersReducedMotion) return;
       stopAuto();
       autoTimer = window.setInterval(() => next(), 4500);
     };
+
     const stopAuto = () => {
       if (!autoTimer) return;
       window.clearInterval(autoTimer);
@@ -164,10 +220,9 @@
     carousel.addEventListener("focusin", stopAuto);
     carousel.addEventListener("focusout", startAuto);
 
-    // Start autoplay only if there are multiple slides
+    // Start autoplay only if multiple slides
     if (slides.length > 1) startAuto();
 
-    // Initial position
     update();
   });
 })();
