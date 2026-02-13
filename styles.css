@@ -1,39 +1,42 @@
 /* =========================================================
-   Josh Jordan for Sheriff — styles.css (WHITE THEME)
-   Goal: White background + Red/Gold accents (clean + official),
-   keep ALL your existing HTML/classes working, fix carousel bleed
-   and make photos look solid + framed (not see-through).
+   Josh Jordan for Sheriff — styles.css (GREEN / GOLD / WHITE)
+   Goal: Clean + official + law-enforcement tone
+   - White page background
+   - Dark green primary
+   - Gold accent
+   - NO red anywhere
+   - Works with your current HTML + NEW index hero-photo
    ========================================================= */
 
 /* ---------- Root / Theme ---------- */
 :root{
   /* Core */
-  --bg: #ffffff;
+  --bg: #f6f7fb;                 /* soft white */
   --surface: #ffffff;
   --card: #ffffff;
 
-  --text: #0b1220;                 /* near-black navy */
-  --muted: rgba(11,18,32,.74);
+  --text: #0b1220;               /* ink */
+  --muted: rgba(11,18,32,.72);
   --muted2: rgba(11,18,32,.56);
   --line: rgba(11,18,32,.12);
 
-  /* Accents (requested) */
-  --red: #b1121a;                  /* campaign red */
-  --red2:#8f0e15;
-  --gold:#c8a451;                  /* badge gold */
+  /* Rhea Sheriff palette */
+  --green: #0b3d2e;              /* dark green */
+  --green2:#0a3327;              /* deeper */
+  --gold: #c8a451;               /* badge gold */
+  --gold2:#b79241;
 
-  /* Optional heritage (not dominant) */
-  --green: #0b3d2e;
-
-  --shadow: 0 18px 45px rgba(11,18,32,.12);
-  --shadow2: 0 10px 26px rgba(11,18,32,.10);
+  --shadow: 0 18px 45px rgba(11,18,32,.10);
+  --shadow2: 0 10px 26px rgba(11,18,32,.08);
 
   --radius: 18px;
   --radius2: 26px;
 
   --container: 1120px;
 
-  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  /* Fonts already loaded in HTML */
+  --font: "Source Sans 3", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --headline: "Merriweather", Georgia, "Times New Roman", serif;
 }
 
 /* ---------- Base ---------- */
@@ -42,16 +45,21 @@ html, body{ height:100%; }
 body{
   margin:0;
   font-family: var(--font);
-  background: var(--bg);
   color: var(--text);
   line-height:1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Subtle “official” depth without looking gimmicky */
+  background:
+    radial-gradient(1000px 620px at 12% -10%, rgba(11,61,46,.10), transparent 55%),
+    radial-gradient(900px 540px at 92% 0%, rgba(200,164,81,.12), transparent 58%),
+    linear-gradient(180deg, #ffffff, var(--bg) 55%, #ffffff);
 }
 
 img{ max-width:100%; display:block; }
 a{ color: inherit; text-decoration:none; }
-a:hover{ opacity:.98; }
+a:hover{ opacity: 1; }
 
 .container{
   width: min(100% - 32px, var(--container));
@@ -60,7 +68,7 @@ a:hover{ opacity:.98; }
 
 /* ---------- Topbar ---------- */
 .topbar{
-  background: linear-gradient(180deg, rgba(177,18,26,1), rgba(143,14,21,1)); /* red */
+  background: linear-gradient(180deg, rgba(11,61,46,1), rgba(10,51,39,1));
   border-bottom: 1px solid rgba(255,255,255,.18);
   color: #fff;
 }
@@ -78,14 +86,14 @@ a:hover{ opacity:.98; }
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(200,164,81,.18);
-  border: 1px solid rgba(200,164,81,.55);
+  border: 1px solid rgba(200,164,81,.46);
   color: #fff;
   font-weight: 900;
   letter-spacing: .16em;
   font-size: 12px;
 }
 .topbar__text{
-  color: rgba(255,255,255,.92);
+  color: rgba(255,255,255,.90);
   font-weight: 700;
   font-size: 13px;
   flex: 1;
@@ -101,14 +109,14 @@ a:hover{ opacity:.98; }
   justify-content:center;
   padding: 9px 12px;
   border-radius: 999px;
-  background: rgba(255,255,255,.14);
+  background: rgba(255,255,255,.12);
   border: 1px solid rgba(255,255,255,.22);
   color: #fff;
   font-weight: 850;
   font-size: 13px;
   white-space: nowrap;
 }
-.topbar__cta:hover{ background: rgba(255,255,255,.18); }
+.topbar__cta:hover{ background: rgba(255,255,255,.16); }
 
 /* Donate: gold cue */
 .topbar__cta--donate{
@@ -124,9 +132,9 @@ a:hover{ opacity:.98; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255,255,255,.86);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(11,18,32,.12);
 }
 
 .header__inner{
@@ -144,24 +152,24 @@ a:hover{ opacity:.98; }
   min-width: 240px;
 }
 
-/* Logo */
+/* Logo: clean + not cramped */
 .brand__logo{
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 12px;
   object-fit: contain;
   object-position: center;
   background: #fff;
-  padding: 6px;
-  border: 1px solid rgba(11,18,32,.12);
-  box-shadow: 0 10px 26px rgba(11,18,32,.10);
+  padding: 4px;
+  border: 1px solid rgba(11,18,32,.14);
+  box-shadow: 0 10px 22px rgba(11,18,32,.10);
 }
-
 .brand__name{
-  font-weight: 950;
+  font-family: var(--headline);
+  font-weight: 900;
   letter-spacing: -.02em;
   font-size: 16px;
-  color: var(--text);
+  color: rgba(11,18,32,.96);
 }
 .brand__title{
   color: rgba(11,18,32,.62);
@@ -185,23 +193,23 @@ a:hover{ opacity:.98; }
   border-radius: 999px;
   font-weight: 850;
   font-size: 13px;
-  color: rgba(11,18,32,.86);
+  color: rgba(11,18,32,.84);
   border: 1px solid transparent;
 }
 .nav__link:hover{
-  background: rgba(11,18,32,.04);
-  border-color: rgba(11,18,32,.08);
+  background: rgba(11,18,32,.06);
+  border-color: rgba(11,18,32,.10);
 }
 .nav__link.is-active{
-  background: rgba(177,18,26,.10);
-  border-color: rgba(177,18,26,.24);
+  background: rgba(11,61,46,.10);
+  border-color: rgba(11,61,46,.20);
   color: rgba(11,18,32,.92);
 }
 
-/* Header CTA (Yard Sign) = red */
+/* Header CTA (Yard Sign) = GREEN */
 .nav__link--button{
-  background: linear-gradient(180deg, rgba(177,18,26,1), rgba(143,14,21,1));
-  border: 1px solid rgba(177,18,26,.70);
+  background: linear-gradient(180deg, rgba(11,61,46,1), rgba(10,51,39,1));
+  border: 1px solid rgba(11,61,46,.55);
   color: #fff;
   padding: 12px 16px;
   font-size: 14px;
@@ -210,17 +218,17 @@ a:hover{ opacity:.98; }
   box-shadow: 0 14px 34px rgba(11,18,32,.12);
 }
 .nav__link--button:hover{
-  background: linear-gradient(180deg, rgba(193,20,29,1), rgba(143,14,21,1));
+  background: linear-gradient(180deg, rgba(11,61,46,1), rgba(9,43,34,1));
 }
 
 /* Donate = gold */
 .nav__link--donate{
-  background: linear-gradient(180deg, rgba(200,164,81,.44), rgba(200,164,81,.22));
+  background: linear-gradient(180deg, rgba(200,164,81,.48), rgba(200,164,81,.22));
   border-color: rgba(200,164,81,.65);
   color: rgba(11,18,32,.92);
 }
 .nav__link--donate:hover{
-  background: linear-gradient(180deg, rgba(200,164,81,.52), rgba(200,164,81,.26));
+  background: linear-gradient(180deg, rgba(200,164,81,.56), rgba(200,164,81,.26));
 }
 
 .icon-btn{
@@ -261,11 +269,11 @@ a:hover{ opacity:.98; }
   color: rgba(11,18,32,.90);
 }
 .mobile-panel a.is-active{
-  background: rgba(177,18,26,.08);
-  border-color: rgba(177,18,26,.22);
+  background: rgba(11,61,46,.08);
+  border-color: rgba(11,61,46,.18);
 }
 
-/* Utility: show mobile panel when open (script toggles .is-open on header) */
+/* Utility */
 .site-header.is-open .mobile-panel{ display:block; }
 
 /* ---------- Buttons ---------- */
@@ -277,34 +285,53 @@ a:hover{ opacity:.98; }
   padding: 12px 14px;
   border-radius: 999px;
   border: 1px solid rgba(11,18,32,.14);
-  background: rgba(255,255,255,1);
+  background: rgba(255,255,255,.94);
   color: rgba(11,18,32,.92);
   font-weight: 900;
   font-size: 13px;
   white-space: nowrap;
-  box-shadow: 0 10px 22px rgba(11,18,32,.10);
+  box-shadow: 0 10px 22px rgba(11,18,32,.08);
 }
-.btn:hover{ background: rgba(11,18,32,.02); }
+.btn:hover{
+  background: #fff;
+  border-color: rgba(11,18,32,.18);
+}
 
 .btn--primary{
-  background: linear-gradient(180deg, rgba(177,18,26,1), rgba(143,14,21,1));
-  border-color: rgba(177,18,26,.70);
+  background: linear-gradient(180deg, rgba(11,61,46,1), rgba(10,51,39,1));
+  border-color: rgba(11,61,46,.55);
   color: #fff;
   box-shadow: 0 18px 45px rgba(11,18,32,.14);
 }
 .btn--primary:hover{
-  background: linear-gradient(180deg, rgba(193,20,29,1), rgba(143,14,21,1));
+  background: linear-gradient(180deg, rgba(11,61,46,1), rgba(9,43,34,1));
 }
 
-/* ---------- Cards / Sections ---------- */
-section{ padding: 34px 0; }
+/* ---------- Sections / Cards ---------- */
+section{ padding: 42px 0; }
+
+section:nth-of-type(even){
+  background: rgba(11,18,32,.02);
+  border-top: 1px solid rgba(11,18,32,.06);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+}
 
 .card{
   background: #fff;
-  border: 1px solid rgba(11,18,32,.10);
+  border: 1px solid rgba(11,18,32,.12);
   border-radius: var(--radius);
   padding: 18px 18px;
   box-shadow: var(--shadow2);
+}
+@media (prefers-reduced-motion: no-preference){
+  .card{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(11,18,32,.12);
+    border-color: rgba(11,18,32,.18);
+  }
 }
 
 .grid-3{
@@ -313,21 +340,28 @@ section{ padding: 34px 0; }
   gap: 14px;
 }
 
+/* Typography hierarchy */
+.section-title,
+.home-hero__title,
+.page-hero__title{
+  font-family: var(--headline);
+  letter-spacing: -0.03em;
+}
 .section-title{
   margin: 0 0 10px;
-  font-size: 26px;
-  letter-spacing: -.02em;
-  font-weight: 950;
+  font-size: 28px;
+  font-weight: 900;
   color: var(--text);
+  position: relative;
 }
 .section-title::after{
   content:"";
   display:block;
-  width: 72px;
+  width: 86px;
   height: 3px;
   margin-top: 10px;
   border-radius: 999px;
-  background: rgba(177,18,26,.85);
+  background: linear-gradient(90deg, rgba(11,61,46,.95), rgba(200,164,81,.88));
 }
 .section-sub{
   margin: 0 0 16px;
@@ -336,103 +370,24 @@ section{ padding: 34px 0; }
   line-height: 1.65;
 }
 
-/* ---------- PAGE HERO (Inner pages) ---------- */
-.page-hero{
-  position: relative;
-  padding: 30px 0 20px;
-  border-bottom: 1px solid rgba(11,18,32,.10);
-  overflow: hidden;
-  background: #fff;
-}
-.page-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image: var(--banner);
-  background-position: var(--banner-pos, center);
-  background-size:cover;
-  opacity:.12; /* subtle */
-  filter: saturate(.9) contrast(1.05);
-  pointer-events:none;
-  transform: scale(var(--banner-zoom, 1.02));
-}
-.page-hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  /* white veil so banners NEVER make text look muddy */
-  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.96));
-  pointer-events:none;
-}
-.page-hero__inner{
-  position: relative;
-  display:flex;
-  align-items:flex-end;
-  justify-content: space-between;
-  gap: 16px;
-}
-.page-hero__title{
-  margin: 10px 0 0;
-  font-size: 34px;
-  line-height: 1.08;
-  letter-spacing: -.03em;
-  font-weight: 1000;
-  color: var(--text);
-}
-.page-hero__sub{
-  margin: 10px 0 0;
-  max-width: 78ch;
-  color: rgba(11,18,32,.72);
-  font-weight: 650;
-  line-height: 1.65;
-}
-.page-hero__chip{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(200,164,81,.55);
-  background: rgba(200,164,81,.16);
-  color: rgba(11,18,32,.92);
-  font-weight: 950;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-.page-hero__actions{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
 /* ---------- HOME HERO (Homepage) ---------- */
+/* Kill “trashy faded banner bleed” by turning off overlays */
 .home-hero{
   position: relative;
   padding: 44px 0 24px;
   border-bottom: 1px solid rgba(11,18,32,.10);
   overflow:hidden;
-  background: #fff;
+  background: transparent;
 }
-.home-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image: var(--banner);
-  background-position: var(--banner-pos, center);
-  background-size:cover;
-  opacity:.10;
-  filter: saturate(.9) contrast(1.08);
-  transform: scale(var(--banner-zoom, 1.03));
-  pointer-events:none;
-}
+.home-hero::after,
 .home-hero::before{
+  opacity: 0 !important;
   content:"";
   position:absolute;
   inset:0;
-  background: linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.98));
   pointer-events:none;
 }
+
 .home-hero__inner{
   position: relative;
   display:grid;
@@ -446,8 +401,8 @@ section{ padding: 34px 0; }
   gap:10px;
   padding: 9px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(11,18,32,.12);
-  background: rgba(255,255,255,1);
+  border: 1px solid rgba(200,164,81,.44);
+  background: rgba(200,164,81,.16);
   font-weight: 900;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -458,13 +413,10 @@ section{ padding: 34px 0; }
   margin: 14px 0 10px;
   font-size: 54px;
   line-height: 1.02;
-  letter-spacing: -.04em;
-  font-weight: 1000;
+  font-weight: 900;
   color: var(--text);
 }
-.home-hero__title span{
-  color: rgba(11,18,32,.92);
-}
+.home-hero__title span{ color: rgba(11,18,32,.92); }
 .home-hero__sub{
   margin: 0 0 16px;
   max-width: 70ch;
@@ -495,11 +447,9 @@ section{ padding: 34px 0; }
   color: rgba(11,18,32,.90);
   box-shadow: 0 10px 22px rgba(11,18,32,.08);
 }
-.quick-pill:hover{
-  border-color: rgba(177,18,26,.30);
-}
+.quick-pill:hover{ border-color: rgba(11,61,46,.28); }
 
-/* Right card: SOLID, professional frame */
+/* Right card */
 .home-hero__card{
   background: #fff;
   border: 1px solid rgba(11,18,32,.12);
@@ -509,13 +459,11 @@ section{ padding: 34px 0; }
   display:flex;
   flex-direction: column;
 }
-
 .home-hero__photo-wrap{
   padding: 14px;
-  background: rgba(11,18,32,.02); /* subtle mat */
-  border-bottom: 1px solid rgba(11,18,32,.08);
+  background: #fff; /* SOLID mat */
+  border-bottom: 1px solid rgba(11,18,32,.10);
 }
-
 .home-hero__card-footer{
   padding: 0 14px 14px;
   display:flex;
@@ -538,6 +486,38 @@ section{ padding: 34px 0; }
   flex-wrap: wrap;
 }
 
+/* NEW index.html headshot container */
+.hero-photo{
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.14);
+  box-shadow: 0 14px 30px rgba(11,18,32,.10);
+  position: relative;
+}
+.hero-photo::before{
+  content:"";
+  position:absolute;
+  inset:10px;
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.10);
+  pointer-events:none;
+}
+.hero-photo img{
+  width: 100%;
+  height: 320px;
+  object-fit: contain;          /* IMPORTANT: no head cut off */
+  object-position: center top;
+  padding: 12px;               /* “mat” */
+  background: #fff;
+}
+@media (max-width: 980px){
+  .hero-photo img{ height: 300px; }
+}
+@media (max-width: 520px){
+  .hero-photo img{ height: 240px; }
+}
+
 /* ---------- Credibility strip ---------- */
 .cred-strip{ padding: 18px 0; }
 .cred-strip__inner{
@@ -547,7 +527,7 @@ section{ padding: 34px 0; }
 }
 .cred{
   background: #fff;
-  border: 1px solid rgba(11,18,32,.10);
+  border: 1px solid rgba(11,18,32,.12);
   border-radius: 18px;
   padding: 14px 14px;
   box-shadow: var(--shadow2);
@@ -594,25 +574,10 @@ section{ padding: 34px 0; }
   font-weight: 600;
 }
 
-/* ---------- Home CTA ---------- */
-.home-cta{ padding: 20px 0 44px; }
-.home-cta__card{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.home-cta__actions{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
 /* ---------- Footer ---------- */
 footer{
   border-top: 1px solid rgba(11,18,32,.10);
-  background: rgba(11,18,32,.02);
+  background: #ffffff;
 }
 .footer__inner{
   display:flex;
@@ -620,83 +585,9 @@ footer{
   justify-content: space-between;
   gap: 16px;
   padding: 22px 0;
-  color: rgba(11,18,32,.72);
+  color: rgba(11,18,32,.70);
   font-weight: 650;
   font-size: 13px;
-}
-
-/* ---------- Carousel (Homepage Hero) ---------- */
-/* Goal: SOLID + framed + neat. No banner bleed. */
-.carousel{
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #fff; /* SOLID */
-  border: 1px solid rgba(11,18,32,.14);
-  box-shadow: 0 16px 40px rgba(11,18,32,.12);
-}
-.carousel::before{
-  content:"";
-  position:absolute;
-  inset:10px;
-  border-radius: 14px;
-  border: 1px solid rgba(11,18,32,.08);
-  pointer-events:none;
-}
-
-.carousel__track{
-  display: flex;
-  transition: transform .45s ease;
-  height: 100%;
-}
-
-/* Consistent frame height */
-.home-hero__photo-wrap .carousel{ height: 320px; }
-
-.carousel__track img{
-  min-width: 100%;
-  height: 100%;
-  /* Neater look: consistent crop (professional) */
-  object-fit: cover;
-  object-position: center;
-  border-radius: 18px;
-  padding: 12px;              /* “mat” spacing */
-  background: #fff;           /* SOLID behind image */
-}
-
-/* Arrows */
-.carousel__btn{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(11,18,32,.18);
-  background: rgba(255,255,255,.92);
-  color: rgba(11,18,32,.92);
-  font-size: 28px;
-  font-weight: 900;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity .25s ease, background .25s ease, transform .18s ease;
-  z-index: 5;
-}
-.carousel__btn:hover{
-  background: rgba(255,255,255,1);
-  transform: translateY(-50%) scale(1.02);
-}
-.carousel__btn.prev{ left: 10px; }
-.carousel__btn.next{ right: 10px; }
-
-/* Show arrows on hover (desktop) */
-.carousel:hover .carousel__btn{ opacity: 1; }
-/* Always show on mobile */
-@media (max-width: 900px){
-  .carousel__btn{ opacity: 1; }
 }
 
 /* ---------- Responsive ---------- */
@@ -709,225 +600,134 @@ footer{
   .cred-strip__inner{ grid-template-columns: 1fr; }
 }
 
+/* Keep CTAs visible on small screens */
 @media (max-width: 520px){
   .brand{ min-width: unset; }
-  .brand__logo{ width: 40px; height: 40px; }
+  .brand__logo{ width: 42px; height: 42px; }
   .home-hero__title{ font-size: 42px; }
-  .page-hero__title{ font-size: 30px; }
 
-  /* Hide long topbar text so buttons fit */
   .topbar__text{ display:none; }
-
-  /* Make CTAs slightly smaller */
   .topbar__cta{
     padding: 8px 10px;
     font-size: 12px;
   }
-
-  .home-hero__photo-wrap .carousel{ height: 240px; }
-}
-/* =========================================================
-   FINAL PATCH — White background + red/gold accents
-   Fix hero "washed" background + solid framed carousel
-   Fix logo fit + stop portrait head cropping
-   Paste at END of styles.css
-   ========================================================= */
-
-/* --- 1) LIGHT THEME BASE (white page, navy text) --- */
-:root{
-  --bg: #f6f7fb;              /* page background */
-  --surface: #ffffff;
-  --card: #ffffff;
-
-  --text: #0b1220;            /* navy/ink */
-  --muted: rgba(11,18,32,.74);
-  --muted2: rgba(11,18,32,.58);
-  --line: rgba(11,18,32,.12);
-
-  --shadow: 0 18px 45px rgba(11,18,32,.10);
-  --shadow2: 0 10px 26px rgba(11,18,32,.08);
-
-  /* Accents */
-  --red: #b10f1b;             /* campaign red */
-  --red2:#8f0b14;
-  --gold:#c8a451;             /* badge gold */
-  --green:#0b3d2e;            /* heritage sheriff green */
 }
 
-body{
-  background: var(--bg) !important;
-  color: var(--text) !important;
-}
-
-/* Links shouldn't “fade” the whole UI */
-a:hover{ opacity: 1 !important; }
-
-/* --- 2) TOPBAR + HEADER read like "official" --- */
-.topbar{
-  background: linear-gradient(180deg, rgba(11,61,46,1), rgba(11,61,46,.96)) !important;
-  border-bottom: 1px solid rgba(255,255,255,.18) !important;
-}
-.topbar__text{ color: rgba(255,255,255,.90) !important; }
-.topbar__badge{
-  background: rgba(200,164,81,.18) !important;
-  border-color: rgba(200,164,81,.42) !important;
-  color: rgba(255,255,255,.96) !important;
-}
-
-/* Make header clean white (no dark glass) */
-.site-header{
-  background: rgba(255,255,255,.92) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(11,18,32,.12) !important;
-}
-
-/* Nav links: darker, more "gov" */
-.nav__link{
-  color: rgba(11,18,32,.82) !important;
-}
-.nav__link:hover{
-  background: rgba(11,18,32,.06) !important;
-  border-color: rgba(11,18,32,.10) !important;
-}
-
-/* Active state = red cue (not washed pill) */
-.nav__link.is-active{
-  background: rgba(177,15,27,.08) !important;
-  border-color: rgba(177,15,27,.18) !important;
-  color: rgba(11,18,32,.92) !important;
-}
-
-/* Header CTAs */
-.nav__link--button{
-  background: linear-gradient(180deg, rgba(177,15,27,1), rgba(143,11,20,.92)) !important;
-  border-color: rgba(143,11,20,.55) !important;
-  color: #fff !important;
-  box-shadow: 0 12px 28px rgba(177,15,27,.18) !important;
-}
-.nav__link--button:hover{
-  background: linear-gradient(180deg, rgba(197,18,34,1), rgba(143,11,20,.95)) !important;
-}
-
-/* Donate = gold (fundraising cue) */
-.nav__link--donate,
-.topbar__cta--donate{
-  background: linear-gradient(180deg, rgba(200,164,81,.48), rgba(200,164,81,.26)) !important;
-  border-color: rgba(200,164,81,.58) !important;
-  color: rgba(11,18,32,.92) !important;
-}
-
-/* --- 3) LOGO: stop looking cramped --- */
-.brand__logo{
-  width: 46px !important;
-  height: 46px !important;
-  padding: 4px !important;
-  background: #fff !important;
-  border: 1px solid rgba(11,18,32,.14) !important;
-  box-shadow: 0 10px 22px rgba(11,18,32,.10) !important;
-  object-fit: contain !important;
-  object-position: center !important;
-}
-.brand__name{ color: rgba(11,18,32,.96) !important; }
-.brand__title{ color: rgba(11,18,32,.60) !important; }
-
-/* --- 4) CARDS/SECTIONS: clean white, professional --- */
-.card{
-  background: #fff !important;
-  border: 1px solid rgba(11,18,32,.12) !important;
-  box-shadow: var(--shadow2) !important;
-}
-.section-sub{ color: var(--muted) !important; }
-
-/* --- 5) HERO: STOP the background photo bleeding/ghosting --- */
-/* This is the "trashy fade" you pointed out. Kill it. */
-.home-hero,
+/* ---------- PAGE HERO (Inner pages) ---------- */
 .page-hero{
-  background: linear-gradient(180deg, #ffffff, #f6f7fb) !important;
-  border-bottom: 1px solid rgba(11,18,32,.10) !important;
+  position: relative;
+  padding: 30px 0 20px;
+  border-bottom: 1px solid rgba(11,18,32,.10);
+  overflow: hidden;
+  background: transparent;
 }
-
-/* Remove the big washed banner overlay entirely */
-.home-hero::after,
-.page-hero::after{
-  opacity: 0 !important;
-  filter: none !important;
-  transform: none !important;
-}
-.home-hero::before,
+.page-hero::after,
 .page-hero::before{
-  opacity: 0 !important;
+  opacity: 0 !important; /* no washed overlay */
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
 }
-
-/* Chips still look "badge/official" */
-.home-hero__kicker,
-.page-hero__chip{
-  background: rgba(200,164,81,.18) !important;
-  border-color: rgba(200,164,81,.40) !important;
-  color: rgba(11,18,32,.88) !important;
+.page-hero__inner{
+  position: relative;
+  display:flex;
+  align-items:flex-end;
+  justify-content: space-between;
+  gap: 16px;
 }
-
-/* Hero text reads dark like an official site */
-.home-hero__title,
 .page-hero__title{
-  color: rgba(11,18,32,.96) !important;
+  margin: 10px 0 0;
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 900;
+  color: var(--text);
 }
-.home-hero__sub,
 .page-hero__sub{
-  color: rgba(11,18,32,.74) !important;
+  margin: 10px 0 0;
+  max-width: 78ch;
+  color: rgba(11,18,32,.72);
+  font-weight: 650;
+  line-height: 1.65;
+}
+.page-hero__chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(200,164,81,.46);
+  background: rgba(200,164,81,.16);
+  color: rgba(11,18,32,.92);
+  font-weight: 950;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.page-hero__actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-/* --- 6) BUTTONS: red primary on white --- */
-.btn{
-  background: rgba(255,255,255,.92) !important;
-  border: 1px solid rgba(11,18,32,.14) !important;
-  color: rgba(11,18,32,.90) !important;
-  box-shadow: 0 10px 22px rgba(11,18,32,.08) !important;
+/* =========================================================
+   FEATURE BANDS (from new index.html)
+   ========================================================= */
+.feature{ padding: 46px 0; }
+.feature__inner{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 18px;
+  align-items: center;
 }
-.btn:hover{
-  background: #fff !important;
-  border-color: rgba(11,18,32,.18) !important;
-}
-.btn--primary{
-  background: linear-gradient(180deg, rgba(177,15,27,1), rgba(143,11,20,.92)) !important;
-  border-color: rgba(143,11,20,.55) !important;
-  color: #fff !important;
-  box-shadow: 0 12px 28px rgba(177,15,27,.18) !important;
-}
+.feature--left .feature__inner{ grid-template-columns: .95fr 1.05fr; }
+.feature--left .feature__media{ order: -1; }
 
-/* --- 7) CAROUSEL: SOLID, BOXED, and NO CROPPING --- */
-.home-hero__card{
-  background: #fff !important;
-  border: 1px solid rgba(11,18,32,.12) !important;
-  box-shadow: var(--shadow) !important;
+.feature__tag{
+  display:inline-flex;
+  align-items:center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,61,46,.18);
+  background: rgba(11,61,46,.08);
+  color: rgba(11,18,32,.86);
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
-
-/* Solid “photo mat” so nothing shows through */
-.home-hero__photo-wrap{
-  background: #fff !important;
-  border-bottom: 1px solid rgba(11,18,32,.10) !important;
+.feature__actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
 }
-
-/* Frame the carousel like a professional media card */
-.carousel{
-  background: #ffffff !important;
-  border: 1px solid rgba(11,18,32,.14) !important;
-  box-shadow: 0 14px 30px rgba(11,18,32,.10) !important;
-  border-radius: 18px !important;
+.feature__bullets{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 12px;
 }
-
-/* IMPORTANT: stop head cut-off.
-   This overrides any .home-hero__photo object-fit:cover. */
-.carousel__track img,
-.carousel__track .home-hero__photo{
-  object-fit: contain !important;
-  object-position: center top !important;
-  background: #fff !important;
-  border-radius: 16px !important;
-  padding: 12px !important;
+.feature__bullet{
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.12);
+  border-radius: 16px;
+  padding: 12px 12px;
+  box-shadow: var(--shadow2);
 }
+.feature__bullet strong{ color: rgba(11,18,32,.92); }
+.feature__bullet span{ color: rgba(11,18,32,.70); }
 
-/* Optional inner border to feel “boxed” */
-.carousel::before{
+.feature__frame{
+  border-radius: 18px;
+  overflow:hidden;
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.14);
+  box-shadow: 0 18px 45px rgba(11,18,32,.10);
+  position: relative;
+}
+.feature__frame::before{
   content:"";
   position:absolute;
   inset:10px;
@@ -935,79 +735,32 @@ a:hover{ opacity: 1 !important; }
   border: 1px solid rgba(11,18,32,.10);
   pointer-events:none;
 }
-
-/* Arrows: darker, less “toy” */
-.carousel__btn{
-  background: rgba(11,18,32,.72) !important;
-  border-color: rgba(255,255,255,.55) !important;
-  color: #fff !important;
+.feature__frame img{
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 980px){
+  .feature__inner{ grid-template-columns: 1fr; }
+  .feature--left .feature__media{ order: 0; }
+  .feature__frame img{ height: 300px; }
+}
+@media (max-width: 520px){
+  .feature__frame img{ height: 240px; }
 }
 
-/* --- 8) FOOTER on light theme --- */
-footer{
-  background: #ffffff !important;
-  border-top: 1px solid rgba(11,18,32,.10) !important;
+/* Home CTA layout helpers (already in your HTML) */
+.home-cta{ padding: 20px 0 44px; }
+.home-cta__card{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
 }
-.footer__inner{
-  color: rgba(11,18,32,.70) !important;
-}
-/* ====== Subtle depth + better scroll flow (CSS only) ====== */
-
-/* Soft background texture so white isn't boring */
-body{
-  background:
-    radial-gradient(900px 520px at 15% 0%, rgba(177,15,27,.06), transparent 55%),
-    radial-gradient(900px 520px at 90% 10%, rgba(200,164,81,.08), transparent 55%),
-    linear-gradient(180deg, #ffffff, #f6f7fb 55%, #ffffff) !important;
-}
-
-/* Make sections feel separated without heavy lines */
-section{
-  padding: 42px 0 !important;
-}
-section:nth-of-type(even){
-  background: rgba(11,18,32,.02);
-  border-top: 1px solid rgba(11,18,32,.06);
-  border-bottom: 1px solid rgba(11,18,32,.06);
-}
-
-/* Cards feel more premium on hover (desktop) */
-@media (prefers-reduced-motion: no-preference){
-  .card{
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
-  .card:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 18px 40px rgba(11,18,32,.12);
-    border-color: rgba(11,18,32,.18);
-  }
-}
-
-/* Better headline “presence” */
-.section-title{
-  font-size: 28px !important;
-}
-.section-title::after{
-  width: 86px !important;
-  height: 3px !important;
-  background: linear-gradient(90deg, rgba(177,15,27,.95), rgba(200,164,81,.85)) !important;
-}
-/* ====== Reveal on scroll (light, professional) ====== */
-.reveal{
-  opacity: 0;
-  transform: translateY(14px);
-}
-
-.reveal.is-visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: no-preference){
-  .reveal{
-    transition: opacity .55s ease, transform .55s ease;
-  }
-}
-@media (prefers-reduced-motion: reduce){
-  .reveal{ opacity: 1; transform: none; }
+.home-cta__actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
