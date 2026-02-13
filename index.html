@@ -38,7 +38,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
 
-  <!-- Fonts (recommended pairing for “official campaign” tone) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -57,7 +57,6 @@
       <span class="topbar__badge">SHERIFF</span>
       <span class="topbar__text">Rhea County, Tennessee • Republican Candidate • May 2026</span>
 
-      <!-- Topbar CTAs -->
       <div class="topbar__actions">
         <a class="topbar__cta" href="get-involved.html">Request a Yard Sign</a>
         <a class="topbar__cta topbar__cta--donate" href="#" aria-label="Donate (link coming soon)">Donate</a>
@@ -71,7 +70,7 @@
       <a class="brand" href="index.html" aria-label="Home">
         <img
           class="brand__logo"
-          src="assets/images/505079140_122095294814908392_6417227761878724309_n.jpg"
+          src="assets/images/josh-jordan-logo.jpg"
           alt="Josh Jordan for Sheriff campaign logo"
         />
         <div class="brand__text">
@@ -90,7 +89,6 @@
         <a class="nav__link" href="priorities.html">Priorities</a>
         <a class="nav__link" href="voter-info.html">Voter Info</a>
 
-        <!-- CTAs in header -->
         <a class="nav__link nav__link--button" href="get-involved.html">Request a Yard Sign</a>
         <a class="nav__link nav__link--button nav__link--donate" href="#" aria-label="Donate (link coming soon)">Donate</a>
 
@@ -129,13 +127,13 @@
 
   <main>
 
-    <!-- HOME HERO -->
+    <!-- HOME HERO (no carousel — official headshot) -->
     <section
       class="home-hero"
       style="
-        --banner:url('assets/images/515547077_122113985780908392_2390202805218607323_n.jpg');
-        --banner-pos:center;
-        --banner-zoom:1.03;
+        --banner:url('assets/images/621246773_122161408160908392_3851311840205601840_n.jpg');
+        --banner-pos:center 20%;
+        --banner-zoom:1.05;
       "
     >
       <div class="container home-hero__inner">
@@ -173,19 +171,10 @@
           </div>
         </div>
 
-        <div class="home-hero__card" aria-label="Candidate photos">
+        <div class="home-hero__card" aria-label="Candidate headshot">
           <div class="home-hero__photo-wrap">
-            <div class="carousel" data-carousel>
-              <button class="carousel__btn prev" type="button" aria-label="Previous photo">‹</button>
-              <div class="carousel__track">
-                <img src="assets/images/568292487_122143344734908392_1006570753609920573_n.jpg" alt="Josh Jordan" />
-                <img src="assets/images/515547077_122113985780908392_2390202805218607323_n.jpg" alt="Josh Jordan" />
-                <img src="assets/images/515548270_122113985768908392_9179540342935613668_n.jpg" alt="Josh Jordan" />
-                <img src="assets/images/555550302_122138274038908392_2979572988193305931_n.jpg" alt="Josh Jordan" />
-                <img src="assets/images/593288527_122152459628908392_7655570133084531755_n.jpg" alt="Josh Jordan" />
-                <img src="assets/images/595667527_122153401874908392_7447416013118529248_n.jpg" alt="Josh Jordan" />
-              </div>
-              <button class="carousel__btn next" type="button" aria-label="Next photo">›</button>
+            <div class="hero-photo">
+              <img src="assets/images/josh-jordan-headshot.jpg" alt="Josh Jordan headshot" />
             </div>
           </div>
 
@@ -217,6 +206,86 @@
         <div class="cred">
           <div class="cred__num">Local</div>
           <div class="cred__label">Lifelong Rhea County resident</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE BAND 1 -->
+    <section class="feature feature--right">
+      <div class="container feature__inner">
+        <div class="feature__content">
+          <div class="feature__tag">Leadership</div>
+          <h2 class="section-title">Professional Leadership You Can Trust</h2>
+          <p class="section-sub" style="margin-bottom:12px;">
+            A Sheriff’s Office should be consistent, well-run, and accountable — so deputies have clear direction
+            and the public gets straight answers.
+          </p>
+
+          <div class="feature__bullets">
+            <div class="feature__bullet">
+              <strong>Clear standards</strong><br>
+              <span>Expectations that apply fairly and consistently.</span>
+            </div>
+            <div class="feature__bullet">
+              <strong>Training + supervision</strong><br>
+              <span>Support deputies with preparation and leadership that shows up.</span>
+            </div>
+            <div class="feature__bullet">
+              <strong>Respectful service</strong><br>
+              <span>Professional communication that builds trust and reduces conflict.</span>
+            </div>
+          </div>
+
+          <div class="feature__actions">
+            <a class="btn btn--primary" href="experience.html">View Experience</a>
+            <a class="btn" href="priorities.html">Read Priorities</a>
+          </div>
+        </div>
+
+        <div class="feature__media">
+          <div class="feature__frame">
+            <img src="assets/images/621246773_122161408160908392_3851311840205601840_n.jpg" alt="Josh Jordan at work" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE BAND 2 -->
+    <section class="feature feature--left">
+      <div class="container feature__inner">
+        <div class="feature__content">
+          <div class="feature__tag">Community</div>
+          <h2 class="section-title">Rooted in Rhea County</h2>
+          <p class="section-sub" style="margin-bottom:12px;">
+            Josh isn’t running to build a resume — he’s running to serve the community where he lives, works,
+            and raises his family.
+          </p>
+
+          <div class="feature__bullets">
+            <div class="feature__bullet">
+              <strong>Lifelong resident</strong><br>
+              <span>Rhea County High School • Class of 2000.</span>
+            </div>
+            <div class="feature__bullet">
+              <strong>Family-first mindset</strong><br>
+              <span>Public safety decisions affect real families — including his own.</span>
+            </div>
+            <div class="feature__bullet">
+              <strong>Service-driven</strong><br>
+              <span>Focused on professionalism, accountability, and public trust.</span>
+            </div>
+          </div>
+
+          <div class="feature__actions">
+            <a class="btn btn--primary" href="about.html">Meet Josh</a>
+            <a class="btn" href="get-involved.html">Get Involved</a>
+          </div>
+        </div>
+
+        <div class="feature__media">
+          <div class="feature__frame">
+            <img src="assets/images/595667527_122153401874908392_7447416013118529248_n.jpg" alt="Josh Jordan in the community" />
+          </div>
         </div>
       </div>
     </section>
