@@ -1,245 +1,200 @@
-/* Josh Jordan for Sheriff — script.js
-   - Sticky header mobile menu toggle (robust)
-   - Close menu on navigation / escape / outside click / resize
-   - Set current year
-   - Auto mark active nav links (safe)
-   - Homepage hero carousel (safe + swipe + optional autoplay + reduced motion)
-*/
+/* ============================================================
+   Josh Jordan for Sheriff — script.js
+   ============================================================ */
 
-(() => {
-  const header = document.querySelector(".site-header");
-  const menuBtn = document.getElementById("menuBtn");
-  const mobilePanel = document.getElementById("mobilePanel");
-  const yearEl = document.getElementById("year");
+(function () {
+  'use strict';
 
-  // ---------------------------
-  // Year
-  // ---------------------------
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  /* ── 1. YEAR ──────────────────────────────────────────── */
+  document.querySelectorAll('#year').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
 
-  // ---------------------------
-  // Mobile menu
-  // ---------------------------
-  const hasMenu = header && menuBtn && mobilePanel;
-  const isOpen = () => header?.classList.contains("is-open");
+  /* ── 2. MOBILE MENU ───────────────────────────────────── */
+  const menuBtn    = document.getElementById('menuBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  const siteHeader = document.querySelector('.site-header');
 
-  const closeMenu = () => {
-    if (!hasMenu) return;
-    header.classList.remove("is-open");
-    menuBtn.setAttribute("aria-expanded", "false");
-  };
+  if (menuBtn && mobilePanel && siteHeader) {
+    menuBtn.addEventListener('click', () => {
+      const isOpen = siteHeader.classList.toggle('is-open');
+      menuBtn.setAttribute('aria-expanded', isOpen);
 
-  const openMenu = () => {
-    if (!hasMenu) return;
-    header.classList.add("is-open");
-    menuBtn.setAttribute("aria-expanded", "true");
-  };
-
-  if (hasMenu) {
-    // Toggle on button click
-    menuBtn.addEventListener("click", (e) => {
-      // Prevent “outside click” handler from immediately closing it
-      e.stopPropagation();
-      isOpen() ? closeMenu() : openMenu();
+      // Animate hamburger → X
+      const spans = menuBtn.querySelectorAll('span');
+      if (isOpen) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity   = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        spans[0].style.transform = '';
+        spans[1].style.opacity   = '';
+        spans[2].style.transform = '';
+      }
     });
 
-    // Close when clicking a link in the mobile panel
-    mobilePanel.addEventListener("click", (e) => {
-      const a = e.target.closest("a");
-      if (!a) return;
-      closeMenu();
+    // Close on outside click
+    document.addEventListener('click', e => {
+      if (!siteHeader.contains(e.target) && siteHeader.classList.contains('is-open')) {
+        siteHeader.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        const spans = menuBtn.querySelectorAll('span');
+        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      }
     });
 
-    // Close on Escape
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
+    // Close on mobile nav link click
+    mobilePanel.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        siteHeader.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        const spans = menuBtn.querySelectorAll('span');
+        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      });
     });
-
-    // Close when clicking outside header (only if open)
-    document.addEventListener("click", (e) => {
-      if (!isOpen()) return;
-      if (!header.contains(e.target)) closeMenu();
-    });
-
-    // Close when switching to desktop layout / orientation changes
-    const closeOnWide = () => {
-      // Match your CSS breakpoint where .nav hides / menu shows
-      if (window.innerWidth > 980) closeMenu();
-    };
-    window.addEventListener("resize", closeOnWide);
-    window.addEventListener("orientationchange", closeOnWide);
   }
 
-  // ---------------------------
-  // Active nav link (safe)
-  // ---------------------------
-  const normalizePath = (hrefOrPath) => {
-    if (!hrefOrPath) return "";
-    // strip query/hash
-    const clean = hrefOrPath.split("#")[0].split("?")[0];
-    // last segment
-    const last = clean.split("/").filter(Boolean).pop() || "";
-    // treat root as index.html
-    return last || "index.html";
-  };
-
-  const current = normalizePath(window.location.pathname);
-
-  const shouldIgnoreHref = (href) => {
-    if (!href) return true;
-    if (href === "#" || href.startsWith("#")) return true;
-    if (href.startsWith("http")) return true;
-    if (href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("sms:")) return true;
-    return false;
-  };
-
-  const markActive = (root) => {
-    if (!root) return;
-    root.querySelectorAll("a").forEach((a) => {
-      const href = a.getAttribute("href") || "";
-      if (shouldIgnoreHref(href)) return;
-
-      const target = normalizePath(href);
-      if (target === current) a.classList.add("is-active");
-      else a.classList.remove("is-active");
-    });
-  };
-
-  markActive(document.querySelector(".nav"));
-  markActive(document.getElementById("mobilePanel"));
-
-  // ---------------------------
-  // Homepage Hero Carousel
-  // ---------------------------
-  const prefersReducedMotion =
-    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Shared pointer tracking so we don't attach a window pointerup per carousel
-  let activePointer = null; // { carousel, startX }
-  const SWIPE_THRESHOLD = 40;
-
-  const onPointerUp = (clientX) => {
-    if (!activePointer) return;
-    const { carousel, startX } = activePointer;
-    activePointer = null;
-
-    const delta = clientX - startX;
-    if (Math.abs(delta) < SWIPE_THRESHOLD) return;
-
-    const prevBtn = carousel.querySelector(".carousel__btn.prev");
-    const nextBtn = carousel.querySelector(".carousel__btn.next");
-    if (!prevBtn || !nextBtn) return;
-
-    if (delta > 0) prevBtn.click();
-    else nextBtn.click();
-  };
-
-  window.addEventListener("pointerup", (e) => onPointerUp(e.clientX));
-
-  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
-    const track = carousel.querySelector(".carousel__track");
-    const slides = track ? Array.from(track.children) : [];
-    const prevBtn = carousel.querySelector(".carousel__btn.prev");
-    const nextBtn = carousel.querySelector(".carousel__btn.next");
-
-    if (!track || slides.length === 0 || !prevBtn || !nextBtn) return;
-
-    if (!carousel.hasAttribute("tabindex")) carousel.setAttribute("tabindex", "0");
-
-    let index = 0;
-    let autoTimer = null;
-
-    const update = () => {
-      track.style.transform = `translateX(-${index * 100}%)`;
+  /* ── 3. STICKY HEADER SHADOW ──────────────────────────── */
+  const header = document.querySelector('.site-header');
+  if (header) {
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        header.style.boxShadow = '0 4px 24px rgba(15,25,35,.1)';
+      } else {
+        header.style.boxShadow = '';
+      }
     };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 
-    const prev = () => {
-      index = (index - 1 + slides.length) % slides.length;
-      update();
-    };
-
-    const next = () => {
-      index = (index + 1) % slides.length;
-      update();
-    };
-
-    prevBtn.addEventListener("click", prev);
-    nextBtn.addEventListener("click", next);
-
-    // Keyboard (only when carousel is focused)
-    carousel.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    });
-
-    // Touch swipe
-    let touchStartX = 0;
-
-    carousel.addEventListener(
-      "touchstart",
-      (e) => {
-        if (!e.touches || !e.touches[0]) return;
-        touchStartX = e.touches[0].clientX;
-      },
-      { passive: true }
-    );
-
-    carousel.addEventListener(
-      "touchend",
-      (e) => {
-        if (!e.changedTouches || !e.changedTouches[0]) return;
-        const endX = e.changedTouches[0].clientX;
-        const delta = endX - touchStartX;
-        if (Math.abs(delta) < SWIPE_THRESHOLD) return;
-        delta > 0 ? prev() : next();
-      },
-      { passive: true }
-    );
-
-    // Pointer swipe (desktop drag)
-    carousel.addEventListener("pointerdown", (e) => {
-      activePointer = { carousel, startX: e.clientX };
-    });
-
-    // Optional autoplay (respects reduced motion)
-    const startAuto = () => {
-      if (prefersReducedMotion) return;
-      stopAuto();
-      autoTimer = window.setInterval(() => next(), 4500);
-    };
-
-    const stopAuto = () => {
-      if (!autoTimer) return;
-      window.clearInterval(autoTimer);
-      autoTimer = null;
-    };
-
-    // Pause autoplay when user interacts
-    carousel.addEventListener("mouseenter", stopAuto);
-    carousel.addEventListener("mouseleave", startAuto);
-    carousel.addEventListener("focusin", stopAuto);
-    carousel.addEventListener("focusout", startAuto);
-
-    // Start autoplay only if multiple slides
-    if (slides.length > 1) startAuto();
-
-    update();
+  /* ── 4. ACTIVE NAV LINK ───────────────────────────────── */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav__link, .mobile-panel a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href !== '#' && (href === currentPage || (currentPage === '' && href === 'index.html'))) {
+      link.classList.add('is-active');
+    }
   });
-     /* ---------- Reveal on scroll (sections/cards) ---------- */
-  const revealEls = [
-    ...document.querySelectorAll(".card"),
-    ...document.querySelectorAll(".section-title"),
-    ...document.querySelectorAll(".section-sub")
-  ];
 
-  revealEls.forEach(el => el.classList.add("reveal"));
+  /* ── 5. SHARE BUTTON ──────────────────────────────────── */
+  document.querySelectorAll('#shareBtn').forEach(btn => {
+    const msgEl = btn.closest('article, div')?.querySelector('#shareMsg, .share-msg');
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add("is-visible");
+    const showMsg = text => {
+      if (!msgEl) return;
+      msgEl.textContent = text;
+      msgEl.style.display = 'block';
+      setTimeout(() => { msgEl.style.display = 'none'; }, 2800);
+    };
+
+    btn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'Josh Jordan for Sheriff — Rhea County, TN',
+        text: 'Official campaign website for Josh Jordan for Sheriff of Rhea County.',
+        url: window.location.href
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          showMsg('Shared!');
+        } else if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(shareData.url);
+          showMsg('Link copied to clipboard!');
+        } else {
+          prompt('Copy this link:', shareData.url);
+        }
+      } catch (e) {
+        // user cancelled — no action
+      }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  });
 
-  revealEls.forEach(el => io.observe(el));
+  /* ── 6. VOLUNTEER FORM ────────────────────────────────── */
+  const form        = document.getElementById('volunteerForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const formError   = document.getElementById('formError');
+
+  if (form) {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      const name  = form.querySelector('#v_name')?.value.trim();
+      const email = form.querySelector('#v_email')?.value.trim();
+
+      // Basic client-side validation
+      if (!name || !email || !email.includes('@')) {
+        if (formError) { formError.hidden = false; formSuccess.hidden = true; }
+        return;
+      }
+      if (formError) formError.hidden = true;
+
+      const submitBtn = form.querySelector('[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+
+      /*
+       * FORM ENDPOINT:
+       * Replace the action attribute on #volunteerForm with your form handler.
+       * Options:
+       *   - Netlify: action="/forms/contact" with data-netlify="true"
+       *   - Formspree: action="https://formspree.io/f/YOUR_ID" method="POST"
+       *   - EmailJS: use their SDK instead of fetch
+       *
+       * The try/catch below handles a real POST submission.
+       * Currently shows success for demo since action="#".
+       */
+
+      const action = form.getAttribute('action');
+      if (action && action !== '#') {
+        try {
+          const res = await fetch(action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' }
+          });
+          if (res.ok) {
+            if (formSuccess) formSuccess.hidden = false;
+            form.reset();
+          } else {
+            throw new Error('Server error');
+          }
+        } catch {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Message'; }
+          alert('Something went wrong. Please call (423) 593-1964 or email jjordan206@yahoo.com.');
+          return;
+        }
+      } else {
+        // Demo mode (no real endpoint yet) — show success
+        if (formSuccess) formSuccess.hidden = false;
+        form.reset();
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    });
+  }
+
+  /* ── 7. SCROLL-TRIGGERED CARD FADE-IN ─────────────────── */
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const cards = document.querySelectorAll('.card, .cred-item, .bio-layout, .timeline__item');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeUp .45s ease both';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      observer.observe(card);
+    });
+  }
 
 })();
