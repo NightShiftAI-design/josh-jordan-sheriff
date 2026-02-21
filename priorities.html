@@ -3,425 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- SEO -->
-  <meta
-    name="description"
-    content="Explore Josh Jordan’s priorities for the Rhea County Sheriff’s Office, focused on professionalism, accountability, public safety, and community trust."
-  />
-
+  <meta name="description" content="Explore Josh Jordan's priorities for the Rhea County Sheriff's Office, focused on professionalism, accountability, public safety, and community trust." />
   <title>Priorities • Josh Jordan for Sheriff • Rhea County, TN</title>
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
-
-  <!-- Fonts (recommended pairing for “official campaign” tone) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body class="page-priorities">
 
-  <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
-      <span class="topbar__badge">SHERIFF</span>
-      <span class="topbar__text">Rhea County, Tennessee • Republican Candidate • May 2026</span>
-
-      <!-- Topbar CTAs -->
+      <span class="topbar__badge">Republican Primary • May 2026</span>
+      <span class="topbar__center">Rhea County, Tennessee</span>
       <div class="topbar__actions">
-        <a class="topbar__cta" href="get-involved.html">Request a Yard Sign</a>
-        <a class="topbar__cta topbar__cta--donate" href="#" aria-label="Donate (link coming soon)">Donate</a>
+        <a class="topbar__cta" href="get-involved.html">🪧 Yard Sign</a>
+        <a class="topbar__cta topbar__cta--gold" href="index.html#donate">Donate</a>
       </div>
     </div>
   </div>
 
-  <!-- Header -->
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <div class="container header__inner">
-      <a class="brand" href="index.html" aria-label="Home">
-        <img
-          class="brand__logo"
-          src="assets/images/505079140_122095294814908392_6417227761878724309_n.jpg"
-          alt="Josh Jordan for Sheriff campaign logo"
-        />
+      <a class="brand" href="index.html" aria-label="Josh Jordan for Sheriff — Home">
+        <div class="brand__emblem" aria-hidden="true"><span class="brand__star">★</span></div>
         <div class="brand__text">
           <div class="brand__name">Josh Jordan</div>
-          <div class="brand__title">For Sheriff • Rhea County, TN</div>
+          <div class="brand__sub">For Sheriff · Rhea County, TN</div>
         </div>
       </a>
-
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobilePanel" id="menuBtn">
-        Menu
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobilePanel" id="menuBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
       </button>
-
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a class="nav__link" href="about.html">About</a>
         <a class="nav__link" href="experience.html">Experience</a>
         <a class="nav__link is-active" href="priorities.html">Priorities</a>
         <a class="nav__link" href="voter-info.html">Voter Info</a>
-
-        <!-- CTAs in header -->
-        <a class="nav__link nav__link--button" href="get-involved.html">Request a Yard Sign</a>
-        <a class="nav__link nav__link--button nav__link--donate" href="#" aria-label="Donate (link coming soon)">Donate</a>
-
-        <a
-          class="icon-btn"
-          href="https://www.facebook.com/profile.php?id=61577251765386"
-          target="_blank"
-          rel="noopener"
-          aria-label="Visit the official Facebook page"
-          title="Facebook"
-        >
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
-            <path d="M22 12.06C22 6.504 17.523 2 12 2S2 6.504 2 12.06C2 17.083 5.657 21.245 10.438 22v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.46h-1.26c-1.242 0-1.63.772-1.63 1.562v1.88h2.773l-.443 2.91h-2.33V22C18.343 21.245 22 17.083 22 12.06z"/>
-          </svg>
+        <a class="nav__link" href="get-involved.html">Get Involved</a>
+        <a class="nav__cta nav__cta--ghost" href="get-involved.html">Yard Sign</a>
+        <a class="nav__cta nav__cta--gold" href="index.html#donate">Donate</a>
+        <a class="icon-btn" href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.504 17.523 2 12 2S2 6.504 2 12.06C2 17.083 5.657 21.245 10.438 22v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.46h-1.26c-1.242 0-1.63.772-1.63 1.562v1.88h2.773l-.443 2.91h-2.33V22C18.343 21.245 22 17.083 22 12.06z"/></svg>
         </a>
       </nav>
     </div>
-
-    <!-- Mobile nav panel -->
-    <div class="container mobile-panel" id="mobilePanel">
-      <a href="about.html">About</a>
-      <a href="experience.html">Experience</a>
-      <a class="is-active" href="priorities.html">Priorities</a>
-      <a href="voter-info.html">Voter Info</a>
-
-      <hr style="opacity:.18;margin:10px 0;" />
-
-      <a href="get-involved.html"><strong>Request a Yard Sign</strong></a>
-      <a href="#"><strong>Donate</strong></a>
-
-      <hr style="opacity:.18;margin:10px 0;" />
-
-      <a href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">Facebook</a>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="container mobile-panel__inner">
+        <a href="about.html">About</a>
+        <a href="experience.html">Experience</a>
+        <a class="is-active" href="priorities.html">Priorities</a>
+        <a href="voter-info.html">Voter Info</a>
+        <a href="get-involved.html">Get Involved</a>
+        <hr />
+        <a href="get-involved.html" class="mobile-cta">🪧 Request a Yard Sign</a>
+        <a href="index.html#donate" class="mobile-cta mobile-cta--gold">Donate to the Campaign</a>
+        <hr />
+        <a href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">Follow on Facebook →</a>
+      </div>
     </div>
   </header>
 
-  <!-- PAGE BANNER -->
-  <section
-    class="page-hero"
-    style="
-      --banner:url('assets/images/618167002_122161268432908392_3892836052872491504_n.jpg');
-      --banner-pos:center 30%;
-      --banner-zoom:1.00;
-    "
-  >
+  <section class="page-hero">
     <div class="container page-hero__inner">
       <div>
-        <div class="page-hero__chip">Priorities</div>
-        <h1 class="page-hero__title">A Sheriff’s Office Built on Trust</h1>
-        <p class="page-hero__sub">
-          Clear standards • Strong patrol • Professional leadership • Accountability • Modern crisis response
-        </p>
+        <span class="page-hero__chip">Priorities</span>
+        <h1 class="page-hero__title">A Sheriff's Office Built on Trust</h1>
+        <p class="page-hero__sub">Clear standards · Strong patrol · Professional leadership · Accountability · Modern crisis response</p>
       </div>
-
       <div class="page-hero__actions">
-        <a class="btn btn--primary" href="get-involved.html">Get Involved</a>
-        <a class="btn" href="experience.html">Experience</a>
+        <a class="btn btn--hero-primary" href="get-involved.html">Get Involved</a>
+        <a class="btn btn--hero-secondary" href="experience.html">Experience</a>
       </div>
     </div>
   </section>
 
   <main>
 
-    <!-- WHAT YOU CAN EXPECT -->
-    <section>
+    <section class="section section--light">
       <div class="container">
-        <h2 class="section-title">What You Can Expect</h2>
-        <p class="section-sub">
-          These priorities are shaped by real-world law enforcement experience — focused on service, professionalism,
-          and practical improvements residents can feel in day-to-day public safety.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Professional Service</h3>
-            <p>
-              A Sheriff’s Office that treats people with respect, communicates clearly, and takes every call seriously —
-              whether it’s a major case or a routine complaint.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Consistency</h3>
-            <p>
-              Clear expectations, reliable supervision, and standards that don’t change based on who you are
-              or who you know.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Leadership You Can Trust</h3>
-            <p>
-              Leadership means being present, steady, and accountable — supporting deputies in the field
-              while holding the organization to a high professional standard.
-            </p>
-          </div>
+        <div class="section-head">
+          <div class="section-head__tag">What to Expect</div>
+          <h2 class="section-head__title">Service You Can Feel</h2>
+          <p class="section-head__sub">These priorities are shaped by real-world law enforcement experience — focused on service, professionalism, and practical improvements residents can feel in day-to-day public safety.</p>
+        </div>
+        <div class="card-grid card-grid--3">
+          <article class="card card--icon">
+            <div class="card__icon" aria-hidden="true">🎖️</div>
+            <h3 class="card__title">Professional Service</h3>
+            <p class="card__body">A Sheriff's Office that treats people with respect, communicates clearly, and takes every call seriously — whether it's a major case or a routine complaint.</p>
+          </article>
+          <article class="card card--icon">
+            <div class="card__icon" aria-hidden="true">📏</div>
+            <h3 class="card__title">Consistency</h3>
+            <p class="card__body">Clear expectations, reliable supervision, and standards that don't change based on who you are or who you know.</p>
+          </article>
+          <article class="card card--icon">
+            <div class="card__icon" aria-hidden="true">🤝</div>
+            <h3 class="card__title">Leadership You Can Trust</h3>
+            <p class="card__body">Leadership means being present, steady, and accountable — supporting deputies in the field while holding the organization to a high professional standard.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- WHAT A SHERIFF’S OFFICE DOES -->
-    <section>
+    <section class="section section--dark">
       <div class="container">
-        <h2 class="section-title">The Sheriff’s Office Touches Every Part of Public Safety</h2>
-        <p class="section-sub">
-          The job is bigger than patrol. It includes the jail, warrants and service, investigations,
-          court-related responsibilities, and the day-to-day operations that keep public safety running.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Patrol & Response</h3>
-            <p>
-              Consistent, professional response across the county — with training and supervision that supports good decisions.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Jail & Corrections</h3>
-            <p>
-              Safe, professional detention operations with standards that protect staff, inmates, and the public.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Investigations & Follow-Up</h3>
-            <p>
-              Strong case work, proper documentation, and coordination with partners so cases move forward the right way.
-            </p>
-          </div>
+        <div class="section-head section-head--light">
+          <div class="section-head__tag section-head__tag--gold">Platform</div>
+          <h2 class="section-head__title">Core Priorities</h2>
+          <p class="section-head__sub">Each priority has one purpose: a safer Rhea County and a Sheriff's Office that operates with professionalism, accountability, and community trust.</p>
+        </div>
+        <div class="card-grid card-grid--3">
+          <article class="card card--dark">
+            <div class="card__num">01</div>
+            <h3 class="card__title">Professional Leadership</h3>
+            <p class="card__body">Lead from the front and set clear expectations across every division. Build a command structure grounded in operational experience so decisions are practical and informed.</p>
+            <div class="card__meta">Consistent leadership · Better coordination · One team</div>
+          </article>
+          <article class="card card--dark">
+            <div class="card__num">02</div>
+            <h3 class="card__title">Accountability &amp; Transparency</h3>
+            <p class="card__body">Maintain consistent standards, clear communication, and professional conduct. Accountability is not punishment — it's the foundation for trust and good policing.</p>
+            <div class="card__meta">Public gets answers · Problems addressed early</div>
+          </article>
+          <article class="card card--dark">
+            <div class="card__num">03</div>
+            <h3 class="card__title">Strong Patrol Operations</h3>
+            <p class="card__body">Focus resources and attention on the calls that impact families and neighborhoods the most. Support deputies with training, supervision, and clear guidance in the field.</p>
+            <div class="card__meta">Consistent service · Safer responses county-wide</div>
+          </article>
+          <article class="card card--dark">
+            <div class="card__num">04</div>
+            <h3 class="card__title">Balanced Enforcement</h3>
+            <p class="card__body">Treat people with respect until the situation demands otherwise. Apply lawful enforcement with sound judgment — tailored to the facts of each call.</p>
+            <div class="card__meta">Fair enforcement · Focused on real threats</div>
+          </article>
+          <article class="card card--dark">
+            <div class="card__num">05</div>
+            <h3 class="card__title">Crisis &amp; Mental Health Response</h3>
+            <p class="card__body">Strengthen CIT-informed response methods and improve partnerships with mental health providers to reduce harm and improve outcomes during crisis calls.</p>
+            <div class="card__meta">Safer outcomes · Better for families &amp; officers</div>
+          </article>
+          <article class="card card--dark">
+            <div class="card__num">06</div>
+            <h3 class="card__title">Continuous Improvement</h3>
+            <p class="card__body">A Sheriff's Office that improves every day — through training, leadership development, and a culture that takes pride in doing the job correctly.</p>
+            <div class="card__meta">Fewer mistakes · Stronger performance over time</div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- CORE PRIORITIES -->
-    <section>
+    <section class="section section--light">
       <div class="container">
-        <h2 class="section-title">Core Priorities</h2>
-        <p class="section-sub">
-          Each priority has one purpose: a safer Rhea County and a Sheriff’s Office that operates with professionalism,
-          accountability, and community trust.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Professional Leadership</h3>
-            <p>
-              Lead from the front and set clear expectations across every division of the Sheriff’s Office.
-              Build a command structure grounded in operational experience so decisions are practical and informed.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              What it means: consistent leadership, better coordination, and an office that runs as one team.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Accountability & Transparency</h3>
-            <p>
-              Maintain consistent standards, clear communication, and professional conduct.
-              Accountability is not punishment — it’s the foundation for trust and good policing.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              What it means: the public gets answers, employees have clarity, and problems get addressed early.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Strong Patrol Operations</h3>
-            <p>
-              Focus resources and attention on the calls that impact families and neighborhoods the most.
-              Support deputies with training, supervision, and clear guidance in the field.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              What it means: more consistent service and safer responses across the county.
-            </p>
-          </div>
+        <div class="section-head">
+          <div class="section-head__tag">FAQ</div>
+          <h2 class="section-head__title">Straight Answers</h2>
+          <p class="section-head__sub">Common questions about the Sheriff's Office and what effective leadership looks like.</p>
         </div>
-
-        <div class="grid-3" style="margin-top:14px;">
-          <div class="card">
-            <h3>Balanced Enforcement</h3>
-            <p>
-              Treat people with respect until the situation demands otherwise.
-              Apply lawful enforcement with sound judgment — tailored to the facts of each call.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              What it means: fair enforcement that stays focused on real threats to public safety.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Crisis & Mental Health Response</h3>
-            <p>
-              Strengthen CIT-informed response methods and improve partnerships with mental health providers
-              to reduce harm and improve outcomes during crisis calls.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              What it means: safer crisis calls for families, officers, and people in distress.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Continuous Improvement</h3>
-            <p>
-              A Sheriff’s Office that improves every day — through training, leadership development,
-              and a culture that takes pride in doing the job correctly.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              What it means: fewer preventable mistakes, stronger performance, and better service over time.
-            </p>
-          </div>
+        <div class="card-grid card-grid--3">
+          <article class="card">
+            <h3 class="card__title">What will change first?</h3>
+            <p class="card__body">Clear expectations, consistent leadership, and professional standards. A strong agency starts with structure: communication, accountability, and support for deputies doing the job every day.</p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">How will you build public trust?</h3>
+            <p class="card__body">Trust comes from consistent service: respectful interactions, clear communication, and accountability. People should feel the Sheriff's Office treats everyone fairly.</p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">What about mental health calls?</h3>
+            <p class="card__body">Crisis calls require preparation and partnerships. Strengthening CIT-informed response and working with providers helps reduce harm and improve outcomes for all involved.</p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">How will you support deputies?</h3>
+            <p class="card__body">Strong supervision, training, and clear direction. Deputies do their best work when leadership is present, expectations are clear, and the organization backs professional decision-making.</p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Working with other agencies?</h3>
+            <p class="card__body">Public safety works best through coordination. Good communication and professional relationships with local, state, and federal partners help cases move forward.</p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">What does "accountability" mean?</h3>
+            <p class="card__body">Accountability protects the public and the deputies serving the public. It means clear standards, consistent supervision, and addressing issues early — so professionalism stays the norm.</p>
+          </article>
         </div>
-      </div>
-    </section>
-
-    <!-- PRACTICAL PRIORITIES -->
-    <section>
-      <div class="container">
-        <h2 class="section-title">Practical Priorities That Affect Real Life</h2>
-        <p class="section-sub">
-          Voters don’t want slogans — they want a Sheriff’s Office that runs well, responds professionally,
-          and earns trust through consistent actions.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Training & Field Support</h3>
-            <p>
-              Better training, clear guidance, and strong supervision so deputies are prepared
-              for high-pressure calls and complex decisions.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              Why it matters: better decisions in the moment lead to safer outcomes for everyone.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Case Quality & Follow-Through</h3>
-            <p>
-              Strong documentation, proper reporting, and consistent follow-up so cases are handled professionally
-              and move forward the way they should.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              Why it matters: victims deserve professionalism, and good work supports accountability.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Professional Standards</h3>
-            <p>
-              Standards that apply to everyone — including leadership — with clarity about conduct, service,
-              and expectations.
-            </p>
-            <p style="margin-top:10px; color:var(--muted);">
-              Why it matters: consistency builds trust inside the agency and out in the community.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section>
-      <div class="container">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-sub">
-          Straight answers to common questions about the Sheriff’s Office and what effective leadership looks like.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>What will change first?</h3>
-            <p style="margin:0; color:var(--muted); line-height:1.75;">
-              Clear expectations, consistent leadership, and professional standards. A strong agency starts with structure:
-              communication, accountability, and support for deputies doing the job every day.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>How will you build public trust?</h3>
-            <p style="margin:0; color:var(--muted); line-height:1.75;">
-              Trust comes from consistent service: respectful interactions, clear communication, and accountability.
-              People should feel the Sheriff’s Office treats everyone fairly and takes concerns seriously.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>What about mental health and crisis calls?</h3>
-            <p style="margin:0; color:var(--muted); line-height:1.75;">
-              Crisis calls require preparation and partnerships. Strengthening CIT-informed response and working with providers
-              helps reduce harm and improve outcomes for families, officers, and people in distress.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>How will you support deputies and staff?</h3>
-            <p style="margin:0; color:var(--muted); line-height:1.75;">
-              Strong supervision, training, and clear direction. Deputies do their best work when leadership is present,
-              expectations are clear, and the organization backs professional decision-making.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>How will you work with other agencies?</h3>
-            <p style="margin:0; color:var(--muted); line-height:1.75;">
-              Public safety works best through coordination. Good communication and professional relationships with local,
-              state, and federal partners help cases move forward and keep communities safer.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>What’s the focus on “accountability”?</h3>
-            <p style="margin:0; color:var(--muted); line-height:1.75;">
-              Accountability protects the public and the deputies serving the public. It means clear standards,
-              consistent supervision, and addressing issues early — so professionalism stays the norm.
-            </p>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px;">
-          <h3>Have a question that isn’t listed?</h3>
-          <p style="margin:0; color:var(--muted); line-height:1.75;">
-            Reach out directly — the campaign welcomes questions and community feedback.
-          </p>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-            <a class="btn" href="tel:4235931964">Call</a>
-            <a class="btn" href="mailto:jjordan206@yahoo.com">Email</a>
-            <a class="btn btn--primary" href="get-involved.html">Get Involved</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section>
-      <div class="container">
-        <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div class="card" style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:var(--space-8);">
           <div>
-            <h3 style="margin:0 0 6px;">Stand with Josh</h3>
-            <p style="margin:0; color:var(--muted);">
-              Request a yard sign or reach out with questions and concerns.
-            </p>
+            <h3 class="card__title">Have a question not listed here?</h3>
+            <p class="card__body">Reach out directly — the campaign welcomes questions and feedback.</p>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a
-              class="btn btn--primary"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdhu4fNVrGbWcvG7QEt__9B5miaXmdgjC7hD1pT8RJ4Ung_SQ/viewform"
-              target="_blank"
-              rel="noopener"
-            >
-              Yard Sign Form
-            </a>
-            <a class="btn" href="get-involved.html">Get Involved</a>
-            <a class="btn" href="tel:4235931964">Call</a>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn--primary" href="tel:4235931964">Call</a>
+            <a class="btn btn--outline" href="mailto:jjordan206@yahoo.com">Email</a>
+            <a class="btn btn--outline" href="get-involved.html">Get Involved</a>
           </div>
         </div>
       </div>
@@ -429,16 +205,23 @@
 
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <div class="container footer__inner">
-      <div>
-        <strong>Josh Jordan for Sheriff</strong><br />
-        <span>Paid for by Friends of Josh Jordan for Sheriff.</span>
+      <div class="footer__brand">
+        <div class="footer__brand-mark">★</div>
+        <div><div class="footer__name">Josh Jordan for Sheriff</div><div class="footer__office">Rhea County, TN · May 2026</div></div>
       </div>
-      <div>© <span id="year"></span> All rights reserved.</div>
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href="about.html">About</a><a href="experience.html">Experience</a><a href="priorities.html">Priorities</a><a href="voter-info.html">Voter Info</a><a href="get-involved.html">Get Involved</a>
+      </nav>
+      <div class="footer__contact">
+        <a href="tel:4235931964">(423) 593-1964</a>
+        <a href="mailto:jjordan206@yahoo.com">jjordan206@yahoo.com</a>
+        <a href="https://www.facebook.com/profile.php?id=61577251765386" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <div class="footer__legal"><p>Paid for by Friends of Josh Jordan for Sheriff.</p><p>© <span id="year"></span> All rights reserved.</p></div>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
